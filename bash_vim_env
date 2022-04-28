@@ -1,0 +1,12 @@
+export ns=default
+alias k='kubectl -n $ns' # This helps when namespace in question doesn't have a friendly name 
+alias kdr= 'kubectl -n $ns -o yaml --dry-run'.  # run commands in dry run mode and generate yaml.
+
+vim ~/.vimrc
+set number
+set expandtab
+set shiftwidth=2
+set tabstop=2
+
+export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
+echo -e 'set number\nset expandtab\nset shiftwidth=2\nset tabstop=2' >> ~/.vimrc
