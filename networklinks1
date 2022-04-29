@@ -1,0 +1,6 @@
+#Networking resource links
+https://akhilsharma.work/kubectl-get-resource-short-names/
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-ingress-em-
+https://kubernetes.io/docs/concepts/services-networking/ingress/
+https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types
+https://kubernetes.github.io/ingress-nginx/examples/rewrite/
