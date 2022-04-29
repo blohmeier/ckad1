@@ -1,0 +1,6 @@
+2  docker images | wc -l
+    3  docker images
+    4  grep -i FROM /root/webapp-color/Dockerfile
+    5  grep -i TO /root/webapp-color/Dockerfile
+    6  grep -i COPY /root/webapp-color/Dockerfile
+    https://l3harris.udemy.com/course/certified-kubernetes-application-developer/learn/lecture/
