@@ -1,14 +1,18 @@
 vim ~/.vimrc
 set number
-set tabstop=2 #how many cols a tab counts for
-set expandtab
-set shiftwidth=2
+set tabstop=2 #how many whitespace cols a tab counts for
+set expandtab #never see \t again in your file - expands tab keypresses to spaces
+set shiftwidth=2 #how many whitespace cols a "lvl of indent" is worth
+set softtabstop #how many whitespace cols a tab/backspace keypress is worth
 
 export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
 echo -e 'set number\nset expandtab\nset shiftwidth=2\nset tabstop=2' >> ~/.vimrc
 OR TRY:
 export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
 echo -e 'set number tabstop=2 shiftwidth=2 expandtab' >> ~/.vimrc
+OR TRY:
+echo -e 'set nu ts=2 sw=2 sts=2 et' >> ~/.vimrc
+
 
 VIM
 (command mode - esc key)
@@ -16,4 +20,7 @@ u undo | crtl+r redo
 (randoms)
 record typing: https://vim.fandom.com/wiki/Recording_keys_for_repeated_jobs
 
+Resources
+https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
+Errata
 Version 100.0.4896.127 (Official Build) (64-bit)
