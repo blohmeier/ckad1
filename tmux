@@ -9,6 +9,7 @@ c create
 p n previous/next
 w list
 
-PANES: split windows 
+PANES: divides a window (does NOT create new windows!) 
 % vert
 : <"split-window"> horiz
+(no prepending!) ctrl-d = shuts pane
