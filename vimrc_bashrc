@@ -11,7 +11,7 @@ OR TRY:
 export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
 echo -e 'set number tabstop=2 shiftwidth=2 expandtab' >> ~/.vimrc
 OR TRY:
-echo -e 'set nu ts=2 sw=2 sts=2 et' >> ~/.vimrc
+export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && echo -e 'set nu ts=2 sw=2 sts=2 et' >> ~/.vimrc
 
 
 VIM
