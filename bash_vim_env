@@ -14,3 +14,5 @@ echo -e 'set number\nset expandtab\nset shiftwidth=2\nset tabstop=2' >> ~/.vimrc
 VIM
 (command mode - esc key)
 u undo | crtl+r redo
+(randoms)
+record typing: https://vim.fandom.com/wiki/Recording_keys_for_repeated_jobs
