@@ -3,7 +3,7 @@ k explain <resource> --recursive | less
 /<parameter>
 
 2
-Shortnames (* = never used)
+Shortnames (* = never used). Source: https://blog.heptio.com/kubectl-resource-short-names-heptioprotip-c8eff9fb7202
 all (aka '-A')
     * certificatesigningrequests (aka 'csr')
     * clusters (valid only for federation apiservers)
