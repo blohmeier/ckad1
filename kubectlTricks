@@ -2,39 +2,39 @@
 k explain <resource> --recursive | less
 /<parameter>
 
-Shortnames
-    * all
+Shortnames (* = never used)
+all (aka '-A')
     * certificatesigningrequests (aka 'csr')
     * clusters (valid only for federation apiservers)
     * clusterrolebindings
     * clusterroles
     * componentstatuses (aka 'cs')
-    * configmaps (aka 'cm')
+configmaps (aka 'cm')
     * daemonsets (aka 'ds')
-    * deployments (aka 'deploy')
-    * endpoints (aka 'ep')
+deployments (aka 'deploy')
+endpoints (aka 'ep')
     * events (aka 'ev')
     * horizontalpodautoscalers (aka 'hpa')
-    * ingresses (aka 'ing')
-    * jobs
+ingresses (aka 'ing')
+jobs
     * limitranges (aka 'limits')
-    * namespaces (aka 'ns')
-    * networkpolicies
+namespaces (aka 'ns')
+    * networkpolicies (aka 'netpol'?)
     * nodes (aka 'no')
-    * persistentvolumeclaims (aka 'pvc')
-    * persistentvolumes (aka 'pv')
-    * pods (aka 'po')
+persistentvolumeclaims (aka 'pvc')
+persistentvolumes (aka 'pv')
+pods (aka 'po')
     * poddisruptionbudgets (aka 'pdb')
     * podsecuritypolicies (aka 'psp')
     * podtemplates
-    * replicasets (aka 'rs')
+replicasets (aka 'rs')
     * replicationcontrollers (aka 'rc')
     * resourcequotas (aka 'quota')
     * rolebindings
     * roles
     * secrets
-    * serviceaccounts (aka 'sa')
-    * services (aka 'svc')
-statefulsets
-storageclasses
-thirdpartyresources
+serviceaccounts (aka 'sa')
+services (aka 'svc')
+    * statefulsets
+    * storageclasses
+    * thirdpartyresources
