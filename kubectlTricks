@@ -2,6 +2,7 @@
 k explain <resource> --recursive | less
 /<parameter>
 
+2
 Shortnames (* = never used)
 all (aka '-A')
     * certificatesigningrequests (aka 'csr')
