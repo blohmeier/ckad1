@@ -12,4 +12,4 @@ w list
 PANES: divides a window (does NOT create new windows!) 
 % vert
 : <"split-window"> horiz
-(no prepending!) ctrl-d = shuts pane
+(no prepending!) ctrl-d = shuts pane; closing last pane closes window
