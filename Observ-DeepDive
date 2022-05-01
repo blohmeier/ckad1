@@ -1,0 +1,79 @@
+Check 1: Create Nginx Pod with Liveness HTTP Get Probe
+Create a new Pod named nginx in the ca1 namespace using the nginx image. Ensure that the pod listens on port 80 and configure it with a Liveness HTTP GET probe with the following configuration:
+
+Probe Type: httpGet
+Path: /
+Port: 80
+Initial delay seconds: 10
+Polling period seconds: 5
+{
+k run nginx -n ca1 --image=nginx --restart=Never --port=80 $dy > 1.yml
+vim 1.yml
+apiVersion: v1
+kind: Pod 
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+  namespace: ca1 
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    ports:
+    - containerPort: 80
+    resources: {}
+    livenessProbe:		#add from here to 'end'
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 10
+      periodSeconds: 5	#end
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
+k create -f 1.yml
+}
+Check 2: Hosting Service Not Working
+A Service in the hosting Namespace is not responding to requests. Determine which Service is not working and resolve the underlying issue so the Service begins responding to requests.
+{
+#List all svc in -n:
+k get svc -n hosting -o wide
+#see if the Services have any Pod Endpoints associated with them:
+k -n hosting get ep
+#shows web2 has no eps, meaning it can't serve requests. List pods for web2 using "--selector" (-l):
+k -n hosting get pods -l app=web2
+#shows 2 pods matching so no issue with labels (?). Naming convention suggests they're part of a deployment. Problem: shows are not in "READY" state. Find out why with:
+k -n hosting describe pods -l app=web2
+#reveals "Readiness probe failed..." for both pods. Reviewing Containers.Readiness, request sent to port 30, but "Port: 80/TCP" a few lines above. Must use 'edit' to change readiness probe so request is sent to port 80:
+k edit deploy -n hosting web2
+{OR could do this way, but not recommended:
+cat << EOF > patch.yaml
+spec:
+  template:
+    spec:
+      containers:
+      - name: web2
+        readinessProbe:
+          httpGet:
+            port: 80
+EOF
+kubectl -n hosting patch deployments web2 --patch "$(cat patch.yaml)"
+}
+}
+Check 3: Pod Log Analysis
+The ca2 namespace contains a set of pods. Pods labelled with app=test, or app=prod have been designed to log out a static list of numbers. Run a command that combines the pod logs for all pods that have the label app=prod and then get a total row count for the combined logs and save this result out to the file /home/ubuntu/combined-row-count-prod.txt.
+{
+k logs -n ca2 -l app=prod | wc -l > /home/ubuntu/combined-row-count-prod.txt
+}
+Check 4: Pod Diagnostics
+A pod named skynet has been deployed into the ca2 namespace. This pod has the following file /skynet/t2-specs.txt located within it, containing important information. You need to extract this file and save it to the following location /home/ubuntu/t2-specs.txt.
+{
+k exec -n ca2 skynet -- cat /skynet/t2-specs.txt > /home/ubuntu/t2-specs.txt
+}
+Check 5: Pod CPU Utilization
+Find the Pod that has the highest CPU utilization in the matrix namespace. Write the name of this pod into the following file: /home/ubuntu/max-cpu-podname.txt
+{
+k top pods -n matrix --sort-by=cpu --no-headers=true | head -n1 | cut -d" " -f1 > /home/ubuntu/max-cpu-podname.txt
+}
