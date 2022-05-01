@@ -8,6 +8,9 @@ set softtabstop #of whitespace cols a tab/backspace keypress is worth
 export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
 echo -e 'set number\nset expandtab\nset shiftwidth=2\nset tabstop=2' >> ~/.vimrc
 OR
+export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
+echo -e 'set et nu sts=2 sw=2 ts=2' >> ~/.vimrc
+OR
 export dy='--dry-run=client -o yaml' && \
 export fg='--force --grace-period 0' && \
 alias k=kubectl && \
