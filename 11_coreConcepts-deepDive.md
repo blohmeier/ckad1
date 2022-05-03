@@ -14,8 +14,8 @@ k run -n cre --image=nginx:stable-alpine-perl --restart=OnFailure --port=80 basi
 </p>
 </details>
 
-Check 2: Create a Namespace and Launch a Pod within it with Labels
-Create a new Namespace named workers and within it launch a Pod with the following configuration:
+### Check 2: Create a Namespace and Launch a Pod within it with Labels ###
+Create a new Namespace named workers and within it launch a Pod with the following configuration: <br />
 The Pod is named worker
 The Pod uses the busybox image for its only container
 Restart the Pod Never
@@ -23,10 +23,18 @@ Command: /bin/sh -c "echo working... && sleep 3600"
 Label 1: company=acme
 Label 2: speed=fast
 Label 3: type=async
-{
+
+<details><summary>show</summary>
+<p>
+  
+```bash
 k create ns workers
-kubectl run -n workers worker --image=busybox --labels="company=acme,speed=fast,type=async" -- /bin/sh -c "echo working... && sleep 3600"}
-◄▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬►
+k run -n workers worker --image=busybox --labels="company=acme,speed=fast,type=async" -- /bin/sh -c "echo working... && sleep 3600"}
+```
+  
+</p>
+</details>
+
 Check 3: Update the Label on a Running Pod
 The ca200 namespace contains a running Pod named compiler. Without restarting the pod, update and change it's language label from java to python.
 {
