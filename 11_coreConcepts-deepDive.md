@@ -1,14 +1,15 @@
 Check 1: Create and Configure a Basic Pod
-<details><summary>show</summary>
-<p>
 Create a Pod in the cre Namespace with the following configuration:
 The Pod is named basic
 The Pod uses the nginx:stable-alpine-perl image for its only container
 Restart the Pod only OnFailure
 Ensure port 80 is open to TCP traffic
-{
+<details><summary>show</summary>
+<p>
+```
 k run -n cre --image=nginx:stable-alpine-perl --restart=OnFailure --port=80 basic}
-◄▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬►
+```
+  
 </p>
 </details>
 Check 2: Create a Namespace and Launch a Pod within it with Labels
