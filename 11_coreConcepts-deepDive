@@ -1,4 +1,6 @@
 Check 1: Create and Configure a Basic Pod
+<details><summary>show</summary>
+<p>
 Create a Pod in the cre Namespace with the following configuration:
 The Pod is named basic
 The Pod uses the nginx:stable-alpine-perl image for its only container
@@ -7,6 +9,8 @@ Ensure port 80 is open to TCP traffic
 {
 k run -n cre --image=nginx:stable-alpine-perl --restart=OnFailure --port=80 basic}
 ◄▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬►
+</p>
+</details>
 Check 2: Create a Namespace and Launch a Pod within it with Labels
 Create a new Namespace named workers and within it launch a Pod with the following configuration:
 The Pod is named worker
