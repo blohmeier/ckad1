@@ -1,4 +1,4 @@
-###Check 1: Create and Configure a Basic Pod###
+### Check 1: Create and Configure a Basic Pod ###
 Create a Pod in the cre Namespace with the following configuration:
 The Pod is named basic
 The Pod uses the nginx:stable-alpine-perl image for its only container
