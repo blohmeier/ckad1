@@ -6,7 +6,7 @@ Restart the Pod only OnFailure
 Ensure port 80 is open to TCP traffic
 <details><summary>show</summary>
 <p>
-```
+```bash
 k run -n cre --image=nginx:stable-alpine-perl --restart=OnFailure --port=80 basic}
 ```
   
