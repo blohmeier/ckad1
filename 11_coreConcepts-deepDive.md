@@ -6,12 +6,14 @@ Restart the Pod only OnFailure
 Ensure port 80 is open to TCP traffic
 <details><summary>show</summary>
 <p>
+  
 ```bash
 k run -n cre --image=nginx:stable-alpine-perl --restart=OnFailure --port=80 basic}
 ```
   
 </p>
 </details>
+
 Check 2: Create a Namespace and Launch a Pod within it with Labels
 Create a new Namespace named workers and within it launch a Pod with the following configuration:
 The Pod is named worker
