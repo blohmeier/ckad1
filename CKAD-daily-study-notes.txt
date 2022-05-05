@@ -1,0 +1,234 @@
+Daily Labs to review:
+https://cloudacademy.com/lab/ckad-practice-exam-core-concepts/
+https://cloudacademy.com/lab-challenge/kubernetes-certification-challenge/
+https://cloudacademy.com/lab-challenge/certified-kubernetes-application-developer-ckad-challenge/
+https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true
+Also good review:
+https://github.com/dgkanatsios/CKAD-exercises/blob/main/a.core_concepts.md
+Less good:
+https://github.com/dennyzhang/cheatsheet-kubernetes-A4
+
+Daily concept review:
+{Create YAML definition file for basic Kubernetes pod:
+
+cat << 'EOF' > my-first-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-first-pod
+  namespace: my-first-namespace
+spec:
+  containers:
+  - image: nginx:stable-alpine-perl 
+    name: first-container
+	ports:
+        - containerPort: 80
+EOF
+
+Four important parts in the above YAML definition file:
+kind describes the schema of the manifest. In this case, you created a Pod.
+metadata.name is the name of the resource.
+A pod is an application that you want to deploy and run in the cluster. The app should be packaged as a container and spec.containers[0].image is where you define the image.
+If you develop a web application, you might need to define which port the container is exposing in spec.containers[*].ports[0].containerPort.}
+
+{#Three "shell console boost" steps & example:
+alias k='kubectl'
+source <(kubectl completion bash | sed 's/kubectl/k/g')
+export dy='--dry-run=client -o yaml'
+export fg="--force --grace-period 0" #skips ~30sec pod delete time.
+
+# Examples:
+k run ckad --image=copy-paste:from-statement $dy (-- /bin/sh -c "..." if necessary) > 03.yaml}
+k delete pod ckad $now
+
+#optional
+vim ~/.bashrc # implement all setup here so they persist in different shells or tmux.
+vim ~/.vimrc
+set number
+set tabstop=2 #of whitespace cols a tab counts for
+set expandtab #never see \t again in your file - expands tab keypresses to spaces
+set shiftwidth=2 #of whitespace cols a "lvl of indent" is worth
+set softtabstop #of whitespace cols a tab/backspace keypress is worth
+
+export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
+echo -e 'set number\nset expandtab\nset shiftwidth=2\nset tabstop=2' >> ~/.vimrc
+OR
+export dy='--dry-run=client -o yaml' && \
+export fg='--force --grace-period 0' && \
+alias k=kubectl && \
+source <(kubectl completion bash | sed 's/kubectl/k/g') && \
+echo -e 'set nu ts=2 sw=2 sts=2 et' >> ~/.vimrc
+}
+
+{# set kubernetes context
+kubectl config use-context ...}
+
+{# create k8s resources with imperative commands
+k run pod / create deploy ... $dy > 12.yaml}
+
+{# make additional configuration - use copy/paste for complex structures
+vi 12.yaml}
+
+{# Two ways to create resources from yaml
+k apply -f 12.yaml # declarative - "need cup of coffee"
+k create -f 12.yaml # imperative - explain each coffee making step in detail
+}
+
+# check!
+k get/describe deploy
+k get/describe po
+
+{commands that should also be on "cheat sheet":
+{# create ConfigMap (2 ways)
+k create cm --from-literal=<key>=<value>
+k create cm --from-file=/path/to/file.yaml}
+
+{#create Secret
+k create secret generic --from-literal=<key>=<value>}
+
+{#create pod (imperative command) - with cpu/memory requests/limits
+k run <pod-name> \
+  --image=... \
+  --env="<key>=<value>" \
+  --labels="<key>=<value>" \
+  --requests='cpu=100m,memory=256Mi' \
+  --limits='cpu=200m,memory=512Mi' \
+  ...
+}
+
+{#delete resource w/o waiting
+k delete po <pod-name> --wait=false
+}
+
+{#search all namespaces (--all-namespaces)
+k get pods -A
+}
+
+{#create resource from YAML manifest
+k apply -f /path/to/file.yaml
+}
+
+{#show pod labels for pod selector patterns
+k get po --show-labels
+}
+
+{# add a label on a Kubernetes resource (pod, node, ...)
+k label ... --overwrite=true
+}
+
+{#change deployment image
+k set image deploy/<deployment-name> <container-name>=<new-image-name:tag>
+}
+
+#never use "k create service" to create ClusterIP or NodePort service
+k expose ...
+
+#troubleshoot container
+kubectl exec -it <pod-name> [-c <container-name>] -- sh
+
+# check logs
+kubectl logs <pod-name> [-c <container-name>]
+
+# check metrics
+kubectl top node <node-name>}
+
+{OTHER RANDOM kubectl:
+
+#set context to namespace (so no need to add namespace flag to kubectl commands):
+kubectl config set-context $(kubectl config current-context) --namespace=<namespace>
+
+#Show current namespace:
+kubectl config view --minify | grep namespace
+
+{#Two ways to label pods:
+#1: a: create pod (2 ways), b: add label (2 ways):
+#a1: 
+kubectl config set-context $(kubectl config current-context) --namespace=workers
+k run worker --image=busybox --restart=Never --command -- /bin/sh -c "echo working... && sleep 3600"
+#a2:
+k run worker -n workers --image=busybox --restart=Never -- /bin/sh -c "echo working... && sleep 3600"
+#b1: 
+kubectl label pod worker -n workers {company=acme,speed=fast,type=async}
+#b2:
+k label --overwrite=true pod worker -n workers company=acme speed=fast type=async
+
+#2: create labels at same time creating pods:
+kubectl run -n workers worker --image=busybox --labels="company=acme,speed=fast,type=async" -- /bin/sh -c "echo working... && sleep 3600"
+}
+
+#List all the pods that belong to the ReplicationController in a machine readable form:
+pods=$(kubectl get pods --selector=app=nginx --output=jsonpath={.items..metadata.name})
+echo $pods
+
+#UNDERSTAND how this resource creation method works, e.g. 15 - CKAD Challenge.txt #3:
+{STEP 1
+cat <<'EOF' | k --kubeconfig=/home/ubuntu/.kube/config apply -f -
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: metric-data
+  namespace: zuc0co
+spec:
+  accessModes:
+  - ReadWriteOnce 
+  resources:
+    requests:
+      storage: 2Gi
+EOF
+}
+#UNDERSTAND "k top pods ..." output manipulation using sed -n, cut, sort, head, others...:
+https://stackoverflow.com/questions/191364/quick-unix-command-to-display-specific-lines-in-the-middle-of-a-file
+
+Troubleshoot:
+➜ k -n <namespace> get all -o wide # gives you <IP list> to test
+➜ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 <any IP from IP list> # checks if pod at IP is accessible on port 80
+➜ k run tmp --restart=Never --rm --image=busybox -i -- wget -O- <any IP from IP list> # same as above, but using busybox/wget
+}
+
+OTHER k8s links (training etc):
+https://examsspy.com/real-ckad-exam-questions/
+https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552
+https://jhooq.com/get-yaml-for-deployed-kubernetes-resources/
+
+vim:
+touch ~/.vimrc; vim ~/.vimrc
+set tabstop=2
+set expandtab
+set shiftwidth=2
+# SINGLE COMMAND - in Vim editor:
+:set ts=2 sw=2 sts=2 et
+resource: https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
+###
+From killer.sh:
+To indent multiple lines using vim you should set the shiftwidth using :set shiftwidth=2. Then mark multiple lines using Shift v and the up/down keys.
+To then indent the marked lines press > or < and to repeat the action press .
+###
+
+tmux (ctrl-b before each shortcut command):
+$ tmux new -s session-name
+c createNewWindow
+%/"/n/p splitWindowsHorizontally/splitWindowsVertically/nextWindow/prevWindow
+%/"/o createHorizPane/createVertPane/toggleBetweenPanes
+If get logged out before timer expires:
+tmux attach -t session-name
+
+https://blog.codonomics.com/2019/09/essential-tmux-for-ckad-or-cka-exam.html
+https://www.youtube.com/watch?v=BHhA_ZKjyxo
+https://danielmiessler.com/study/tmux/
+
+bash generally:
+##Meanings of each? From ~/.bashrc in terminal window in https://cloudacademy.com/lab-challenge/kubernetes-certification-challenge/session/
+alias ll='ls -alF'
+	-a, --all                  	List all entries including those starting with a dot .
+	-l                         	Use a long listing format.
+	-F, --classify             	Append indicator (one of */=@|) to entries.
+
+		--format=WORD          	Across -x, commas -m, horizontal -x, long -l,
+								single-column -1, verbose -l, vertical -C
+
+		--full-time            	List both full date and full time
+alias la='ls -A'
+		-A, --almost-all        List all entries including those starting with a dot .
+								Except for . and .. (implied).
+alias l='ls -CF'
+		-C                      List entries by columns.
