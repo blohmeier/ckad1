@@ -64,14 +64,22 @@ k label --overwrite=true pod compiler -n ca200 language=python
   
 </p>
 </details>
-Check 4: Get the Pod IP Address using JSONPath
+
+### Check 4: Get the Pod IP Address using JSONPath ###
 Discover the Pod IP address assigned to the pod named ip-podzoid running in the ca300 namespace using JSONPath (hint: use -o jsonpath). Once you've established the correct kubectl command to do this, save the command (not the result) into a file located here: /home/ubuntu/podip.sh
-{
+
+<details><summary>show</summary>
+<p>
+  
+```bash
 cat << EOF > /home/ubuntu/podip.sh
 kubectl get pods -n ca300 -o jsonpath="{.items[*].status.podIP}"
 EOF
-}
-◄▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬►
+```
+  
+</p>
+</details>
+
 Check 5: Generate Pod YAML Manifest File
 Generate a new Pod manifest file which contains the following configuration:
 Pod name: borg1
