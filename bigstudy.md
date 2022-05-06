@@ -52,11 +52,18 @@ k run -n workers worker --image=busybox --labels="company=acme,speed=fast,type=a
 </p>
 </details>
 
-Check 3: Update the Label on a Running Pod
+### Check 3: Update the Label on a Running Pod ###
 The ca200 namespace contains a running Pod named compiler. Without restarting the pod, update and change it's language label from java to python.
-{
-k label --overwrite=true pod compiler -n ca200 language=python}
-◄▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬►
+
+<details><summary>show</summary>
+<p>
+  
+```bash
+k label --overwrite=true pod compiler -n ca200 language=python
+```
+  
+</p>
+</details>
 Check 4: Get the Pod IP Address using JSONPath
 Discover the Pod IP address assigned to the pod named ip-podzoid running in the ca300 namespace using JSONPath (hint: use -o jsonpath). Once you've established the correct kubectl command to do this, save the command (not the result) into a file located here: /home/ubuntu/podip.sh
 {
