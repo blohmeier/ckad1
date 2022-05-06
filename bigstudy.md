@@ -178,8 +178,7 @@ Create a pod named secpod in the dnn namespace which includes 2 containers named
 <details><summary>show</summary>
 <p>
   
-```bash
-#1 Create a pod named secpod in the dnn namespace which includes 2 containers named c1 and c2. Both containers must be configured to run the bash image, and should execute the command /usr/local/bin/bash -c sleep 3600. 
+```bash 
 k run -n dnn secpod --image=bash $dy --command -- /usr/local/bin/bash -c sleep 3600 > 3_pod.yml
 vim 3_pod.yml:
 apiVersion: v1
@@ -207,6 +206,86 @@ spec:
     name: c2
     securityContext:
       runAsUser: 2000
+```
+  
+</p>
+</details>
+
+Check 4: Pod Resource Constraints
+Create a new Pod named web1 in the ca100 namespace using the nginx image. Ensure that it has the following 2 labels env=prod and type=processor. Configure it with a memory request of 100Mi and a memory limit at 200Mi. Expose the pod on port 80.
+<details><summary>show</summary>
+<p>
+  
+```bash
+1# Can do all but request/limit with kubectl:
+k run -n ca100 web1 --image=nginx --labels="env=prod,type=processor" --port=80 $dy > 4_pod.yml
+#2 Edit to add resource limits
+apiVersion: v1
+kind: Pod 
+metadata:
+  creationTimestamp: null
+  labels:
+    env: prod
+    type: processor
+  name: web1
+  namespace: ca100
+spec:
+  containers:
+  - image: nginx
+    name: web1
+    ports:
+    - containerPort: 80
+    resources: {} 	# Replace/add from here down as marked with "##"
+	resources:			##
+	  requests:			##
+	    memory: 100Mi	##
+	  limits:			##
+	    memory: 200Mi	##
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+```
+  
+</p>
+</details>
+
+Check 5: Create a Pod with Config Map Environment Vars
+Create a new ConfigMap named config1 in the ca200 namespace. The new ConfigMap should be created with the following 2 key/value pairs:
+COLOUR=red
+SPEED=fast
+Launch a new Pod named redfastcar in the same ca200 namespace, using the image busybox. The redfastcar pod should expose the previous ConfigMap settings as environment variables inside the container. Configure the redfastcar pod to run the command:  /bin/sh -c "env | grep -E 'COLOUR|SPEED'; sleep 3600"
+<details><summary>show</summary>
+<p>
+  
+```bash
+#1 Create ConfigMap
+k create cm config1 -n ca200 --from-literal COLOUR=red --from-literal SPEED=fast
+#2 Run pod
+k run -n ca200 redfastcar --image=busybox $dy --command -- /bin/sh -c "env | grep -E 'COLOUR|SPEED'; sleep 3600" > 5_pod.yml
+#3 vim 5_pod.yml and add ("##") configMap env configuration
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: redfastcar
+  name: redfastcar
+  namespace: ca200
+spec:
+  containers:
+  - command:
+    - /bin/sh
+    - -c
+    - env | grep -E 'COLOUR|SPEED'; sleep 3600
+    image: busybox
+    name: redfastcar
+    resources: {}
+    envFrom:				##add
+    - configMapRef:			##add
+        name: config1		##add
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
 ```
   
 </p>
