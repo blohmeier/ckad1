@@ -63,10 +63,6 @@ spec:
 ### Check 2: Multi Container Pod Networking ###
 The following multi-container Pod manifest needs to be updated BEFORE being deployed. Container c2 is designed to make HTTP requests to container c1. Before deploying this manifest, update it by substituting the <REPLACE_HOST_HERE> placeholder with the correct host or IP address - the remaining parts of the manifest must remain unchanged. Once deployed - confirm that the solution works correctly by executing the command kubectl logs -n app1 webpod -c c2 > /home/ubuntu/webpod-log.txt. The resulting /home/ubuntu/webpod-log.txt file should contain a single string within it.
 
-
-<details><summary>show</summary>
-<p>
-  
 ```bash
 vim 2.yml
 apiVersion: v1
@@ -101,6 +97,11 @@ k create -f 2.yaml
 #Output to logs
 kubectl logs -n app1 webpod -c c2 > /home/ubuntu/webpod-log.txt
 ```
-  
+
+<details><summary>show</summary>
+<p>
+```bash
+
+```
 </p>
 </details>
