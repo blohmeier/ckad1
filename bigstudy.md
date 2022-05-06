@@ -261,9 +261,6 @@ k run -n ca200 redfastcar --image=busybox $dy --command -- /bin/sh -c "env | gre
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: null
-  labels:
-    run: redfastcar
   name: redfastcar
   namespace: ca200
 spec:
@@ -274,7 +271,6 @@ spec:
     - env | grep -E 'COLOUR|SPEED'; sleep 3600
     image: busybox
     name: redfastcar
-    resources: {}
     envFrom:				##add
     - configMapRef:			##add
         name: config1			##add
