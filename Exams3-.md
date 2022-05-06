@@ -103,7 +103,15 @@ k logs -n app1 webpod -c c2 > /home/ubuntu/webpod-log.txt
 </p>
 </details>
 
+### Check 3: Add New Container with ReadOnly Volume ###
+Update and deploy the provided /home/ubuntu/md5er-app.yaml manifest file, adding a second container named c2 to the existing md5er Pod. The c2 container will run the same bash image that the c1 container already uses. The c2 container must mount the existing vol1 volume in read only mode, and such that it can execute the following bash script:
 
+```bash
+ for word in $(</data/file.txt)
+ do 
+ echo $word | md5sum | awk '{print $1}'
+ done
+```
 
 
 #TEMPLATE
