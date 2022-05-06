@@ -217,13 +217,11 @@ Create a new Pod named web1 in the ca100 namespace using the nginx image. Ensure
 <p>
   
 ```bash
-1# Can do all but request/limit with kubectl:
 k run -n ca100 web1 --image=nginx --labels="env=prod,type=processor" --port=80 $dy > 4.yml
 vim 4.yml
 apiVersion: v1
 kind: Pod 
 metadata:
-  creationTimestamp: null
   labels:
     env: prod
     type: processor
@@ -241,9 +239,6 @@ spec:
 	    memory: 100Mi	##
 	  limits:			##
 	    memory: 200Mi	##
-  dnsPolicy: ClusterFirst
-  restartPolicy: Always
-status: {}
 ```
   
 </p>
