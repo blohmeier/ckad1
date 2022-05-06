@@ -1,8 +1,7 @@
 ### https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true ###
 ### https://cloudacademy.com/lab/ckad-practice-exam-core-concepts/?context_resource=lp&context_id=3086 ###
 
-Env Config:
-<details><summary>show</summary>
+<details><summary>Env Config:</summary>
 <p>
   
 ```bash
