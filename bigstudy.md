@@ -80,15 +80,15 @@ EOF
 </p>
 </details>
 
-Check 5: Generate Pod YAML Manifest File
+### Check 5: Generate Pod YAML Manifest File ###
 Generate a new Pod manifest file which contains the following configuration:
-Pod name: borg1
-Namespace to launch in: core-system
-Container image: busybox
-Command: /bin/sh -c "echo borg.running... && sleep 3600"
-Restart policy: Always
-Pod label: platform=prod
-Environment variable: system=borg
+<ul><li>Pod name: borg1</li>
+<li>Namespace to launch in: core-system</li>
+<li>Container image: busybox</li>
+<li>Command: /bin/sh -c "echo borg.running... && sleep 3600"</li>
+<li>Restart policy: Always</li>
+<li>Pod label: platform=prod</li>
+<li>Environment variable: system=borg</li></ul>
 Save the resulting manifest to the following location: /home/ubuntu/pod.yaml
 {
 k run -n core-system borg1 --image=busybox --restart=Always --labels="platform=prod" --env system=borg $dy -- /bin/sh -c "echo borg.running... && sleep 3600" > /home/ubuntu/pod.yaml
