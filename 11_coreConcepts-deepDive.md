@@ -9,7 +9,7 @@ Env Config:
 export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
 echo -e 'set number\nset expandtab\nset shiftwidth=2\nset tabstop=2' >> ~/.vimrc
 ```
-  
+ 
 </p>
 </details>
 
