@@ -100,6 +100,7 @@ kubectl logs -n app1 webpod -c c2 > /home/ubuntu/webpod-log.txt
 
 <details><summary>show</summary>
 <p>
+  
 ```bash
 
 ```
