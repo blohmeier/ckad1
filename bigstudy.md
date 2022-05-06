@@ -114,3 +114,5 @@ kubectl apply -f pod-zeroshutdown.yaml
   
 </p>
 </details>
+
+#### https://cloudacademy.com/lab/ckad-practice-exam-configuration/?context_resource=lp&context_id=3086 ####
