@@ -97,9 +97,9 @@ k run -n core-system borg1 --image=busybox --restart=Always --labels="platform=p
 
 ### Check 6: Launch Pod and Configure its Termination Shutdown Time ###
 Launch a new web server Pod in the sys2 namespace with the following configuration:
-<ul><li>Pod name: web-zeroshutdown
-<li>Container image: nginx
-<li>Restart policy: Never
+<ul><li>Pod name: web-zeroshutdown</li>
+<li>Container image: nginx</li>
+<li>Restart policy: Never</li></ul>
 Ensure the pod is configured to terminate immediately when requested to do so by configuring it's terminationGracePeriodSeconds setting.
 
 <details><summary>show</summary>
