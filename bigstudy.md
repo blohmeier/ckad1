@@ -181,7 +181,32 @@ Create a pod named secpod in the dnn namespace which includes 2 containers named
 ```bash
 #1 Create a pod named secpod in the dnn namespace which includes 2 containers named c1 and c2. Both containers must be configured to run the bash image, and should execute the command /usr/local/bin/bash -c sleep 3600. 
 k run -n dnn secpod --image=bash $dy --command -- /usr/local/bin/bash -c sleep 3600 > 3_pod.yml
-vim 3_pod.yml
+vim 3_pod.yml:
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: secpod
+  namespace: dnn 
+spec:
+  securityContext:
+    fsGroup: 3000
+  containers:
+  - args:
+    - usr/local/bin/bash
+    - -c
+    - sleep 3600
+    image: bash
+    name: c1
+    securityContext:
+      runAsUser: 1000
+  - args:
+    - usr/local/bin/bash
+    - -c
+    - sleep 3600
+    image: bash
+    name: c2
+    securityContext:
+      runAsUser: 2000
 ```
   
 </p>
