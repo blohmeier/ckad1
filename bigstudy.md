@@ -63,9 +63,7 @@ k label --overwrite=true pod compiler -n ca200 language=python
 </details>
 
 ### Check 4: Get the Pod IP Address using JSONPath ###
-Discover the Pod IP address assigned to the pod named ip-podzoid running in the ca300 namespace using JSONPath (hint: use -o jsonpath). Once you've established the correct kubectl command to do this, save the command (not the result) into a file located here: /home/ubuntu/podip.sh
-
-<details><summary>show</summary>
+<details><summary>Discover the Pod IP address assigned to the pod named ip-podzoid running in the ca300 namespace using JSONPath (hint: use -o jsonpath). Once you've established the correct kubectl command to do this, save the command (not the result) into a file at /home/ubuntu/podip.sh</summary>
 <p>
   
 ```bash
