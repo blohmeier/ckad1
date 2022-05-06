@@ -108,7 +108,7 @@ Ensure the pod is configured to terminate immediately when requested to do so by
 ```bash
 k run web-zeroshutdown -n sys2 --image=nginx --restart=Never --port=80 $dy > pod-zeroshutdown.yaml
 k explain pod.spec
-vim pod-zeroshutdown.yaml
+vim pod-zeroshutdown.yaml # terminationGracePeriodSeconds: 0 at .spec
 kubectl apply -f pod-zeroshutdown.yaml
 ```
   
