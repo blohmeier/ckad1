@@ -173,7 +173,7 @@ k edit deploy secapp -n app #insert name of created sa at appropriate spot in ma
 </p>
 </details>
 
-Check 3: Pod Security Context Configuration
+### Check 3: Pod Security Context Configuration ###
 Create a pod named secpod in the dnn namespace which includes 2 containers named c1 and c2. Both containers must be configured to run the bash image, and should execute the command /usr/local/bin/bash -c sleep 3600. Container c1 should run as user ID 1000, and container c2 should run as user ID 2000. Both containers should use file system group ID 3000.
 <details><summary>show</summary>
 <p>
