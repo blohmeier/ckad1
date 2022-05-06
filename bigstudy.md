@@ -3,7 +3,7 @@
 https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true
 </p></details>
 
-## 1: Core Concepts: ##
+# 1: Core Concepts #
 <details><summary>Exam link</summary>
 https://cloudacademy.com/lab/ckad-practice-exam-core-concepts/?context_resource=lp&context_id=3086
 </p></details>
@@ -122,7 +122,7 @@ kubectl apply -f pod-zeroshutdown.yaml
 </p>
 </details>
 
-## 2: Configuration: ##
+# 2: Configuration #
 <details><summary>Exam link</summary>
 https://cloudacademy.com/lab/ckad-practice-exam-configuration/?context_resource=lp&context_id=3086
 </p></details>
