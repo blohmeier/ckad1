@@ -115,8 +115,8 @@ kubectl apply -f pod-zeroshutdown.yaml
 </p>
 </details>
 
-<details><p><summary>Configuration:</summary>
-#### https://cloudacademy.com/lab/ckad-practice-exam-configuration/?context_resource=lp&context_id=3086 ####
+<details><summary>Configuration:</summary>
+https://cloudacademy.com/lab/ckad-practice-exam-configuration/?context_resource=lp&context_id=3086
 </p></details>
 ### Check 1: Create and Consume a Secret using a Volume ###
 <p>Create a secret named app-secret in the yqe Namespace that stores key-value pair of password=abnaoieb2073xsj</p>
