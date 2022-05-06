@@ -28,10 +28,9 @@ A Pod in the mcp namespace has a single container named random that writes its l
 <p>
   
 ```bash
-k -n mcp get pod random -o yaml > 1_original.yml
-cp 1_original.yml 1.yml
+k -n mcp get pod random -o yaml > 1_orig.yml
+cp 1_orig.yml 1.yml
 vim 1.yml:
-cat << EOF > second.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -56,8 +55,6 @@ spec:
       mountPath: /var/log
   volumes:
   - name: logs
-    emptyDir: {}
-EOF
 ```
   
 </p>
