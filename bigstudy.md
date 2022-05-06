@@ -32,14 +32,14 @@ k run -n cre --image=nginx:stable-alpine-perl --restart=OnFailure --port=80 basi
 </details>
 
 ### Check 2: Create a Namespace and Launch a Pod within it with Labels ###
-Create a new Namespace named workers and within it launch a Pod with the following configuration: <br />
-The Pod is named worker
-The Pod uses the busybox image for its only container
-Restart the Pod Never
-Command: /bin/sh -c "echo working... && sleep 3600"
-Label 1: company=acme
-Label 2: speed=fast
-Label 3: type=async
+Create a new Namespace named workers and within it launch a Pod with the following configuration: <ul>
+<li>The Pod is named worker</li>
+<li>The Pod uses the busybox image for its only container</li>
+<li>Restart the Pod Never</li>
+<li>Command: /bin/sh -c "echo working... && sleep 3600"</li>
+<li>Label 1: company=acme</li>
+<li>Label 2: speed=fast</li>
+<li>Label 3: type=async</li></ul>
 
 <details><summary>show</summary>
 <p>
