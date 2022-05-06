@@ -14,13 +14,11 @@ echo -e 'set nu et sts=2 sw=2 ts=2' >> ~/.vimrc
 </details>
 
 ### Check 1: Create and Configure a Basic Pod ###
-Create a Pod in the cre Namespace with the following configuration: <ul>
+<details><summary>Create a Pod in the cre Namespace with the following configuration: <ul>
 <li>The Pod is named basic</li>
 <li>The Pod uses the nginx:stable-alpine-perl image for its only container</li>
 <li>Restart the Pod only OnFailure</li>
-<li>Ensure port 80 is open to TCP traffic</li>
-  </ul>
-<details><summary>show</summary>
+<li>Ensure port 80 is open to TCP traffic</li></ul></summary>
 <p>
   
 ```bash
