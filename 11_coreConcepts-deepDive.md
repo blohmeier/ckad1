@@ -8,7 +8,7 @@ Ensure port 80 is open to TCP traffic
 <p>
   
 ```bash
-k run -n cre --image=nginx:stable-alpine-perl --restart=OnFailure --port=80 basic}
+k run -n cre --image=nginx:stable-alpine-perl --restart=OnFailure --port=80 basic
 ```
   
 </p>
