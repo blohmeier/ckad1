@@ -1,4 +1,17 @@
 ### https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true ###
+### https://cloudacademy.com/lab/ckad-practice-exam-core-concepts/?context_resource=lp&context_id=3086 ###
+
+Env Config:
+<details><summary>show</summary>
+<p>
+  
+```bash
+export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
+echo -e 'set number\nset expandtab\nset shiftwidth=2\nset tabstop=2' >> ~/.vimrc
+```
+  
+</p>
+</details>
 
 ### Check 1: Create and Configure a Basic Pod ###
 Create a Pod in the cre Namespace with the following configuration: <br />
