@@ -211,7 +211,7 @@ spec:
 </p>
 </details>
 
-Check 4: Pod Resource Constraints
+### Check 4: Pod Resource Constraints ###
 Create a new Pod named web1 in the ca100 namespace using the nginx image. Ensure that it has the following 2 labels env=prod and type=processor. Configure it with a memory request of 100Mi and a memory limit at 200Mi. Expose the pod on port 80.
 <details><summary>show</summary>
 <p>
@@ -249,10 +249,10 @@ status: {}
 </p>
 </details>
 
-Check 5: Create a Pod with Config Map Environment Vars
+### Check 5: Create a Pod with Config Map Environment Vars ###
 Create a new ConfigMap named config1 in the ca200 namespace. The new ConfigMap should be created with the following 2 key/value pairs:
-COLOUR=red
-SPEED=fast
+<ul><li>COLOUR=red</li>
+<li>SPEED=fast</li></ul>
 Launch a new Pod named redfastcar in the same ca200 namespace, using the image busybox. The redfastcar pod should expose the previous ConfigMap settings as environment variables inside the container. Configure the redfastcar pod to run the command:  /bin/sh -c "env | grep -E 'COLOUR|SPEED'; sleep 3600"
 <details><summary>show</summary>
 <p>
