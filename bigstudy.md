@@ -1,5 +1,5 @@
 ## Study Path: ##
-<details><summary>Exam link</summary>
+<details><summary></summary>
 https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true
 </p></details>
 
