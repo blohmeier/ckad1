@@ -52,9 +52,7 @@ k run -n workers worker --image=busybox --labels="company=acme,speed=fast,type=a
 </details>
 
 ### Check 3: Update the Label on a Running Pod ###
-The ca200 namespace contains a running Pod named compiler. Without restarting the pod, update and change it's language label from java to python.
-
-<details><summary>show</summary>
+<details><summary>The ca200 namespace contains a running Pod named compiler. Without restarting the pod, update and change it's language label from java to python.</summary>
 <p>
   
 ```bash
