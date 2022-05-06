@@ -166,7 +166,7 @@ A Deployment named secapp has been created in the app namespace and currently us
   
 ```bash
 k create sa -n app secure-svc
-k explain deploy --recursive | less #find placement of "serviceAccountName" object
+k explain deploy --recursive | less #find placement of "serviceAccountName" object (same as .spec.container)
 k edit deploy secapp -n app #insert name of created sa at appropriate spot in manifest file
 ```
   
