@@ -218,8 +218,8 @@ Create a new Pod named web1 in the ca100 namespace using the nginx image. Ensure
   
 ```bash
 1# Can do all but request/limit with kubectl:
-k run -n ca100 web1 --image=nginx --labels="env=prod,type=processor" --port=80 $dy > 4_pod.yml
-#2 Edit to add resource limits
+k run -n ca100 web1 --image=nginx --labels="env=prod,type=processor" --port=80 $dy > 4.yml
+vim 4.yml
 apiVersion: v1
 kind: Pod 
 metadata:
@@ -261,8 +261,8 @@ Launch a new Pod named redfastcar in the same ca200 namespace, using the image b
 #1 Create ConfigMap
 k create cm config1 -n ca200 --from-literal COLOUR=red --from-literal SPEED=fast
 #2 Run pod
-k run -n ca200 redfastcar --image=busybox $dy --command -- /bin/sh -c "env | grep -E 'COLOUR|SPEED'; sleep 3600" > 5_pod.yml
-#3 vim 5_pod.yml and add ("##") configMap env configuration
+k run -n ca200 redfastcar --image=busybox $dy --command -- /bin/sh -c "env | grep -E 'COLOUR|SPEED'; sleep 3600" > 5.yml
+#3 vim 5.yml and add ("##") configMap env configuration
 apiVersion: v1
 kind: Pod
 metadata:
