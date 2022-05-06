@@ -1,5 +1,12 @@
-#### https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true ####
-#### https://cloudacademy.com/lab/ckad-practice-exam-core-concepts/?context_resource=lp&context_id=3086 ####
+## Study Path: ##
+<details><summary>Exam link</summary>
+https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true
+</p></details>
+
+## 1: Core Concepts: ##
+<details><summary>Exam link</summary>
+https://cloudacademy.com/lab/ckad-practice-exam-core-concepts/?context_resource=lp&context_id=3086
+</p></details>
 
 <details><summary>Env Config:</summary>
 <p>
