@@ -1,5 +1,5 @@
-#### https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true ####
-#### https://cloudacademy.com/lab/ckad-practice-exam-core-concepts/?context_resource=lp&context_id=3086 ####
+### https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true ###
+### https://cloudacademy.com/lab/ckad-practice-exam-core-concepts/?context_resource=lp&context_id=3086 ###
 
 Env Config:
 <details><summary>show</summary>
@@ -7,18 +7,19 @@ Env Config:
   
 ```bash
 export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
-echo -e 'set number\nset expandtab\nset shiftwidth=2\nset tabstop=2' >> ~/.vimrc
+echo -e 'set nu et sts=2 sw=2 ts=2' >> ~/.vimrc
 ```
-  
+ 
 </p>
 </details>
 
 ### Check 1: Create and Configure a Basic Pod ###
-Create a Pod in the cre Namespace with the following configuration: <br />
-The Pod is named basic
-The Pod uses the nginx:stable-alpine-perl image for its only container
-Restart the Pod only OnFailure
-Ensure port 80 is open to TCP traffic
+Create a Pod in the cre Namespace with the following configuration: <ul>
+<li>The Pod is named basic</li>
+<li>The Pod uses the nginx:stable-alpine-perl image for its only container</li>
+<li>Restart the Pod only OnFailure</li>
+<li>Ensure port 80 is open to TCP traffic</li>
+  </ul>
 <details><summary>show</summary>
 <p>
   
