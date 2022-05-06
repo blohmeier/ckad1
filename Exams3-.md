@@ -93,11 +93,14 @@ spec:
    command: ["/bin/sh", "-c", "curl -s http://localhost && sleep 3600"]
 ```
 
+<details><summary>show</summary>
+<p>
 
 k create -f 2.yaml
-#Output to logs
-kubectl logs -n app1 webpod -c c2 > /home/ubuntu/webpod-log.txt
+k logs -n app1 webpod -c c2 > /home/ubuntu/webpod-log.txt
 ```
+  </p>
+</details>
 
 
 
