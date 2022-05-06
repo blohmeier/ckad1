@@ -157,3 +157,18 @@ spec:
   
 </p>
 </details>
+
+### Check 2: Update Deployment with New Service Account ###
+A Deployment named secapp has been created in the app namespace and currently uses the default ServiceAccount. Create a new ServiceAccount named secure-svc in the app namespace and then use it within the existing secapp Deployment, ensuring that the replicas now run with it.
+
+<details><summary>show</summary>
+<p>
+  
+```bash
+k create sa -n app secure-svc
+k explain deploy --recursive | less #find placement of "serviceAccountName" object
+k edit deploy secapp -n app #insert name of created sa at appropriate spot in manifest file
+```
+  
+</p>
+</details>
