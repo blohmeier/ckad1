@@ -233,12 +233,12 @@ spec:
     name: web1
     ports:
     - containerPort: 80
-    resources: 	# Replace/add from here to 	'EOF'
+    resources: 	# Replace/add from here to 	# EOF
 	resources:			
 	  requests:			
 	    memory: 100Mi	
 	  limits:			
-	    memory: 200Mi			'EOF'
+	    memory: 200Mi			# EOF
 ```
   
 </p>
