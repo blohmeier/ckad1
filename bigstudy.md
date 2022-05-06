@@ -1,5 +1,5 @@
-### https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true ###
-### https://cloudacademy.com/lab/ckad-practice-exam-core-concepts/?context_resource=lp&context_id=3086 ###
+#### https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true ####
+#### https://cloudacademy.com/lab/ckad-practice-exam-core-concepts/?context_resource=lp&context_id=3086 ####
 
 <details><summary>Env Config:</summary>
 <p>
@@ -116,3 +116,34 @@ kubectl apply -f pod-zeroshutdown.yaml
 </details>
 
 #### https://cloudacademy.com/lab/ckad-practice-exam-configuration/?context_resource=lp&context_id=3086 ####
+
+### Check 1: Create and Consume a Secret using a Volume ###
+<p>Create a secret named app-secret in the yqe Namespace that stores key-value pair of password=abnaoieb2073xsj</p>
+<p>Create a Pod in the yqe Namespace that consumes the app-secret Secret using a Volume that mounts the Secret in the /etc/app directory. The Pod should be named app and run a memcached container.</p>
+
+<details><summary>show</summary>
+<p>
+  
+```bash
+k -n yqe create secret generic --from-literal=password=abnaoieb2073xsj app-secret
+k -n yqe run app --image=memcached $dy > 1_pod.yml
+vim 1_pod.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+spec:
+  containers:
+  - name: app
+    image: memcached #add/edit below
+    volumeMounts:
+    - name: secret
+      mountPath: "/etc/app"
+  volumes:
+  - name: secret
+    secret:
+      secretName: app-secret
+```
+  
+</p>
+</details>
