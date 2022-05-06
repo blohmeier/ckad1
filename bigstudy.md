@@ -249,7 +249,9 @@ Create a new ConfigMap named config1 in the ca200 namespace. The new ConfigMap s
 <ul><li>COLOUR=red</li>
 <li>SPEED=fast</li></ul>
 Launch a new Pod named redfastcar in the same ca200 namespace, using the image busybox. The redfastcar pod should expose the previous ConfigMap settings as environment variables inside the container. Configure the redfastcar pod to run the command:  /bin/sh -c "env | grep -E 'COLOUR|SPEED'; sleep 3600"
-<details><summary>show</summary><p>
+<details><summary>show</summary>
+<p>
+	
 ```bash
 #1 Create ConfigMap
 k create cm config1 -n ca200 --from-literal COLOUR=red --from-literal SPEED=fast
@@ -277,4 +279,6 @@ spec:
     - configMapRef:			##add
         name: config1			##add
 ```
-</p></details>
+	
+</p>
+</details>
