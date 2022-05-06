@@ -22,7 +22,8 @@ echo -e 'set nu et sts=2 sw=2 ts=2' >> ~/.vimrc
 
 ### Check 1:Pod with Legacy Logs ###
 <details><summary>
-A Pod in the mcp namespace has a single container named random that writes its logs to the /var/log/random.log file. Add a second container named second that uses the busybox image to allow the following command to display the logs written to the random container's /var/log/random.log file:
+A Pod in the mcp namespace has a single container named random that writes its logs to the /var/log/random.log file. Add a second container named second that uses the busybox image to allow the following command to display the logs written to the random container's /var/log/random.log file: </br>
+  kubectl -n mcp logs random second
 </summary>
 <p>
   
