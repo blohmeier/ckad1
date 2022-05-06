@@ -6,7 +6,8 @@ Env Config:
 <p>
   
 ```bash
-export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
+export dy='--dry-run=client -o yaml' fg='--force --grace-period 0' && \
+alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
 echo -e 'set nu et sts=2 sw=2 ts=2' >> ~/.vimrc
 ```
  
