@@ -69,52 +69,28 @@ status: {}
 apiVersion: v1
 kind: Pod 
 metadata:
-  creationTimestamp: null
   name: secpod
   namespace: dnn 
 spec:
   securityContext:
-   fsGroup: 3000
+    fsGroup: 3000
   containers:
   - args:
-    - /usr/local/bin/bash
+    - usr/local/bin/bash
     - -c
     - sleep 3600
     image: bash
     name: c1
     securityContext:
-     runAsUser: 1000
+      runAsUser: 1000
   - args:
-    - /usr/local/bin/bash
+    - usr/local/bin/bash
     - -c
     - sleep 3600
     image: bash
     name: c2
     securityContext:
-     runAsUser: 2000
-  dnsPolicy: ClusterFirst
-  restartPolicy: Always
-status: {}
-
-STILL NOT WORKING ... GET ONE kubectl exec check to work ... WORKING:
-apiVersion: v1
-kind: Pod 
-metadata:
-  creationTimestamp: null
-  name: secpod
-  namespace: dnn 
-spec:
-  securityContext:
-   fsGroup: 3000
-  containers:
-  - name: c1
-    image: bash
-    args:
-    - /usr/local/bin/bash
-    - -c
-    - sleep 3600
-    securityContext:
-     runAsUser: 1000
+      runAsUser: 2000
 }
 Check 4: Pod Resource Constraints
 Create a new Pod named web1 in the ca100 namespace using the nginx image. Ensure that it has the following 2 labels env=prod and type=processor. Configure it with a memory request of 100Mi and a memory limit at 200Mi. Expose the pod on port 80.
