@@ -14,7 +14,7 @@ echo -e 'set nu et sts=2 sw=2 ts=2' >> ~/.vimrc
 </details>
 
 <details><summary>
-  ### Check 1: Create and Configure a Basic Pod ### </br>
+ **Check 1: Create and Configure a Basic Pod** </br>
   Create a Pod in the cre Namespace with the following configuration: <ul>
 <li>The Pod is named basic</li>
 <li>The Pod uses the nginx:stable-alpine-perl image for its only container</li>
