@@ -29,7 +29,7 @@ Expose the Pod named basic in the red Namespace, ensuring it has the following s
 <p>
   
 ```bash
-
+k expose pod basic -n red --name=cloudacademy-svc --port=8080 --target-port=80
 ```
 
 </p>
