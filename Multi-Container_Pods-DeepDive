@@ -143,8 +143,8 @@ spec:
    volumeMounts:
    - name: vol1
      mountPath: /data
-   command: ["/usr/local/bin/bash", "-c", "echo $DATA > /data/file.txt"]    
- - name: c2										## Here to end
+   command: ["/usr/local/bin/bash", "-c", "echo $DATA > /data/file.txt"]    ## Add from line below to end
+ - name: c2										
    image: bash
    volumeMounts:
    - name: vol1
@@ -152,10 +152,12 @@ spec:
      readOnly: true
    command:
      - "/usr/local/bin/bash"
-     - "-c"										##
-     - | 										##
-       for word in $(</data/file.txt)			##
-       do										##
+     - "-c"
+     - |
+       for word in $(</data/file.txt)
+       do 
+       echo $word | md5sum | awk '{print $1}'
+       done		
 # Apply the update Pod manifest into the K8s cluster
 kubectl apply -f /home/ubuntu/md5er-app.yaml
 # Save the stdout output from the c2 container as per given instructions
