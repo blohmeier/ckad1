@@ -52,7 +52,7 @@ A Service in the hosting Namespace is not responding to requests. Determine whic
 
 ```bash
 k get svc -n hosting -o wide #List all svc in -n
-k -n hosting get ep #Any svc associated with any Pod eps? web2 has none (can's serve requests).
+k -n hosting get ep #Any svc associated with any Pod eps? web2 has none (means web2 can't serve requests).
 k -n hosting get pods -l app=web2 #Two pods match web2 using "--selector" (-l) so no label issue. NOTE: are part of deploy. But not "READY"?
 k -n hosting describe pods -l app=web2 #Both pods "Readiness probe failed...". Containers.Readiness: port 30, but "Port: 80/TCP" a few lines above. ort 80:
 k edit deploy -n hosting web2 #Change Containers.Readiness: port 80
