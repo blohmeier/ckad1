@@ -62,7 +62,7 @@ kubectl run client -n skynet --image=appropriate/curl -it --rm --restart=Never -
 <p>
   
 ```bash
-k edit svc -n skynet t2-svc #Edit to change 'Selector' from t3 to t2
+k edit svc -n skynet t2-svc #Change 'Selector' from t3 to t2
 k run client -n skynet --image=appropriate/curl -it --rm --restart=Never -- curl http://t2-svc:8080 > /home/ubuntu/svc-output.txt
 ```
 </p>
@@ -77,7 +77,7 @@ The following two Pods have been created in the sec1 Namespace:
 <p>
   
 ```bash
-  
+k edit -n sec1 netpol netpol1 #Change spec.ingress.from.podSelector.matchLabels from 'test' to 'client'
 ```
 </p>
 </details>
