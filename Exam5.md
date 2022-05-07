@@ -70,29 +70,22 @@ k -n saas create cronjob --image=radial/busyboxplus:curl --schedule='*/10 * * * 
 ### Check 6: Filter and Sort Pods ###
 <p>Get a list of all pod names running in the rep namespace which have their colour label set to either orange, red, or yellow. The returned pod name list should contain only the pod names and nothing else. The pods names should be ordered by the cluster IP address assigned to each pod. The resulting pod name list should be saved out to the file /home/ubuntu/pod001 </p>
 <p>The following list is an example of the required output:</p>
-pod6
-pod17
-pod3
-pod16
-pod15
-pod13</p>
+<p>pod6</p>
+<p>pod17</p>
+<p>pod3</p>
+<p>pod16</p>
+<p>pod15</p>
+<p>pod13</p>
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k -n saas create cronjob --image=radial/busyboxplus:curl --schedule='*/10 * * * *' matrix -- curl www.google.com
+k -n rep get pods --selector 'colour in (orange,red,yellow)' --sort-by=.status.podIP -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' > /home/ubuntu/pod001
+
 ```
 </p>
 </details>
-
-
-
-
-
-
-
-
 
 
 
