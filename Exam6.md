@@ -45,7 +45,8 @@ A Deployment named cloudforce has been created in the ca1 Namespace. You must no
 <p>
   
 ```bash
-
+k expose deployment -n ca1 cloudforce --name=cloudforce-svc --port=80 --type=NodePort
+k patch -n ca1 svc cloudforce-svc --patch '{"spec": {"ports": [{"port": 80, "nodePort": 32080}]}}'
 ```
 
 </p>
