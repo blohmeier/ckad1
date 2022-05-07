@@ -38,6 +38,9 @@ spec:
       mountPath: /var/log
   volumes:
   - name: logs
+
+k delete pod -n mcp random $fg
+k create -f 1.yml
 ```
   
 </p>
