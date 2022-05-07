@@ -111,7 +111,38 @@ spec:
 <p>
   
 ```bash
-
+cat << EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+ labels:
+   env: prod
+ name: logger
+ namespace: blah
+spec:
+ containers:
+ - image: bash
+   name: c1
+   command: ["/usr/local/bin/bash", "-c"]
+   args:
+    - ifconfig > /var/log/blah/data;
+      sleep 3600;
+   volumeMounts:
+   - mountPath: /var/log/blah
+     name: vol1
+ - image: bash
+   name: c2
+   command: ["/usr/local/bin/bash", "-c"]
+   args:
+    - sleep 3600;
+   volumeMounts:
+   - mountPath: /var/log/blah
+     name: vol1
+ volumes:
+ - name: vol1
+   hostPath:
+     path: /tmp/vol
+EOF
 ```
 </p>
 </details>
