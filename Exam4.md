@@ -15,86 +15,60 @@ Create a new Pod named nginx in the ca1 namespace using the nginx image. Ensure 
 <p>
   
 ```bash
-k -n mcp get pod random -o yaml > 1_orig.yml
-cp 1_orig.yml 1.yml
+k run nginx -n ca1 --image=nginx --restart=Never --port=80 $dy > 1.yml
 vim 1.yml
 apiVersion: v1
-kind: Pod
+kind: Pod 
 metadata:
-  name: random
-  namespace: mcp
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+  namespace: ca1 
 spec:
   containers:
-  - args:
-    - /bin/sh
-    - -c
-    - while true; do shuf -i 0-1 -n 1 >> /var/log/random.log; sleep 1; done
-    image: busybox
-    name: random
-    volumeMounts:
-    - mountPath: /var/log
-      name: logs
-  - name: second
-    image: busybox
-    args: [/bin/sh, -c, 'tail -n+1 -f /var/log/random.log']
-    volumeMounts:
-    - name: logs
-      mountPath: /var/log
-  volumes:
-  - name: logs
-
-k delete pod -n mcp random $fg
+  - image: nginx
+    name: nginx
+    ports:
+    - containerPort: 80
+    resources: {}
+    livenessProbe:		#add from here to 'end'
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 10
+      periodSeconds: 5	#end
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
 k create -f 1.yml
 ```
   
 </p>
 </details>
 
-### Check 2: Multi Container Pod Networking ###
-The following multi-container Pod manifest needs to be updated BEFORE being deployed. Container c2 is designed to make HTTP requests to container c1. Before deploying this manifest, update it by substituting the <REPLACE_HOST_HERE> placeholder with the correct host or IP address - the remaining parts of the manifest must remain unchanged. Once deployed - confirm that the solution works correctly by executing the command kubectl logs -n app1 webpod -c c2 > /home/ubuntu/webpod-log.txt. The resulting /home/ubuntu/webpod-log.txt file should contain a single string within it.
-
-```bash
-apiVersion: v1
-kind: Pod
-metadata:
- name: webpod
- namespace: app1
-spec:
- restartPolicy: Never
- volumes:
- - name: vol1
-   emptyDir: {}
- containers:
- - name: c1
-   image: nginx
-   volumeMounts:
-   - name: vol1
-     mountPath: /usr/share/nginx/html
-   lifecycle:
-     postStart:
-       exec:
-         command:
-           - "bash"
-           - "-c"
-           - |
-             date | sha256sum | tr -d " *-" > /usr/share/nginx/html/index.html
- - name: c2
-   image: appropriate/curl
-   command: ["/bin/sh", "-c", "curl -s http://<REPLACE_HOST_HERE> && sleep 3600"]
-```
+### Check 2: Hosting Service Not Working ###
+A Service in the hosting Namespace is not responding to requests. Determine which Service is not working and resolve the underlying issue so the Service begins responding to requests.
 
 <details><summary>show</summary><p>
 
 ```bash
-vim 2.yml #only change in above: <REPLACE_HOST_HERE> = localhost
-k create -f 2.yml
-k logs -n app1 webpod -c c2 > /home/ubuntu/webpod-log.txt
+#List all svc in -n:
+k get svc -n hosting -o wide
+#see if the Services have any Pod Endpoints associated with them:
+k -n hosting get ep
+#shows web2 has no eps, meaning it can't serve requests. List pods for web2 using "--selector" (-l):
+k -n hosting get pods -l app=web2
+#shows 2 pods matching so no issue with labels (?). Naming convention suggests they're part of a deployment. Problem: shows are not in "READY" state. Find out why with:
+k -n hosting describe pods -l app=web2
+#reveals "Readiness probe failed..." for both pods. Reviewing Containers.Readiness, request sent to port 30, but "Port: 80/TCP" a few lines above. Must use 'edit' to change readiness probe so request is sent to port 80:
+k edit deploy -n hosting web2
   
 ```
 </p>
 </details>
 
-### Check 3: Add New Container with ReadOnly Volume ###
+### Check 3: Pod Log Analysis ###
 Update and deploy the provided /home/ubuntu/md5er-app.yaml manifest file, adding a second container named c2 to the existing md5er Pod. The c2 container will run the same bash image that the c1 container already uses. The c2 container must mount the existing vol1 volume in read only mode, and such that it can execute the following bash script:
 
 ```bash
