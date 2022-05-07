@@ -31,42 +31,60 @@ k label pod -n gzz -l env=prod app=cloudacademy
 </p>
 </details>
 
-### Check 3: Pod Log Analysis ###
-The ca2 namespace contains a set of pods. Pods labelled with app=test, or app=prod have been designed to log out a static list of numbers. Run a command that combines the pod logs for all pods that have the label app=prod and then get a total row count for the combined logs and save this result out to the file /home/ubuntu/combined-row-count-prod.txt.
+### Check 3: Rollback Deployment ###
+The nginx container running within the cloudforce deployment in the fre namespace needs to be updated to use the nginx:1.19.0-perl image. Perform this deployment update and ensure that the command used to perform it is recorded in the tracked rollout history.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k logs -n ca2 -l app=prod | wc -l > /home/ubuntu/combined-row-count-prod.txt
+k -n fre set image deployment cloudforce nginx=nginx:1.19.0-perl --record
 ```
 </p>
 </details>
 
-### Check 4: Pod Diagnostics ###
-A pod named skynet has been deployed into the ca2 namespace. This pod has the following file /skynet/t2-specs.txt located within it, containing important information. You need to extract this file and save it to the following location /home/ubuntu/t2-specs.txt.
+### Check 4: Configure Pod AutoScaling ###
+A deployment named eclipse has been created in the xx1 namespace. This deployment currently consists of 2 replicas. Configure this deployment to autoscale based on CPU utilisation. The autoscaling should be set for a minimum of 2, maximum of 4, and CPU usage of 65%.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k exec -n ca2 skynet -- cat /skynet/t2-specs.txt > /home/ubuntu/t2-specs.txt
+k -n xx1 autoscale deploy --min=2 --max=4 --cpu-percent=65 eclipse
 ```
 </p>
 </details>
 
-### Check 5: Pod CPU Utilization ###
-Find the Pod that has the highest CPU utilization in the matrix namespace. Write the name of this pod into the following file: /home/ubuntu/max-cpu-podname.txt
+### Check 5: Create CronJob ###
+<p>Create a cronjob named matrix in the saas namespace. Use the radial/busyboxplus:curl image and set the schedule to */10 * * * *. </p>
+<p>The job should run the command: curl www.google.com</p>
+<details><summary>show</summary>
+<p>
+  
+```bash
+k -n saas create cronjob --image=radial/busyboxplus:curl --schedule='*/10 * * * *' matrix -- curl www.google.com
+```
+</p>
+</details>
+
+### Check 6: Filter and Sort Pods ###
+<p>Get a list of all pod names running in the rep namespace which have their colour label set to either orange, red, or yellow. The returned pod name list should contain only the pod names and nothing else. The pods names should be ordered by the cluster IP address assigned to each pod. The resulting pod name list should be saved out to the file /home/ubuntu/pod001 </p>
+<p>The following list is an example of the required output:</p>
+pod6
+pod17
+pod3
+pod16
+pod15
+pod13</p>
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k top pods -n matrix --sort-by=cpu --no-headers=true | head -n1 | cut -d" " -f1 > /home/ubuntu/max-cpu-podname.txt
+k -n saas create cronjob --image=radial/busyboxplus:curl --schedule='*/10 * * * *' matrix -- curl www.google.com
 ```
 </p>
 </details>
-
 
 
 
