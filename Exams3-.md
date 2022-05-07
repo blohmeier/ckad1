@@ -150,7 +150,7 @@ spec:
    - name: vol1
      mountPath: /data
    command: ["/usr/local/bin/bash", "-c", "echo $DATA > /data/file.txt"] ## Add from line below to end
- - name: c2										
+ - name: c2
    image: bash
    volumeMounts:
    - name: vol1
@@ -158,10 +158,12 @@ spec:
      readOnly: true
    command:
      - "/usr/local/bin/bash"
-     - "-c"										
-     - | 										
-       for word in $(</data/file.txt)			
-       do										
+     - "-c"
+     - |
+       for word in $(</data/file.txt)
+       do 
+       echo $word | md5sum | awk '{print $1}'
+       done					
 
 k apply -f /home/ubuntu/md5er-app.yaml
 k logs -n app2 md5er c2 > /home/ubuntu/md5er-output.log
