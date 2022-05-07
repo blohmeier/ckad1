@@ -13,7 +13,7 @@ A Pod in the mcp namespace has a single container named random that writes its l
 ```bash
 k -n mcp get pod random -o yaml > 1_orig.yml
 cp 1_orig.yml 1.yml
-vim 1.yml:
+vim 1.yml
 apiVersion: v1
 kind: Pod
 metadata:
