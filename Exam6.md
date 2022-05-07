@@ -13,79 +13,69 @@ Create a Pod in the red Namespace with the following configuration:
 <p>
   
 ```bash
-k create deploy -n zap webapp --image=nginx:1.17.8 --replicas=2
-k scale deploy -n zap webapp --replicas=4
-k edit deploy -n zap webapp #edit "image" field
+k run -n red basic --image=nginx:stable-alpine-perl --restart=OnFailure --port=80
 ```
-  
+
 </p>
 </details>
 
-### Check 2: Create Pod Labels ###
-Add an additional label app=cloudacademy to all pods currently running in the gzz namespace that have the label env=prod
-
-<details><summary>show</summary><p>
-
+### Check 2: Expose Pod ###
+<details><summary>
+Expose the Pod named basic in the red Namespace, ensuring it has the following settings:
+<ul><li>Service name is cloudacademy-svc</li>
+<li>Service port is 8080</li>
+<li>Target port is 80</li>
+<li>Service type is ClusterIP</li></ul></summary>
+<p>
+  
 ```bash
-k get pod -n gzz -l env=prod
-k label pod -n gzz -l env=prod app=cloudacademy
-  
+
 ```
+
 </p>
 </details>
 
-### Check 3: Rollback Deployment ###
-The nginx container running within the cloudforce deployment in the fre namespace needs to be updated to use the nginx:1.19.0-perl image. Perform this deployment update and ensure that the command used to perform it is recorded in the tracked rollout history.
+### Check 3: Expose Existing Deployment ###
+<details><summary>
+A Deployment named cloudforce has been created in the ca1 Namespace. You must now expose this Deployment as a NodePort based Service using the following settings:
+<ul><li>Service name is cloudacademy-svc</li>
+<li>Service type is ClusterIP</li>
+<li>Service port is 80</li>
+<li>NodePort is 32080</li></ul></summary>
+<p>
+  
+```bash
+
+```
+
+</p>
+</details>
+
+### Check 4: Fix Networking Issue ###
+A Deployment named t2 has been created in the skynet Namespace, and has been exposed as a ClusterIP based Service named t2-svc. The t2-svc Service when contacted should return a valid HTTP response, but unfortunately, this is currently not yet the case. Please investigate and fix the problem. When you have applied the fix, run the following command to save the HTTP response:
+```bash
+kubectl run client -n skynet --image=appropriate/curl -it --rm --restart=Never -- curl http://t2-svc:8080 > /home/ubuntu/svc-output.txt
+```
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k -n fre set image deployment cloudforce nginx=nginx:1.19.0-perl --record
-```
-</p>
-</details>
 
-### Check 4: Configure Pod AutoScaling ###
-A deployment named eclipse has been created in the xx1 namespace. This deployment currently consists of 2 replicas. Configure this deployment to autoscale based on CPU utilisation. The autoscaling should be set for a minimum of 2, maximum of 4, and CPU usage of 65%.
-
-<details><summary>show</summary>
-<p>
-  
-```bash
-k -n xx1 autoscale deploy --min=2 --max=4 --cpu-percent=65 eclipse
 ```
 </p>
 </details>
 
 ### Check 5: Create CronJob ###
-<p>Create a cronjob named matrix in the saas namespace. Use the radial/busyboxplus:curl image and set the schedule to */10 * * * *. </p>
-<p>The job should run the command: curl www.google.com</p>
-<details><summary>show</summary>
+<details><summary>
+The following two Pods have been created in the sec1 Namespace:
+<ul><li>pod1 has the label app=test</li>
+<li>pod2 has the label app=client</li></ul></summary>
+<p>A NetworkPolicy named netpol1 has also been established in the sec1 Namespace but is currently blocking traffic sent from pod2 to pod1. Update the NetworkPolicy to ensure that pod2 can send traffic to pod1.</p></summary>
 <p>
   
 ```bash
-k -n saas create cronjob --image=radial/busyboxplus:curl --schedule='*/10 * * * *' matrix -- curl www.google.com
-```
-</p>
-</details>
-
-### Check 6: Filter and Sort Pods ###
-<p>Get a list of all pod names running in the rep namespace which have their colour label set to either orange, red, or yellow. The returned pod name list should contain only the pod names and nothing else. The pods names should be ordered by the cluster IP address assigned to each pod. The resulting pod name list should be saved out to the file /home/ubuntu/pod001 </p>
-<p>The following list is an example of the required output:</p>
-<p>pod6</p>
-<p>pod17</p>
-<p>pod3</p>
-<p>pod16</p>
-<p>pod15</p>
-<p>pod13</p>
-
-<details><summary>show</summary>
-<p>
   
-```bash
-k -n rep get pods --selector 'colour in (orange,red,yellow)' --sort-by=.status.podIP -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' > /home/ubuntu/pod001
-
 ```
 </p>
 </details>
