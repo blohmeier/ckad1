@@ -76,13 +76,14 @@ spec:
              date | sha256sum | tr -d " *-" > /usr/share/nginx/html/index.html
  - name: c2
    image: appropriate/curl
-   command: ["/bin/sh", "-c", "curl -s http://localhost && sleep 3600"]
+   command: ["/bin/sh", "-c", "curl -s http://<REPLACE_HOST_HERE> && sleep 3600"]
 ```
 
 <details><summary>show</summary><p>
 
 ```bash
-k create -f <name for file created from manifest above>.yml
+vim 2.yml #only change in above: <REPLACE_HOST_HERE> = localhost
+k create -f 2.yml
 k logs -n app1 webpod -c c2 > /home/ubuntu/webpod-log.txt
   
 ```
