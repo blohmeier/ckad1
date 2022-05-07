@@ -1,24 +1,7 @@
-## Study Path: ##
-<details><summary></summary>
-https://cloudacademy.com/learning-paths/certified-kubernetes-application-developer-ckad-exam-preparation-1-3086/?fromTp=true
-</p></details>
-
 # Exam 3: Multi-Container Pods #
 <details><summary>Exam link</summary>
 https://cloudacademy.com/lab/ckad-practice-exam-multi-container-pods/?context_resource=lp&context_id=3086
 </p></details>
-
-<details><summary>Env Config:</summary>
-<p>
-  
-```bash
-export dy='--dry-run=client -o yaml' fg='--force --grace-period 0' && \
-alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
-echo -e 'set nu et sts=2 sw=2 ts=2' >> ~/.vimrc
-```
- 
-</p>
-</details>
 
 ### Check 1:Pod with Legacy Logs ###
 <details><summary>
