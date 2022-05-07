@@ -37,10 +37,8 @@ spec:
         path: /
         port: 80
       initialDelaySeconds: 10
-      periodSeconds: 5	#end
-  dnsPolicy: ClusterFirst
-  restartPolicy: Never
-status: {}
+      periodSeconds: 5
+
 k create -f 1.yml
 ```
   
@@ -53,16 +51,11 @@ A Service in the hosting Namespace is not responding to requests. Determine whic
 <details><summary>show</summary><p>
 
 ```bash
-#List all svc in -n:
-k get svc -n hosting -o wide
-#see if the Services have any Pod Endpoints associated with them:
-k -n hosting get ep
-#shows web2 has no eps, meaning it can't serve requests. List pods for web2 using "--selector" (-l):
-k -n hosting get pods -l app=web2
-#shows 2 pods matching so no issue with labels (?). Naming convention suggests they're part of a deployment. Problem: shows are not in "READY" state. Find out why with:
-k -n hosting describe pods -l app=web2
-#reveals "Readiness probe failed..." for both pods. Reviewing Containers.Readiness, request sent to port 30, but "Port: 80/TCP" a few lines above. Must use 'edit' to change readiness probe so request is sent to port 80:
-k edit deploy -n hosting web2
+k get svc -n hosting -o wide #List all svc in -n
+k -n hosting get ep #Any svc associated with any Pod eps? web2 has none (can's serve requests).
+k -n hosting get pods -l app=web2 #Two pods match web2 using "--selector" (-l) so no label issue. NOTE: are part of deploy. But not "READY"?
+k -n hosting describe pods -l app=web2 #Both pods "Readiness probe failed...". Containers.Readiness: port 30, but "Port: 80/TCP" a few lines above. ort 80:
+k edit deploy -n hosting web2 #Change Containers.Readiness: port 80
   
 ```
 </p>
