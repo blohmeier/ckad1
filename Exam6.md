@@ -70,7 +70,7 @@ kubectl run client -n skynet --image=appropriate/curl -it --rm --restart=Never -
 <details><summary>
 The following two Pods have been created in the sec1 Namespace:
 <ul><li>pod1 has the label app=test</li>
-<li>pod2 has the label app=client</li></ul></summary>
+<li>pod2 has the label app=client</li></ul>
 <p>A NetworkPolicy named netpol1 has also been established in the sec1 Namespace but is currently blocking traffic sent from pod2 to pod1. Update the NetworkPolicy to ensure that pod2 can send traffic to pod1.</p></summary>
 <p>
   
