@@ -109,7 +109,7 @@ kubectl logs -n app2 md5er c2 > /home/ubuntu/md5er-output.log
   
 ```bash
 cp /home/ubuntu/md5er-app.yaml /home/ubuntu/md5er-app-original.yaml
-vim /home/ubuntu/md5er-app.yaml:
+vim /home/ubuntu/md5er-app.yaml
 apiVersion: v1
 kind: Pod 
 metadata:
