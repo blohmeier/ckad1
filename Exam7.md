@@ -10,13 +10,107 @@ Create a PersistentVolume named pv in the qq3 Namespace. The PersistentVolume mu
 <li>2Gi of storage capacity</li>
 <li>Allow a single Node read-write access</li>
 <li>Use a hostPath of /mnt/data</li></ul>
-The PersistentVolume must be claimed by a PersistentVolumeClaim named pvc. The PersistentVolume must request 1Gi of storage capacity.
-Lastly, create a Pod named persist with one redis container. The Pod must use the pvc PersistentVolumeClaim to mount a volume at /data.
+<p>The PersistentVolume must be claimed by a PersistentVolumeClaim named pvc. The PersistentVolume must request 1Gi of storage capacity.</p>
+<p>Lastly, create a Pod named persist with one redis container. The Pod must use the pvc PersistentVolumeClaim to mount a volume at /data.</p>
 </summary>
 <p>
   
 ```bash
-
+Copy code
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+# Create a PersistentVolume named pv in the qq3 Namespace. The PersistentVolume must be configured with the following settings: storageClassName: host, 2Gi of storage capacity, Allow a single Node read-write access, Use a hostPath of /mnt/data
+cat << EOF | kubectl -n qq3 apply -f -
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv
+spec:
+  storageClassName: host
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+EOF
+# The PersistentVolume must be claimed by a PersistentVolumeClaim named pvc. The PersistentVolume must request 1Gi of storage capacity.
+cat << EOF | kubectl -n qq3 apply -f -
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc
+spec:
+  storageClassName: host
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+EOF
+# Lastly, create a Pod named persist with one redis container. The Pod must use the pvc PersistentVolumeClaim to mount a volume at /data.
+cat << EOF | kubectl -n qq3 apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: persist
+spec:
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: pvc
+  containers:
+    - name: persist
+      image: redis
+      volumeMounts:
+        - mountPath: "/data"
+          name: data
+EOF
 ```
 
 </p>
