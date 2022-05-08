@@ -13,7 +13,9 @@ echo -e 'set et nu sts=2 sw=2 ts=2' >> ~/.vimrc
 OR
 export dy='--dry-run=client -o yaml' fg='--force --grace-period 0' && \
 alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
+echo "source <(kubectl completion bash)" >> $HOME/.bashrc && \
 echo -e 'set nu ts=2 sw=2 sts=2 et' >> ~/.vimrc
+
 
 VIM
 (command mode - esc key)
