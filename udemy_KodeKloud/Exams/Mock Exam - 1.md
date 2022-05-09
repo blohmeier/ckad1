@@ -176,3 +176,31 @@ k logs -n e-commerce e-com-1123 > /opt/outputs/e-com-1123.logs
 ```
 </p>
 </details>
+
+### Check 12 ###
+<details><summary>
+Create a Persistent Volume with the given specification.
+Volume Name: pv-analytics
+Storage: 100Mi
+Access modes: ReadWriteMany
+Host Path: /pv/data-analytics
+</summary>
+<p>
+  
+```bash
+vim 12.yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-analytics
+spec:
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/pv/data-analytics"
+k create -f 12.yml
+```
+</p>
+</details>
