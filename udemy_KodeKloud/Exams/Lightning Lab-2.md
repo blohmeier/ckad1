@@ -147,7 +147,36 @@ Here 30093 is the port used by the Ingress Controller.
 <p>
   
 ```bash
-
+vim 4.yml
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: ingress-vh-routing
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: watch.ecom-store.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/video"
+        backend:
+          service:
+            name: video-service
+            port:
+              number: 8080
+  - host: apparels.ecom-store.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/wear"
+        backend:
+          service:
+            name: apparels-service
+            port:
+              number: 8080
+k create -f 4.yml
 ```
 </p>
 </details>
@@ -159,7 +188,7 @@ A pod called dev-pod-dind-878516 has been deployed in the default namespace. Ins
 <p>
   
 ```bash
-
+k logs dev-pod-dind-878516 -c log-x | grep WARNING > /opt/dind-878516_logs.txt
 ```
 </p>
 </details>
