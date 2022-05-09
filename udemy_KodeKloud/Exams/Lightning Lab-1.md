@@ -61,6 +61,8 @@ spec:
     - name: config
       persistentVolumeClaim:
         claimName: log-claim
+
+k create -f 1_pvc.yml
 ```
   
 </p>
