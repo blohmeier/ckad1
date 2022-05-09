@@ -123,62 +123,39 @@ k run -n dvl1987 time-check --image=busybox $dy --command -- "while true; do dat
 </p>
 </details>
 
-### Check 4: Configure Pod AutoScaling ###
-A deployment named eclipse has been created in the xx1 namespace. This deployment currently consists of 2 replicas. Configure this deployment to autoscale based on CPU utilisation. The autoscaling should be set for a minimum of 2, maximum of 4, and CPU usage of 65%.
+### Check 4 ###
+Create a new deployment called nginx-deploy, with one single container called nginx, image nginx:1.16 and 4 replicas. The deployment should use RollingUpdate strategy with maxSurge=1, and maxUnavailable=2.
+Next upgrade the deployment to version 1.17.
+Finally, once all pods are updated, undo the update and go back to the previous version.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k -n xx1 autoscale deploy --min=2 --max=4 --cpu-percent=65 eclipse
+
 ```
 </p>
 </details>
 
-### Check 5: Create CronJob ###
-<p>Create a cronjob named matrix in the saas namespace. Use the radial/busyboxplus:curl image and set the schedule to */10 * * * *. </p>
-<p>The job should run the command: curl www.google.com</p>
+### Check 5 ###
+<p>Create a redis deployment with the following parameters:
+Name of the deployment should be redis using the redis:alpine image. It should have exactly 1 replica.
+The container should request for .2 CPU. It should use the label app=redis.
+It should mount exactly 2 volumes.
+
+a. An Empty directory volume called data at path /redis-master-data.
+b. A configmap volume called redis-config at path /redis-master.
+c. The container should expose the port 6379. 
+The configmap has already been created.</p>
 <details><summary>show</summary>
 <p>
   
 ```bash
-k -n saas create cronjob --image=radial/busyboxplus:curl --schedule='*/10 * * * *' matrix -- curl www.google.com
 ```
 </p>
 </details>
 
-### Check 6: Filter and Sort Pods ###
-<p>Get a list of all pod names running in the rep namespace which have their colour label set to either orange, red, or yellow. The returned pod name list should contain only the pod names and nothing else. The pods names should be ordered by the cluster IP address assigned to each pod. The resulting pod name list should be saved out to the file /home/ubuntu/pod001 </p>
-<p>The following list is an example of the required output:</p>
-pod6</br>
-pod17</br>
-pod3</br>
-pod16</br>
-pod15</br>
-pod13</br></br>
-
-<details><summary>show</summary>
-<p>
-  
-```bash
-k -n rep get pods --selector 'colour in (orange,red,yellow)' --sort-by=.status.podIP -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' > /home/ubuntu/pod001
-EQUIVALENT LINUX COMMANDS:
-# cut the first column of the earlier table output and remove the column heading
-kubectl -n rep get pods --selector 'colour in (orange,red,yellow)' --sort-by=.status.podIP | cut -d' ' -f1 | tail +2
-# grep the pod name and only output the matching characters
-kubectl -n rep get pods --selector 'colour in (orange,red,yellow)' --sort-by=.status.podIP | grep -o -e "pod[0-9]*"
-DETAILED STEPS FOR FIRST ANSWER ABOVE
-  kubectl -n rep get pods --selector 'colour in (orange,red,yellow)' --show-labels #Confirm only desired pods are selected
-  kubectl -n rep get pod pod1 -o yaml; kubectl explain pod; kubectl explain pod.status #Determine JSONPATH expression for PodIP (.status.podIP)
-  kubectl -n rep get pods --selector 'colour in (orange,red,yellow)' --sort-by=.status.podIP -o wide #Output IP addresses to confirm step above
-  kubectl -n rep get pods --selector 'colour in (orange,red,yellow)' --sort-by=.status.podIP -o jsonpath='{.items[*].metadata.name}' #Task only requires pod names
-  kubectl -n rep get pods --selector 'colour in (orange,red,yellow)' --sort-by=.status.podIP -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' #Range function to output in column format
-  kubectl -n rep get pods --selector 'colour in (orange,red,yellow)' --sort-by=.status.podIP -o custom-columns="NAME:.metadata.name" #Alternative to step above
-  
-```
-</p>
-</details>
-
+### Check 6 ###
 
 
 #TEMPLATE
@@ -190,4 +167,3 @@ DETAILED STEPS FOR FIRST ANSWER ABOVE
 ```
 </p>
 </details>
-
