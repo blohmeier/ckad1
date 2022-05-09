@@ -106,14 +106,19 @@ nc -z -v -w 1 secure-service 80
 </p>
 </details>
 
-### Check 3: Rollback Deployment ###
-The nginx container running within the cloudforce deployment in the fre namespace needs to be updated to use the nginx:1.19.0-perl image. Perform this deployment update and ensure that the command used to perform it is recorded in the tracked rollout history.
+### Check 3 ###
+Create a pod called time-check in the dvl1987 namespace. This pod should run a container called time-check that uses the busybox image. 
+Create a config map called time-config with the data TIME_FREQ=10 in the same namespace.
+The time-check container should run the command: while true; do date; sleep $TIME_FREQ;done and write the result to the location /opt/time/time-check.log.
+The path /opt/time on the pod should mount a volume that lasts the lifetime of this pod.
 
 <details><summary>show</summary>
 <p>
   
 ```bash
-k -n fre set image deployment cloudforce nginx=nginx:1.19.0-perl --record
+k -get ns
+k create ns dvl1987
+k run -n dvl1987 time-check --image=busybox $dy --command -- "while true; do date; sleep $TIME_FREQ; done"
 ```
 </p>
 </details>
