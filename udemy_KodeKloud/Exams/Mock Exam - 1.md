@@ -68,3 +68,28 @@ k run messaging --image=redis:alpine --labels=tier=msg
 ```
 </p>
 </details>
+
+### Check 5 ###
+<details><summary>
+A replicaset rs-d33393 is created. However the pods are not coming up. Identify and fix the issue.
+Once fixed, ensure the ReplicaSet has 4 Ready replicas.
+</summary>
+<p>
+  
+```bash
+
+```
+</p>
+</details>
+
+### Check 6 ###
+<details><summary>
+Create a service messaging-service to expose the redis deployment in the marketing namespace within the cluster on port 6379.
+</summary>
+<p>
+  
+```bash
+
+```
+</p>
+</details>
