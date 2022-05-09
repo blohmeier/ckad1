@@ -148,3 +148,17 @@ k create secret generic db-secret-xxdf --from-literal='DB_Host=sql01,DB_User=roo
 ```
 </p>
 </details>
+
+### Check 10 ###
+<details><summary>
+Update pod app-sec-kff3345 to run as Root user and with the SYS_TIME capability.
+Pod Name: app-sec-kff3345
+Image Name: ubuntu
+SecurityContext: Capability SYS_TIME
+</summary>
+<p>
+  
+```bash
+```
+</p>
+</details>
