@@ -56,3 +56,15 @@ k create deploy httpd-frontend --image=httpd:2.4-alpine --replicas=3
 ```
 </p>
 </details>
+
+### Check 4 ###
+<details><summary>
+Deploy a messaging pod using the redis:alpine image with the labels set to tier=msg.
+</summary>
+<p>
+  
+```bash
+k run messaging --image=redis:alpine --labels=tier=msg
+```
+</p>
+</details>
