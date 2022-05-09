@@ -44,3 +44,15 @@ k create ns apx-z993845
 ```
 </p>
 </details>
+
+### Check 3 ###
+<details><summary>
+Create a new Deployment named httpd-frontend with 3 replicas using image httpd:2.4-alpine.
+</summary>
+<p>
+  
+```bash
+k create deploy httpd-frontend --image=httpd:2.4-alpine --replicas=3
+```
+</p>
+</details>
