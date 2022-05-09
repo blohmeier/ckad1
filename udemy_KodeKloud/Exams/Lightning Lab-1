@@ -1,31 +1,86 @@
-# Exam 5: Pod Design #
 <details><summary>Exam link</summary>
-https://cloudacademy.com/lab/ckad-practice-exam-pod-design/?context_resource=lp&context_id=3086
+https://kodekloud.com/topic/lightning-lab-1-4/
 </p></details>
 
-### Check 1: Create and Manage Deployments ###
+### Check 1 ###
 <details><summary>
-Create a deployment named webapp in the zap namespace. Use the nginx:1.17.8 image and set the number of replicas initially to 2. Next, scale the current deployment up from 2 to 4. Finally, update the deployment to use the newer nginx:1.19.0 image.
+Create a Persistent Volume called log-volume. It should make use of a storage class name manual. It should use RWX as the access mode and have a size of 1Gi. The volume should use the hostPath /opt/volume/nginx
+Next, create a PVC called log-claim requesting a minimum of 200Mi of storage. This PVC should bind to log-volume.
+Mount this in a pod called logger at the location /var/www/nginx. This pod should use the image nginx:alpine.
 </summary>
 <p>
   
 ```bash
-k create deploy -n zap webapp --image=nginx:1.17.8 --replicas=2
-k scale deploy -n zap webapp --replicas=4
-k edit deploy -n zap webapp #edit "image" field
+vim 1_pv.yml
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: log-volume
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: manual
+  hostPath:
+    path: "opt/volume/nginx"
+
+k create -f 1_pv.yml
+vim 1_pvc.yml
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: log-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 200Mi
+
+k create -f 1_pvc.yml
+k run logger --image=nginx:alpine $dy > 1_pod.yml
+vim 1_pod.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: logger
+spec:
+  containers:
+    - name: logger
+      image: nginx:alpine
+      volumeMounts:
+        - name: config
+          mountPath: /var/www/nginx
+  volumes:
+    - name: config
+      persistentVolumeClaim:
+        claimName: log-clai
 ```
   
 </p>
 </details>
 
-### Check 2: Create Pod Labels ###
-Add an additional label app=cloudacademy to all pods currently running in the gzz namespace that have the label env=prod
+### Check 2 ###
+We have deployed a new pod called secure-pod and a service called secure-service. Incoming or Outgoing connections to this pod are not working. 
+Troubleshoot why this is happening.
+Make sure that incoming connection from the pod webapp-color are successful.
 
 <details><summary>show</summary><p>
 
 ```bash
-k get pod -n gzz -l env=prod
-k label pod -n gzz -l env=prod app=cloudacademy
+k get svc
+k exec -it webapp-color -- sh
+nc -zvw 1 secure-service 80
+k get netpol default-deny -o yaml > 2_netpol.yml
+vim 2_netpol.yml #Final config follows
+
+
+
   
 ```
 </p>
