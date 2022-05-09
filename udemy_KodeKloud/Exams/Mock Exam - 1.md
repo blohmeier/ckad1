@@ -107,3 +107,28 @@ k create -f /tmp/kubectl-edit-___.yaml
 ```
 </p>
 </details>
+
+### Check 8 ###
+<details><summary>
+Create a new ConfigMap named cm-3392845. Use the spec given on the below.
+ConfigName Name: cm-3392845
+Data: DB_NAME=SQL3322
+Data: DB_HOST=sql322.mycompany.com
+Data: DB_PORT=3306
+</summary>
+<p>
+  
+```bash
+k create cm cm-3392845
+k edit cm cm-3392845
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-3392845
+data:
+  DB_HOST: sql322.mycompany.com
+  DB_NAME: SQL3322
+  DB_PORT: "3306"
+```
+</p>
+</details>
