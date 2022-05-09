@@ -212,7 +212,29 @@ Create a redis deployment using the image redis:alpine with 1 replica and label 
 <p>
   
 ```bash
-
+k create deployment redis --image=redis:alpine --replicas=1
+k expose deployment redis --name=redis --port=6379 --target-port=6379
+vim 13_netpol.yml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: redis-access
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+       app: redis
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          access: redis
+    ports:
+     - protocol: TCP
+       port: 6379
+k create -f 13_netpol.yml
 ```
 </p>
 </details>
@@ -226,7 +248,24 @@ Container 2: Name sonic with image nginx and Environment variable: NGINX_PORT wi
 <p>
   
 ```bash
-
+vim 14.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sega
+spec:
+  containers:
+  - image: busybox
+    name: tails
+    command:
+    - sleep
+    - "3600"
+  - image: nginx
+    name: sonic
+    env:
+    - name: NGINX_PORT
+      value: "8080"
+k create -f 14.yml
 ```
 </p>
 </details>
