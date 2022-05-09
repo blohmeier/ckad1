@@ -151,6 +151,42 @@ The configmap has already been created.</p>
 <p>
   
 ```bash
+vim 5.yml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      volumes:
+      - name: data
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: redis-config
+      containers:
+      - image: redis:alpine
+        name: redis
+        volumeMounts:
+        - mountPath: /redis-master-data
+          name: data
+        - mountPath: /redis-master
+          name: config
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            cpu: "0.2"
 ```
 </p>
 </details>
