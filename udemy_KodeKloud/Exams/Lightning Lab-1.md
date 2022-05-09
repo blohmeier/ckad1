@@ -12,7 +12,8 @@ Mount this in a pod called logger at the location /var/www/nginx. This pod shoul
   
 ```bash
 vim 1_pv.yml
-
+OR
+cat << EOF > -f apply
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -24,7 +25,7 @@ spec:
     - ReadWriteMany
   storageClassName: manual
   hostPath:
-    path: "opt/volume/nginx"
+    path: /opt/volume/nginx
 
 k create -f 1_pv.yml
 vim 1_pvc.yml
@@ -54,12 +55,12 @@ spec:
     - name: logger
       image: nginx:alpine
       volumeMounts:
-        - name: config
-          mountPath: /var/www/nginx
+      - name: config
+        mountPath: /var/www/nginx
   volumes:
     - name: config
       persistentVolumeClaim:
-        claimName: log-clai
+        claimName: log-claim
 ```
   
 </p>
@@ -133,7 +134,7 @@ k create -f 3_configMap.yml
 
 k run -n dvl1987 time-check --image=busybox $dy --command -- "/bin/sh" "-c" "while true; do date; sleep $TIME_FREQ; done" > 3_pod.yml
 vim 3_pod.yml
-
+WRONG
 apiVersion: v1
 kind: Pod
 metadata:
@@ -160,7 +161,34 @@ spec:
       name: log-volume
   volumes:
   - name: log-volume
-
+RIGHT
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: time-check
+  name: time-check
+  namespace: dvl1987
+spec:
+  volumes:
+  - name: log-volume
+    emptyDir: {}
+  containers:
+  - image: busybox
+    name: time-check
+    env:
+    - name: TIME_FREQ
+      valueFrom:
+            configMapKeyRef:
+              name: time-config
+              key: TIME_FREQ
+    volumeMounts:
+    - mountPath: /opt/time
+      name: log-volume
+    command:
+    - "/bin/sh"
+    - "-c"
+    - "while true; do date; sleep $TIME_FREQ;done > /opt/time/time-check.log"
 k create -f 3_pod.yml
 ```
 </p>
