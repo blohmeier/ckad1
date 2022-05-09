@@ -30,11 +30,41 @@ k describe pod -n dev1401 nginx1401
 ```
 </p>
 </details>
+
 ### Check 2 ###
 <details><summary>
 Create a cronjob called dice that runs every one minute. Use the Pod template located at /root/throw-a-dice. The image throw-dice randomly returns a value between 1 and 6. The result of 6 is considered success and all others are failure.
 The job should be non-parallel and complete the task once. Use a backoffLimit of 25. 
 If the task is not completed within 20 seconds the job should fail and pods should be terminated.
+</summary>
+<p>
+  
+```bash
+
+```
+</p>
+</details>
+
+### Check 3 ###
+<details><summary>
+Create a pod called my-busybox in the dev2406 namespace using the busybox image. The container should be called secret and should sleep for 3600 seconds. 
+The container should mount a read-only secret volume called secret-volume at the path /etc/secret-volume. The secret being mounted has already been created for you and is called dotfile-secret.
+Make sure that the pod is scheduled on controlplane and no other node in the cluster.
+</summary>
+<p>
+  
+```bash
+
+```
+</p>
+</details>
+
+### Check 4 ###
+<details><summary>
+Create a single ingress resource called ingress-vh-routing. The resource should route HTTP traffic to multiple hostnames as specified below:
+The service video-service should be accessible on http://watch.ecom-store.com:30093/video
+The service apparels-service should be accessible on http://apparels.ecom-store.com:30093/wear
+Here 30093 is the port used by the Ingress Controller
 </summary>
 <p>
   
