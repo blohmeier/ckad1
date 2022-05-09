@@ -132,7 +132,17 @@ Finally, once all pods are updated, undo the update and go back to the previous 
 <p>
   
 ```bash
+k create deploy nginx-deploy --image=nginx:1.16 --replicas=4 $dy > 4.yml
+k apply -f 4.yml
 
+#edit at .spec.strategy:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 2
+
+k set image deploy nginx-deploy nginx=nginx:1.17deployment.apps/nginx-deploy image updated
+k rollout undo deploy nginx-deploy
 ```
 </p>
 </details>
