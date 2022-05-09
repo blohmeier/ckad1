@@ -62,9 +62,21 @@ Make sure that the pod is scheduled on controlplane and no other node in the clu
 ### Check 4 ###
 <details><summary>
 Create a single ingress resource called ingress-vh-routing. The resource should route HTTP traffic to multiple hostnames as specified below:
-The service video-service should be accessible on http://watch.ecom-store.com:30093/video
-The service apparels-service should be accessible on http://apparels.ecom-store.com:30093/wear
-Here 30093 is the port used by the Ingress Controller
+The service video-service should be accessible on http://watch.ecom-store.com:30093/video.
+The service apparels-service should be accessible on http://apparels.ecom-store.com:30093/wear.
+Here 30093 is the port used by the Ingress Controller.
+</summary>
+<p>
+  
+```bash
+
+```
+</p>
+</details>
+
+### Check 5 ###
+<details><summary>
+A pod called dev-pod-dind-878516 has been deployed in the default namespace. Inspect the logs for the container called log-x and redirect the warnings to /opt/dind-878516_logs.txt on the controlplane node.
 </summary>
 <p>
   
