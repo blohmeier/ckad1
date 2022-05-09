@@ -132,3 +132,19 @@ data:
 ```
 </p>
 </details>
+
+### Check 9 ###
+<details><summary>
+Create a new Secret named db-secret-xxdf with the data given (on the below).
+Secret Name: db-secret-xxdf
+Secret 1: DB_Host=sql01
+Secret 2: DB_User=root
+Secret 3: DB_Password=password123
+</summary>
+<p>
+  
+```bash
+k create secret generic db-secret-xxdf --from-literal='DB_Host=sql01,DB_User=root,DB_Password=password123'
+```
+</p>
+</details>
