@@ -27,6 +27,7 @@ Next, add a check to restart the container on the same pod if the command ls /va
 ```bash
 k get pods -A
 k get pod -n dev1401 nginx1401 > 1.yml
+vim 1.yml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -100,7 +101,38 @@ Make sure that the pod is scheduled on controlplane and no other node in the clu
 <p>
   
 ```bash
-
+vim 3.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-busybox
+  name: my-busybox
+  namespace: dev2406
+spec:
+  volumes:
+  - name: secret-volume
+    secret:
+      secretName: dotfile-secret
+  nodeSelector:
+    kubernetes.io/hostname: controlplane
+  tolerations:
+  - key: "node-role.kubernetes.io/master"
+    operator: "Exists"
+    effect: "NoSchedule"
+  containers:
+  - command:
+    - sleep
+    args:
+    - "3600"
+    image: busybox
+    name: secret
+    volumeMounts:
+    - name: secret-volume
+      readOnly: true
+      mountPath: "/etc/secret-volume"
+k create -f 2.yml
 ```
 </p>
 </details>
