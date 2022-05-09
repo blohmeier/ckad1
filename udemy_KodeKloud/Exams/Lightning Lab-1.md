@@ -79,9 +79,29 @@ nc -zvw 1 secure-service 80
 k get netpol default-deny -o yaml > 2_netpol.yml
 vim 2_netpol.yml #Final config follows
 
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-webapp-color
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              name: webapp-color
+      ports:
+        - protocol: TCP 
+          port: 80
 
+k create -f 2_netpol.yml
 
-  
+k exec -it webapp-color -- sh
+nc -z -v -w 1 secure-service 80  
 ```
 </p>
 </details>
