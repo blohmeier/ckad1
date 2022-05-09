@@ -162,3 +162,17 @@ SecurityContext: Capability SYS_TIME
 ```
 </p>
 </details>
+
+### Check 11 ###
+<details><summary>
+Export the logs of the e-com-1123 pod to the file /opt/outputs/e-com-1123.logs
+It is in a different namespace. Identify the namespace first.
+</summary>
+<p>
+  
+```bash
+k get pods -A
+k logs -n e-commerce e-com-1123 > /opt/outputs/e-com-1123.logs
+```
+</p>
+</details>
