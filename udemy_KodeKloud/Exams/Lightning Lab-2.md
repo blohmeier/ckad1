@@ -68,7 +68,25 @@ If the task is not completed within 20 seconds the job should fail and pods shou
 <p>
   
 ```bash
-
+vim 2.yml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dice
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      completions: 1
+      backoffLimit: 25 # This is so the job does not quit before it succeeds.
+      activeDeadlineSeconds: 20
+      template:
+        spec:
+          containers:
+          - name: dice
+            image: kodekloud/throw-dice
+          restartPolicy: Never
+k create -f 2.yml
 ```
 </p>
 </details>
