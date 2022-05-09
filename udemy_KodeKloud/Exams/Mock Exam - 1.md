@@ -93,3 +93,17 @@ Create a service messaging-service to expose the redis deployment in the marketi
 ```
 </p>
 </details>
+
+### Check 7 ###
+<details><summary>
+Update the environment variable on the pod webapp-color to use a green background.
+</summary>
+<p>
+  
+```bash
+k edit pod webapp-color #Change "pink" to "green"
+k delete pod webapp-color $fg
+k create -f /tmp/kubectl-edit-___.yaml
+```
+</p>
+</details>
