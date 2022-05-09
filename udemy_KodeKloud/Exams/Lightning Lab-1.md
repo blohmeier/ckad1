@@ -118,7 +118,50 @@ The path /opt/time on the pod should mount a volume that lasts the lifetime of t
 ```bash
 k -get ns
 k create ns dvl1987
-k run -n dvl1987 time-check --image=busybox $dy --command -- "while true; do date; sleep $TIME_FREQ; done"
+  
+vim 3_configMap.yml
+  
+apiVersion: v1
+data:
+  TIME_FREQ: "10"
+kind: ConfigMap
+metadata:
+  name: time-config
+  namespace: dvl1987
+
+k create -f 3_configMap.yml
+
+k run -n dvl1987 time-check --image=busybox $dy --command -- "/bin/sh" "-c" "while true; do date; sleep $TIME_FREQ; done" > 3_pod.yml
+vim 3_pod.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: time-check
+  name: time-check
+  namespace: dvl1987
+spec:
+  containers:
+  - command:
+    - /bin/sh
+    - -c
+    - while true; do date; sleep ; done
+    image: busybox
+    name: time-check #add below
+    env:
+    - name: TIME_FREQ
+      valueFrom:
+        configMapKeyRef:
+          name: time-config
+          key: TIME_FREQ
+    volumeMounts:
+    - mountPath: /opt/time
+      name: log-volume
+  volumes:
+  - name: log-volume
+
+k create -f 3_pod.yml
 ```
 </p>
 </details>
