@@ -17,13 +17,16 @@ set tabstop=2 #of whitespace cols a tab counts for
 </p>
 </details>
 
-
-#TEMPLATE
-<details><summary>show</summary>
+### Check 1 ###
+<details><summary>
+We have deployed a few pods in this cluster in various namespaces. Inspect them and identify the pod which is not in a Ready state. Troubleshoot and fix the issue.
+Next, add a check to restart the container on the same pod if the command ls /var/www/html/file_check fails. This check should start after a delay of 10 seconds and run every 60 seconds.
+</summary>
 <p>
   
 ```bash
-
+k get pods -A
+k describe pod -n dev1401 nginx1401
 ```
 </p>
 </details>
