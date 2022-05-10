@@ -49,12 +49,33 @@ k create -f 1_svc.yml
 
 ### Check 2 ###
 <details><summary>
-Create a namespace named apx-z993845.
+Add a taint to the node node01 of the cluster. Use the specification below:
+key: app_type, value: alpha and effect: NoSchedule
+Create a pod called alpha, image: redis with toleration to node01.
 </summary>
 <p>
   
 ```bash
-k create ns apx-z993845
+k taint node node01 app_type=alpha:NoSchedule
+k run alpha --image=redis $dy > 2.yml
+vim 2.yml
+apiVersion: v1
+kind: Pod 
+metadata:
+  creationTimestamp: null
+  labels:
+    run: alpha
+  name: alpha
+spec:
+  tolerations:
+  - effect: NoSchedule
+    key: app_type
+    value: alpha
+  containers:
+  - image: redis
+    name: alpha
+k create -f 2.yml
+
 ```
 </p>
 </details>
