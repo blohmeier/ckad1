@@ -77,7 +77,7 @@ Once fixed, ensure the ReplicaSet has 4 Ready replicas.
 <p>
   
 ```bash
-The image used for the replicaset should be busybox instead of busyboxXXXXXXX. Use kubectl edit rs rs-d33393 to fix the image. Then delete all PODs to provision new ones with the new image.
+k edit rs rs-d33393 #delete x's from busyboxXXXXXXX. Then delete all Pods in the rs.
 ```
 </p>
 </details>
