@@ -152,7 +152,27 @@ You may delete and recreate the object. Ignore the warnings from the probe.
 <p>
   
 ```bash
-
+k run nginx1401 --image=nginx $dy > 6.yml
+vim 6.yml
+apiVersion: v1
+kind: Pod 
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx1401
+  name: nginx1401
+spec:
+  containers:
+  - image: nginx
+    name: nginx1401
+    livenessProbe:
+      exec:
+        command:
+        - ls
+        - /var/www/html/probe
+      initialDelaySeconds: 10
+      periodSeconds: 60
+k create -f 6.yml
 ```
 </p>
 </details>
