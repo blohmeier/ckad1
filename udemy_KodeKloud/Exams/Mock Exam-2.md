@@ -89,38 +89,65 @@ NodeAffinity: requiredDuringSchedulingIgnoredDuringExecution
   
 ```bash
 k label node controlplane app_type=beta
+k create deploy beta-apps --image=nginx --replicas=3 $dy > 3.yml
+vim 3.yml
+??????
+
 ```
 </p>
 </details>
 
 ### Check 4 ###
 <details><summary>
-Deploy a messaging pod using the redis:alpine image with the labels set to tier=msg.
+Create a new Ingress Resource for the service: my-video-service to be made available at the URL: http://ckad-mock-exam-solution.com:30093/video.
+Create an ingress resource with host: ckad-mock-exam-solution.com
+path: /video
+Once set up, curl test of the URL from the nodes should be successful / HTTP 200
 </summary>
 <p>
   
 ```bash
-k run messaging --image=redis:alpine --labels=tier=msg
+
 ```
 </p>
 </details>
 
 ### Check 5 ###
 <details><summary>
-A replicaset rs-d33393 is created. However the pods are not coming up. Identify and fix the issue.
-Once fixed, ensure the ReplicaSet has 4 Ready replicas.
+We have deployed a new pod called pod-with-rprobe. This Pod has an initial delay before it is Ready. Update the newly created pod pod-with-rprobe with a readinessProbe using the given spec
+httpGet path: /ready
+httpGet port: 8080
 </summary>
 <p>
   
 ```bash
-
+k get pod pod-with-rprobe -o yaml > 5.yml
+vim 5.yml
+spec:
+  containers:
+  - env:
+    - name: APP_START_DELAY
+      value: "180"
+    image: kodekloud/webapp-delayed-start
+    imagePullPolicy: Always
+    name: pod-with-rprobe
+    ports:
+    - containerPort: 8080
+      protocol: TCP 
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: 8080
+k delete pod pod-with-rprobe $fg
+k create -f 5.yml
 ```
 </p>
 </details>
 
 ### Check 6 ###
 <details><summary>
-Create a service messaging-service to expose the redis deployment in the marketing namespace within the cluster on port 6379.
+Create a new pod called nginx1401 in the default namespace with the image nginx. Add a livenessProbe to the container to restart it if the command ls /var/www/html/probe fails. This check should start after a delay of 10 seconds and run every 60 seconds.
+You may delete and recreate the object. Ignore the warnings from the probe.
 </summary>
 <p>
   
