@@ -82,12 +82,13 @@ k create -f 2.yml
 
 ### Check 3 ###
 <details><summary>
-Create a new Deployment named httpd-frontend with 3 replicas using image httpd:2.4-alpine.
+Apply a label app_type=beta to node controlplane. Create a new deployment called beta-apps with image: nginx and replicas: 3. Set Node Affinity to the deployment to place the PODs on controlplane only.
+NodeAffinity: requiredDuringSchedulingIgnoredDuringExecution
 </summary>
 <p>
   
 ```bash
-k create deploy httpd-frontend --image=httpd:2.4-alpine --replicas=3
+k label node controlplane app_type=beta
 ```
 </p>
 </details>
