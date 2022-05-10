@@ -195,11 +195,29 @@ This simple job runs the popular cowsay game that was modifed by docker…
 
 ### Check 8 ###
 <details><summary>
-Create a new ConfigMap named cm-3392845. Use the spec given on the below.
-ConfigName Name: cm-3392845
-Data: DB_NAME=SQL3322
-Data: DB_HOST=sql322.mycompany.com
-Data: DB_PORT=3306
+Create a pod called multi-pod with two containers. 
+Container 1: 
+name: jupiter, image: nginx
+Container 2: 
+name: europa, image: busybox
+command: sleep 4800
+Environment Variables: 
+Container 1: 
+type: planet
+Container 2: 
+type: moon
+</summary>
+<p>
+  
+```bash
+
+```
+</p>
+</details>
+
+### Check 9 ###
+<details><summary>
+Create a PersistentVolume called custom-volume with size: 50MiB reclaim policy:retain, Access Modes: ReadWriteMany and hostPath: /opt/data.
 </summary>
 <p>
   
