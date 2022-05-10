@@ -90,6 +90,8 @@ Create a service messaging-service to expose the redis deployment in the marketi
   
 ```bash
 k expose deploy redis --port=6379 --name messaging-service -n marketing
+OR??
+k expose deploy redis --name=messaging-service -n marketing --port=6379
 ```
 </p>
 </details>
