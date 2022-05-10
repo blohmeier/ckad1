@@ -225,6 +225,7 @@ spec:
 EOF
 OR
 k create -f 7.yml
+(optional) docker container run --rm docker/whalesay cowsay I am going to ace CKAD!
 ```
 </p>
 </details>
