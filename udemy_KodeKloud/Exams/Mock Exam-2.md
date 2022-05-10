@@ -279,7 +279,23 @@ Create a PersistentVolume called custom-volume with size: 50MiB reclaim policy:r
 <p>
   
 ```bash
-
+vim 9.yml
+OR
+cat << EOF | k apply -f -
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: custom-volume
+spec:
+  accessModes: ["ReadWriteMany"]
+  capacity:
+    storage: 50Mi
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /opt/data
+EOF
+OR
+k create -f 9.yml
 ```
 </p>
 </details>
