@@ -196,7 +196,31 @@ This simple job runs the popular cowsay game that was modifed by docker…
 <p>
   
 ```bash
-
+vim 7.yml
+OR
+cat << EOF | k apply -f -
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: whalesay
+spec:
+  completions: 10
+  backoffLimit: 6
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - command:
+        - sh 
+        - -c
+        - "cowsay I am going to ace CKAD!"
+        image: docker/whalesay
+        name: whalesay
+      restartPolicy: Never
+EOF
+OR
+k create -f 7.yml
 ```
 </p>
 </details>
