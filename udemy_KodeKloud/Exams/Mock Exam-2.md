@@ -95,14 +95,14 @@ NodeAffinity: requiredDuringSchedulingIgnoredDuringExecution
 k label node controlplane app_type=beta
 k create deploy beta-apps --image=nginx --replicas=3 $dy > 3.yml
 vim 3.yml #add below under .spec.template.spec
-      affinity:
-        nodeAffinity:
-         requiredDuringSchedulingIgnoredDuringExecution:
-           nodeSelectorTerms:
-           - matchExpressions:
-             - key: app_type
-               values: ["beta"]
-               operator: In
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: app_type
+          values: ["beta"]
+          operator: In
 k create -f 3.yml
 ```
 </p>
