@@ -192,6 +192,8 @@ Host Path: /pv/data-analytics
   
 ```bash
 vim 12.yml
+OR
+cat << EOF | k apply -f -
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -203,6 +205,8 @@ spec:
     - ReadWriteMany
   hostPath:
     path: "/pv/data-analytics"
+EOF
+OR
 k create -f 12.yml
 ```
 </p>
