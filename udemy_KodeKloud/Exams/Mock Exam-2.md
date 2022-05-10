@@ -242,7 +242,32 @@ type: moon
 <p>
   
 ```bash
-
+vim 8.yml
+OR
+cat << EOF | k apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: multi-pod
+  name: multi-pod
+spec:
+  containers:
+  - image: nginx
+    name: jupiter
+    env:
+    - name: type
+      value: planet
+  - image: busybox
+    name: europa
+    command: ["/bin/sh","-c","sleep 4800"]
+    env:
+     - name: type
+       value: moon
+EOF
+OR
+k create -f 8.yml
 ```
 </p>
 </details>
