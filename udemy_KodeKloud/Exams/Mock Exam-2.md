@@ -179,7 +179,11 @@ k create -f 6.yml
 
 ### Check 7 ###
 <details><summary>
-Update the environment variable on the pod webapp-color to use a green background.
+Create a job called whalesay with image docker/whalesay and command "cowsay I am going to ace CKAD!".
+completions: 10
+backoffLimit: 6
+restartPolicy: Never
+This simple job runs the popular cowsay game that was modifed by docker…
 </summary>
 <p>
   
