@@ -159,6 +159,7 @@ SecurityContext: Capability SYS_TIME
 <p>
   
 ```bash
+k get pod app-sec-kff3345 -o yaml > 10.yml
 ```
 </p>
 </details>
