@@ -114,6 +114,7 @@ Once set up, curl test of the URL from the nodes should be successful / HTTP 200
 <p>
   
 ```bash
+k create ingress ingress --rule="ckad-mock-exam-solution.com/video*=my-video-service:8080"
 
 ```
 </p>
