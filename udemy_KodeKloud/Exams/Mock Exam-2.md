@@ -31,6 +31,8 @@ Create a deployment called my-webapp with image: nginx, label tier:frontend and 
 k create deploy my-webapp --image=nginx --replicas=2
 k label deploy my-webapp tier=frontend
 vim 1_svc.yml
+OR
+cat << EOF | k apply -f -
 apiVersion: v1
 kind: Service
 metadata:
@@ -42,6 +44,8 @@ spec:
   ports:
     - port: 80
       nodePort: 30083
+EOF
+OR
 k create -f 1_svc.yml
 ```
 </p>
