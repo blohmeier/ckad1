@@ -77,7 +77,7 @@ Once fixed, ensure the ReplicaSet has 4 Ready replicas.
 <p>
   
 ```bash
-
+The image used for the replicaset should be busybox instead of busyboxXXXXXXX. Use kubectl edit rs rs-d33393 to fix the image. Then delete all PODs to provision new ones with the new image.
 ```
 </p>
 </details>
@@ -89,7 +89,7 @@ Create a service messaging-service to expose the redis deployment in the marketi
 <p>
   
 ```bash
-
+k expose deploy redis --port=6379 --name messaging-service -n marketing
 ```
 </p>
 </details>
