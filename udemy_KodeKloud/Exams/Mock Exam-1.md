@@ -162,6 +162,27 @@ SecurityContext: Capability SYS_TIME
   
 ```bash
 k get pod app-sec-kff3345 -o yaml > 10.yml
+vim 10.yml
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: app-sec-kff3345
+spec:
+  securityContext:        #add
+    runAsUser: 0          #add
+  containers:
+  - command:
+    - sleep
+    - "4800"
+    image: ubuntu
+    name: ubuntu
+    securityContext:      #add
+      capabilities:       #add
+        add: ["SYS_TIME"] #add
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-79gqh
+      readOnly: true
 ```
 </p>
 </details>
