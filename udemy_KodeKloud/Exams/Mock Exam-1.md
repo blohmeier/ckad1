@@ -146,7 +146,7 @@ Secret 3: DB_Password=password123
 <p>
   
 ```bash
-k create secret generic db-secret-xxdf --from-literal='DB_Host=sql01,DB_User=root,DB_Password=password123'
+k create secret generic db-secret-xxdf --from-literal=DB_Host=sql01 --from-literal=DB_User=root --from-literal=DB_Password=password123
 ```
 </p>
 </details>
