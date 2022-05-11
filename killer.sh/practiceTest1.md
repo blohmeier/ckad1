@@ -195,7 +195,9 @@ k -n neptune rollout undo deploy api-new-c32
 <p>Please create the Deployment and save its yaml under /opt/course/9/holy-api-deployment.yaml.</p>
 </summary>
 <p>
+
 add below from _`Deployment`_ example yaml.
+
 ```bash
 cp /opt/course/9/holy-api-pod.yaml /opt/course/9/holy-api-deployment.yaml
 vim /opt/course/9/holy-api-deployment.yaml #
@@ -220,6 +222,8 @@ k -n pluto delete pod holy-api $fg
 ```
 </p>
 </details>
+
+add below from _`Deployment`_ example yaml.
 
 ### Q10 | Service, Logs ###
 <details><summary>
