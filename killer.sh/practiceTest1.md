@@ -173,49 +173,17 @@ k -n saturn delete pod webserver-sat-003 $fg
 </p>
 </details>
 
-### Check 8 ###
+### Q8 | Deployment, Rollouts ###
 <details><summary>
-Create a pod called multi-pod with two containers. 
-Container 1: 
-name: jupiter, image: nginx
-Container 2: 
-name: europa, image: busybox
-command: sleep 4800
-Environment Variables: 
-Container 1: 
-type: planet
-Container 2: 
-type: moon
+There is an existing Deployment named api-new-c32 in Namespace neptune. A developer did make an update to the Deployment but the updated version never came online. Check the Deployment history and find a revision that works, then rollback to it. Could you tell Team Neptune what the error was so it doesn't happen again?
 </summary>
 <p>
   
 ```bash
-vim 8.yml
-OR
-cat << EOF | k apply -f -
-apiVersion: v1
-kind: Pod
-metadata:
-  creationTimestamp: null
-  labels:
-    run: multi-pod
-  name: multi-pod
-spec:
-  containers:
-  - image: nginx
-    name: jupiter
-    env:
-    - name: type
-      value: planet
-  - image: busybox
-    name: europa
-    command: ["/bin/sh","-c","sleep 4800"]
-    env:
-     - name: type
-       value: moon
-EOF
-OR
-k create -f 8.yml
+k -n neptune rollout history deploy api-new-c32
+k -n neptune get deploy,pod | grep api-new-c32
+k -n neptune describe pod api-new-c32-7d64747c87-zh648 | grep -i error; k -n neptune describe pod api-new-c32-7d64747c87-zh648 | grep -i image
+k -n neptune rollout undo deploy api-new-c32
 ```
 </p>
 </details>
