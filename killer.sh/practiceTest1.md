@@ -99,18 +99,21 @@ k create -f /opt/course/3/job.yaml
 </p>
 </details>
 
-### Check 4 ###
+### Q4 | Helm Management ###
 <details><summary>
-Create a new Ingress Resource for the service: my-video-service to be made available at the URL: http://ckad-mock-exam-solution.com:30093/video.
-Create an ingress resource with host: ckad-mock-exam-solution.com
-path: /video
-Once set up, curl test of the URL from the nodes should be successful / HTTP 200
+Team Mercury asked you to perform some operations using Helm, all in Namespace mercury:
+1. Delete release internal-issue-report-apiv1
+2. Upgrade release internal-issue-report-apiv2 to any newer version of chart bitnami/nginx available
+3. Install a new release internal-issue-report-apache of chart bitnami/apache. The Deployment should have two replicas, set these via Helm-values during install
+4. There seems to be a broken release, stuck in pending-install state. Find it and delete it
 </summary>
 <p>
   
 ```bash
-k create ingress ingress --rule="ckad-mock-exam-solution.com/video*=my-video-service:8080"
-
+helm -n mercury uninstall internal-issue-report-apiv1
+helm repo list; helm repo update; helm search repo nginx; helm -n mercury upgrade internal-issue-report-apiv2 bitnami/nginx
+helm show values bitnami/apache | yq e; helm -n mercury install internal-issue-report-apache bitnami/apache --set replicaCount=2; k -n mercury get deploy internal-issue-report-apache
+helm -n mercury uninstall internal-issue-report-daniel
 ```
 </p>
 </details>
