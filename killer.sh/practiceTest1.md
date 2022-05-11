@@ -57,7 +57,7 @@ spec:
   - image: httpd:2.4.41-alpine
     name: pod1-container # change
 k create -f 2.yml
-
+k get pod pod1 -o jsonpath="{.status.phase}" > /opt/course/2/pod1-status-command.sh
 ```
 </p>
 </details>
