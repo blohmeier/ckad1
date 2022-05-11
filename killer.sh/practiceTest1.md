@@ -198,7 +198,7 @@ k -n neptune rollout undo deploy api-new-c32
   
 ```bash
 cp /opt/course/9/holy-api-pod.yaml /opt/course/9/holy-api-deployment.yaml
-vim /opt/course/9/holy-api-deployment.yaml #add below from *Deployment* example yaml.
+vim /opt/course/9/holy-api-deployment.yaml #add below from _Deployment_ example yaml.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
