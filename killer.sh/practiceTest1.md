@@ -134,34 +134,23 @@ vim /opt/course/5/token #copy part under "token:" here from step above
 </p>
 </details>
 
-### Check 6 ###
+### Q6 | ReadinessProbe ###
 <details><summary>
-Create a new pod called nginx1401 in the default namespace with the image nginx. Add a livenessProbe to the container to restart it if the command ls /var/www/html/probe fails. This check should start after a delay of 10 seconds and run every 60 seconds.
-You may delete and recreate the object. Ignore the warnings from the probe.
+Create a single Pod named pod6 in Namespace default of image busybox:1.31.0. The Pod should have a readiness-probe executing cat /tmp/ready. It should initially wait 5 and periodically wait 10 seconds. This will set the container ready only if the file /tmp/ready exists.
+The Pod should run the command touch /tmp/ready && sleep 1d, which will create the necessary file to be ready and then idles. Create the Pod and confirm it starts.
 </summary>
 <p>
   
 ```bash
-k run nginx1401 --image=nginx $dy > 6.yml
-vim 6.yml
-apiVersion: v1
-kind: Pod 
-metadata:
-  creationTimestamp: null
-  labels:
-    run: nginx1401
-  name: nginx1401
-spec:
-  containers:
-  - image: nginx
-    name: nginx1401
-    livenessProbe:
-      exec:
-        command:
-        - ls
-        - /var/www/html/probe
-      initialDelaySeconds: 10
-      periodSeconds: 60
+k run pod6 --image=busybox:1.31.0 $dy --command -- sh -c "touch /tmp/ready && sleep 1d" > 6.yaml
+vim 6.yml #add spec.containers.readinessProbe and add below that:
+exec:                                     # add
+  command:                                # add
+  - sh                                    # add
+  - -c                                    # add
+  - cat /tmp/ready                        # add
+ initialDelaySeconds: 5                   # add
+ periodSeconds: 10                        # add
 k create -f 6.yml
 ```
 </p>
