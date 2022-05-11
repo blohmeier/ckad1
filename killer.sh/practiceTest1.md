@@ -118,34 +118,18 @@ helm -n mercury uninstall internal-issue-report-daniel
 </p>
 </details>
 
-### Check 5 ###
+### Q5 | ServiceAccount, Secret ###
 <details><summary>
-We have deployed a new pod called pod-with-rprobe. This Pod has an initial delay before it is Ready. Update the newly created pod pod-with-rprobe with a readinessProbe using the given spec
-httpGet path: /ready
-httpGet port: 8080
+Team Neptune has its own ServiceAccount named neptune-sa-v2 in Namespace neptune. A coworker needs the token from the Secret that belongs to that ServiceAccount. Write the base64 decoded token to file /opt/course/5/token.
 </summary>
 <p>
   
 ```bash
-k get pod pod-with-rprobe -o yaml > 5.yml
-vim 5.yml
-spec:
-  containers:
-  - env:
-    - name: APP_START_DELAY
-      value: "180"
-    image: kodekloud/webapp-delayed-start
-    imagePullPolicy: Always
-    name: pod-with-rprobe
-    ports:
-    - containerPort: 8080
-      protocol: TCP 
-    readinessProbe:
-      httpGet:
-        path: /ready
-        port: 8080
-k delete pod pod-with-rprobe $fg
-k create -f 5.yml
+k -n neptune get sa neptune-sa-v2 -o yaml | grep secret -A 2
+k -n neptune get secret neptune-sa-v2-token-lwhhl -o yaml | base64 -d
+OR
+k -n neptune describe secret neptune-sa-v2-token-lwhhl
+vim /opt/course/5/token #copy part under "token:" here from step above 
 ```
 </p>
 </details>
