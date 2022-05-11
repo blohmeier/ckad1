@@ -19,6 +19,7 @@ set number
 set softtabstop #of whitespace cols a tab/backspace keypress is worth
 set shiftwidth=2 #of whitespace cols a "lvl of indent" is worth
 set tabstop=2 #of whitespace cols a tab counts for
+  
 ```
 </p>
 </details>
@@ -35,6 +36,7 @@ The DevOps team would like to get the list of all Namespaces in the cluster. Get
   
 ```bash
 k get ns > /opt/course/1/namespaces
+  
 ```
 </p>
 </details>
