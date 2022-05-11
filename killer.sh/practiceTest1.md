@@ -156,44 +156,19 @@ k create -f 6.yml
 </p>
 </details>
 
-### Check 7 ###
+### Q7 | Pods, Namespaces ###
 <details><summary>
-Create a job called whalesay with image docker/whalesay and command "cowsay I am going to ace CKAD!".
-completions: 10
-backoffLimit: 6
-restartPolicy: Never
-This simple job runs the popular cowsay game that was modifed by docker…
+<p>The board of Team Neptune decided to take over control of one e-commerce webserver from Team Saturn. The administrator who once setup this webserver is not part of the organisation any longer. All information you could get was that the e-commerce system is called my-happy-shop.</p>
+<p>Search for the correct Pod in Namespace saturn and move it to Namespace neptune. It doesn't matter if you shut it down and spin it up again, it probably hasn't any customers anyways.</p>
 </summary>
 <p>
   
 ```bash
-vim 7.yml
-OR
-cat << EOF | k apply -f -
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: whalesay
-spec:
-  completions: 10
-  backoffLimit: 6
-  template:
-    metadata:
-      creationTimestamp: null
-    spec:
-      containers:
-      - command:
-        - sh 
-        - -c
-        - "cowsay I am going to ace CKAD!"
-        image: docker/whalesay
-        name: whalesay
-      restartPolicy: Never
-EOF
-OR
-k create -f 7.yml
-#(optional) view what docker container is doing
-docker container run --rm docker/whalesay cowsay I am going to ace CKAD!
+k -n saturn get pod -o yaml | grep my-happy-shop -A10
+k -n saturn get pod webserver-sat-003 -o yaml > 7_webserver-sat-003.yaml
+vim 7_webserver-sat-003.yaml #change ns, remove "status:" section, token vol & volMount, & nodeName
+k create -f 7_webserver-sat-003.yaml
+k -n saturn delete pod webserver-sat-003 $fg
 ```
 </p>
 </details>
