@@ -188,30 +188,61 @@ k -n neptune rollout undo deploy api-new-c32
 </p>
 </details>
 
-### Check 9 ###
+### Q9 | Pod -> Deployment ###
 <details><summary>
-Create a PersistentVolume called custom-volume with size: 50MiB reclaim policy:retain, Access Modes: ReadWriteMany and hostPath: /opt/data.
+<p>In Namespace pluto there is single Pod named holy-api. It has been working okay for a while now but Team Pluto needs it to be more reliable. Convert the Pod into a Deployment with 3 replicas and name holy-api. The raw Pod template file is available at /opt/course/9/holy-api-pod.yaml.</p>
+<p>In addition, the new Deployment should set allowPrivilegeEscalation: false and privileged: false for the security context on container level.</p>
+<p>Please create the Deployment and save its yaml under /opt/course/9/holy-api-deployment.yaml.</p>
 </summary>
 <p>
   
 ```bash
-vim 9.yml
-OR
-cat << EOF | k apply -f -
-kind: PersistentVolume
-apiVersion: v1
+cp /opt/course/9/holy-api-pod.yaml /opt/course/9/holy-api-deployment.yaml
+vim /opt/course/9/holy-api-deployment.yaml #add below from *Deployment* example yaml.
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: custom-volume
+  name: holy-api        # name stays the same
+  namespace: pluto      # important
 spec:
-  accessModes: ["ReadWriteMany"]
-  capacity:
-    storage: 50Mi
-  persistentVolumeReclaimPolicy: Retain
-  hostPath:
-    path: /opt/data
-EOF
-OR
-k create -f 9.yml
+  replicas: 3           # 3 replicas
+  selector:
+    matchLabels:
+      id: holy-api      # set the correct selector
+  template:
+    # => from here down its the same as the pods metadata: and spec: sections
+#add spec.template.spec.containers.securityContext and indented from that add:
+  allowPrivilegeEscalation: false  # add
+  privileged: false                # add
+
+k -f create /opt/course/9/holy-api-deployment.yaml
+k -n pluto delete pod holy-api $fg
+```
+</p>
+</details>
+
+### Q10 | Service, Logs ###
+<details><summary>
+<p>Team Pluto needs a new cluster internal Service. Create a ClusterIP Service named project-plt-6cc-svc in Namespace pluto. This Service should expose a single Pod named project-plt-6cc-api of image nginx:1.17.3-alpine, create that Pod as well. The Pod should be identified by label project: plt-6cc-api. The Service should use tcp port redirection of 3333:80.</p>
+
+<p>Finally use for example curl from a temporary nginx:alpine Pod to get the response from the Service. Write the response into /opt/course/10/service_test.html. Also check if the logs of Pod project-plt-6cc-api show the request and write those into /opt/course/10/service_test.log.</p>
+</summary>
+<p>
+  
+```bash
+?
+```
+</p>
+</details>
+
+### Q?? | Template ###
+<details><summary>
+?
+</summary>
+<p>
+  
+```bash
+?
 ```
 </p>
 </details>
