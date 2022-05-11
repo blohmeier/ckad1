@@ -62,26 +62,39 @@ k get pod pod1 -o jsonpath="{.status.phase}" > /opt/course/2/pod1-status-command
 </p>
 </details>
 
-### Check 3 ###
+### Q3 | Job ###
 <details><summary>
-Apply a label app_type=beta to node controlplane. Create a new deployment called beta-apps with image: nginx and replicas: 3. Set Node Affinity to the deployment to place the PODs on controlplane only.
-NodeAffinity: requiredDuringSchedulingIgnoredDuringExecution
+Team Neptune needs a Job template located at /opt/course/3/job.yaml. This Job should run image busybox:1.31.0 and execute sleep 2 && echo done. It should be in namespace neptune, run a total of 3 times and should execute 2 runs in parallel.
+Start the Job and check its history. Each pod created by the Job should have the label id: awesome-job. The job should be named neb-new-job and the container neb-new-job-container.
 </summary>
 <p>
   
 ```bash
-k label node controlplane app_type=beta
-k create deploy beta-apps --image=nginx --replicas=3 $dy > 3.yml
-vim 3.yml #add below under .spec.template.spec
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: app_type
-          values: ["beta"]
-          operator: In
-k create -f 3.yml
+k -n neptune create job neb-new-job --image=busybox:1.31.0 $dy > /opt/course/3/job.yaml -- sh -c "sleep 2 && echo done"
+vim /opt/course/3/job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: neb-new-job
+  namespace: neptune      # add
+spec:
+  completions: 3          # add
+  parallelism: 2          # add
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:             # add
+        id: awesome-job   # add
+    spec:
+      containers:
+      - command:
+        - sh
+        - -c
+        - sleep 2 && echo done
+        image: busybox:1.31.0
+        name: neb-new-job-container # update
+k create -f /opt/course/3/job.yaml
 ```
 </p>
 </details>
