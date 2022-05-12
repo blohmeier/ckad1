@@ -1,6 +1,6 @@
 # K8s Certification Challenge (final exam 1 of 3) #
 <details><summary>Exam link</summary>
-https://cloudacademy.com/lab-challenge/kubernetes-certification-challenge/?context_resource=lp&context_id=3086
+https://cloudacademy.com/lab-challenge/certified-kubernetes-application-developer-ckad-challenge/?context_resource=lp&context_id=3086
 </p></details>
 
 ### Check 1: Created Specified Deployment ###
