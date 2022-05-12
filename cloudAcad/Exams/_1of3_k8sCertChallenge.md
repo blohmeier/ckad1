@@ -28,7 +28,7 @@ The site deployment in the pwn namespace is supposed to be exposed to clients ou
 </details>
   
 
-#TEMPLATE
+### Check 3: ###
 <details><summary>
 Write the name of the pod in zz8 namespace consuming the most CPU to /home/ubuntu/hcp001. The content of the file should be only the name of the Pod and nothing more.
 </summary>
