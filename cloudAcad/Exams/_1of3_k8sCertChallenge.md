@@ -12,19 +12,20 @@ Create a deployment named chk1 in the cal namespace. Use the image nginx:1.15.12
 ```bash
 
 ```
-
 </p>
 </details>
 
 ### Check 2: Resolve Configuration Issues ###
 <details><summary>
 The site deployment in the pwn namespace is supposed to be exposed to clients outside of the Kubernetes cluster by the sitelb service. However, requests sent to the service do not reach the deployment's pods. Resolve the service configuration issue so the requests sent to the service do reach the deployment's pods.
-
-```bash
-```
-
 </summary>
 <p>
+
+```bash
+
+```
+</p>
+</details>
   
 
 #TEMPLATE
