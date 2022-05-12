@@ -39,9 +39,9 @@ Write the name of the pod in zz8 namespace consuming the most CPU to /home/ubunt
 </p>
 </details>
 
-  #TEMPLATE
+### Check 4: Pod Secret ###
 <details><summary>
-Write the name of the pod in zz8 namespace consuming the most CPU to /home/ubuntu/hcp001. The content of the file should be only the name of the Pod and nothing more.
+In the sjq namespace, create a secret named xh8jqk7z that stores a generic secret with the key of tkn and the value of hy8szK2iu. Create a pod named server using the httpd:2.4.39-alpine image and give the pod's container access to the tkn key in the xh8jqk7z secret through an environment variable named SECRET_TKN.
 </summary>
 <p>
   
@@ -51,7 +51,7 @@ Write the name of the pod in zz8 namespace consuming the most CPU to /home/ubunt
 </p>
 </details>
 
-#TEMPLATE
+### TEMPLATE ###
 <details><summary>
 </summary>
 <p>
