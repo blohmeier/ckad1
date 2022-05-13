@@ -344,14 +344,18 @@ k -n moon exec secret-handler -- cat /tmp/secret2/key
 </p>
 </details>
 
-### Q15 | Secret, Secret-Volume, Secret-Env ###
+### Q15 | ConfigMap, Configmap-Volume ###
 <details><summary>
-?
+Team Moonpie has a nginx server Deployment called web-moon in Namespace moon. Someone started configuring it but it was never completed. To complete please create a ConfigMap called configmap-web-moon-html containing the content of file /opt/course/15/web-moon.html under the data key-name index.html.
+The Deployment web-moon is already configured to work with this ConfigMap and serve its content. Test the nginx configuration for example using curl from a temporary nginx:alpine Pod.
 </summary>
 <p>
   
 ```bash
-?
+k -n moon create configmap configmap-web-moon-html --from-file=index.html=/opt/course/15/web-moon.html
+k -n moon rollout restart deploy web-moon # MAY need to delete/recreate for pods to deploy
+k -n moon get pod -o wide # get <test cluster IP>
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
 ```
 </p>
 </details>
