@@ -532,7 +532,15 @@ The original Deployment yaml is available at /opt/course/p1/project-23-api.yaml.
 <p>
   
 ```bash
-
+cp /opt/course/p1/project-23-api.yaml /opt/course/p1/project-23-api-new.yaml
+vim /opt/course/p1/project-23-api-new.yaml #add below under under spec.template.spec.containers
+livenessProbe:
+  tcpSocket:
+    port: 80
+  initialDelaySeconds: 10
+  periodSeconds: 15
+k delete deploy -n pluto project-23-api 
+k create -f /opt/course/p1/project-23-api-new.yaml
 ```
 </p>
 </details>
@@ -567,4 +575,3 @@ Find the Service, fix any issues and confirm its working again. Write the reason
 ```
 </p>
 </details>
-cat << EOF | k create -f -
