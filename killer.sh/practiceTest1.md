@@ -1,5 +1,5 @@
 <details><summary>Exam link</summary>
-?
+https://killer.sh/dashboard
 </p></details>
 
 <details><summary>vim config</summary>
