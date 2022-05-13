@@ -336,11 +336,27 @@ vim /opt/course/14/secret-handler-new.yaml #add the following at the indicated i
        key: pass
 k delete pod -n moon secret-handler
 k create -f /opt/course/14/secret-handler-new.yaml
+#verify with:
+k -n moon exec secret-handler -- env
+k -n moon exec secret-handler -- find /tmp/secret2
+k -n moon exec secret-handler -- cat /tmp/secret2/key
 ```
 </p>
 </details>
 
-### Q14 | Secret, Secret-Volume, Secret-Env ###
+### Q15 | Secret, Secret-Volume, Secret-Env ###
+<details><summary>
+?
+</summary>
+<p>
+  
+```bash
+?
+```
+</p>
+</details>
+
+### Q16 | Secret, Secret-Volume, Secret-Env ###
 <details><summary>
 ?
 </summary>
