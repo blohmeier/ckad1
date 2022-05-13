@@ -268,14 +268,23 @@ podman logs sun-cipher > /opt/course/11/logs
 </p>
 </details>
 
-### Q?? | Template ###
+### Q12 | Storage, PV, PVC, Pod volume ###
 <details><summary>
-?
+<p>Create a new PersistentVolume named earth-project-earthflower-pv. It should have a capacity of 2Gi, accessMode ReadWriteOnce, hostPath /Volumes/Data and no storageClassName defined.</p>
+<p>Next create a new PersistentVolumeClaim in Namespace earth named earth-project-earthflower-pvc . It should request 2Gi storage, accessMode ReadWriteOnce and should not define a storageClassName. The PVC should bound to the PV correctly.</p>
+<p>Finally create a new Deployment project-earthflower in Namespace earth which mounts that volume at /tmp/project-data. The Pods of that Deployment should be of image httpd:2.4.41-alpine.</p>
 </summary>
 <p>
   
 ```bash
-?
+#modify 12_pv.yml, 12_pvc.yml and 12_dep.yml from:
+  https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume (link within https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes)
+  application/wordpress/mysql-deployment.yaml (at https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)
+k create 12_pv.yml
+k create 12_pvc.yml
+k -n earth get pv,pvc #STATUS: Bound
+k create 12_dep.yml
+k -n earth describe pod project-earthflower-<deployID>-<podID> | grep -A2 Mounts:
 ```
 </p>
 </details>
