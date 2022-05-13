@@ -360,7 +360,31 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
 </p>
 </details>
 
-### Q16 | Secret, Secret-Volume, Secret-Env ###
+### Q16 | Logging sidecar ###
+<details><summary>
+The Tech Lead of Mercury2D decided its time for more logging, to finally fight all these missing data incidents. There is an existing container named cleaner-con in Deployment cleaner in Namespace mercury. This container mounts a volume and writes logs into a file called cleaner.log.
+The yaml for the existing Deployment is available at /opt/course/16/cleaner.yaml. Persist your changes at /opt/course/16/cleaner-new.yaml but also make sure the Deployment is running.
+Create a sidecar container named logger-con, image busybox:1.31.0 , which mounts the same volume and writes the content of cleaner.log to stdout, you can use the tail -f command for this. This way it can be picked up by kubectl logs.
+Check if the logs of the new container reveal something about the missing data incidents.
+</summary>
+<p>
+  
+```bash
+cp /opt/course/16/cleaner.yaml /opt/course/16/cleaner-new.yaml #then vim into new file and add:
+#spec.template.spec.containers
+- name: logger-con
+  image: busybox:1.31.0
+  command: ["sh", "-c", "tail -f /var/log/cleaner/cleaner.log"]
+  volumeMounts:
+  - name: logs
+    mountPath: /var/log/cleaner
+k apply -f /opt/course/16/cleaner-new.yaml
+k -n mercury logs cleaner-<dep>-<pod> -c logger-con
+```
+</p>
+</details>
+
+### Q16 | Logging sidecar ###
 <details><summary>
 ?
 </summary>
@@ -371,6 +395,5 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
 ```
 </p>
 </details>
-  
+
 cat << EOF | k create -f -
-  
