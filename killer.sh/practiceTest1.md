@@ -532,8 +532,7 @@ The original Deployment yaml is available at /opt/course/p1/project-23-api.yaml.
 <p>
   
 ```bash
-k -n sun label pod -l "type in (worker,runner)" protected=true
-k -n sun annotate pod -l protected=true protected="do not delete this pod"
+
 ```
 </p>
 </details>
@@ -546,8 +545,7 @@ Expose the Deployment internally using a ClusterIP Service named sun-srv on port
 <p>
   
 ```bash
-k -n sun label pod -l "type in (worker,runner)" protected=true
-k -n sun annotate pod -l protected=true protected="do not delete this pod"
+
 ```
 </p>
 </details>
@@ -560,8 +558,7 @@ Find the Service, fix any issues and confirm its working again. Write the reason
 <p>
   
 ```bash
-k -n sun label pod -l "type in (worker,runner)" protected=true
-k -n sun annotate pod -l protected=true protected="do not delete this pod"
+
 ```
 </p>
 </details>
