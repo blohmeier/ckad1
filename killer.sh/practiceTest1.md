@@ -545,7 +545,12 @@ Expose the Deployment internally using a ClusterIP Service named sun-srv on port
 <p>
   
 ```bash
-
+k create deploy sunny -n sun --image=nginx:1.17.3-alpine --replicas=4 $dy > pq2.ym
+pq2.yml
+vim pq2.yml # add "serviceAccountName: sa-sun-deploy" under spec.template.spec
+k create -f pq2.yml
+k expose deploy -n sun sunny --type=ClusterIP --port=80 --target-port=9999 --name=sun-srv
+echo "kubectl get pods -l app=sunny -n sun" > /opt/course/p2/sunny_status_command.sh
 ```
 </p>
 </details>
