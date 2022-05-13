@@ -312,7 +312,30 @@ There is existing yaml for another Secret at /opt/course/14/secret2.yaml, create
 <p>
   
 ```bash
-?
+k -n moon create secret generic secret1 --from-literal user=test --from-literal pass=pwd
+k -n moon -f /opt/course/14/secret2.yaml create
+cp /opt/course/14/secret-handler.yaml /opt/course/14/secret-handler-new.yaml
+vim /opt/course/14/secret-handler-new.yaml #add the following at the indicated indent level:
+#spec.volumes
+- name: secret2-volume
+  secret:
+    secretName: secret2
+#spec.containers.volumemounts
+- name: secret2-volume
+  mountPath: /tmp/secret2
+#spec.containers.env
+ - name: SECRET1_USER
+   valueFrom:
+     secretKeyRef:
+       name: secret1
+       key: user
+ - name: SECRET1_PASS
+   valueFrom:
+     secretKeyRef:
+       name: secret1
+       key: pass
+k delete pod -n moon secret-handler
+k create -f /opt/course/14/secret-handler-new.yaml
 ```
 </p>
 </details>
