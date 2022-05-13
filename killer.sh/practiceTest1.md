@@ -501,4 +501,17 @@ k -n venus exec frontend-<dep>-<pod> -- wget -O- api:2222 #works
 </p>
 </details>
 
+### Q22 | Labels, Annotations ###
+<details><summary>
+Team Sunny needs to identify some of their Pods in namespace sun. They ask you to add a new label protected: true to all Pods with an existing label type: worker or type: runner. Also add an annotation protected: do not delete this pod to all Pods having the new label protected: true.
+</summary>
+<p>
+  
+```bash
+k -n sun label pod -l "type in (worker,runner)" protected=true
+k -n sun annotate pod -l protected=true protected="do not delete this pod"
+```
+</p>
+</details>
+
 cat << EOF | k create -f -
