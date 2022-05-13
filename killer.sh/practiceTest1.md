@@ -409,7 +409,7 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
 </p>
 </details>
 
-### Q18 | Logging sidecar ###
+### Q18 | Service misconfiguration ###
 <details><summary>
 ?
 </summary>
@@ -421,7 +421,7 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
 </p>
 </details>
 
-### Q19 | Logging sidecar ###
+### Q19 | Service ClusterIP->NodePort ###
 <details><summary>
 ?
 </summary>
@@ -433,7 +433,7 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
 </p>
 </details>
 
-### Q20 | Logging sidecar ###
+### Q20 | NetworkPolicy ###
 <details><summary>
 ?
 </summary>
@@ -445,7 +445,7 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
 </p>
 </details>
 
-### Q21 | Logging sidecar ###
+### Q21 | Requests and Limits, ServiceAccount ###
 <details><summary>
 ?
 </summary>
