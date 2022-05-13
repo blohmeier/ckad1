@@ -496,7 +496,17 @@ k -n venus exec frontend-<dep>-<pod> -- wget -O- api:2222 #works
 <p>
   
 ```bash
-?
+k -n neptune create deploy neptune-10ab --image=httpd:2.4-alpine --replicas=3 $dy > 21.yaml
+vim 21.yml
+serviceAccountName: neptune-sa-v2 #spec.template.spec
+#spec.template.spec.containers:
+name: neptune-pod-10ab  # change
+resources:              # add
+  limits:               # add
+    memory: 50Mi        # add
+  requests:             # add
+    memory: 20Mi        # add
+
 ```
 </p>
 </details>
