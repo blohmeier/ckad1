@@ -289,7 +289,35 @@ k -n earth describe pod project-earthflower-<deployID>-<podID> | grep -A2 Mounts
 </p>
 </details>
 
-### Q?? | Template ###
+### Q13 | Storage, StorageClass, PVC ###
+<details><summary>
+Team Moonpie, which has the Namespace moon, needs more storage. Create a new PersistentVolumeClaim named moon-pvc-126 in that namespace. This claim should use a new StorageClass moon-retain with the provisioner set to moon-retainer and the reclaimPolicy set to Retain. The claim should request storage of 3Gi, an accessMode of ReadWriteOnce and should use the new StorageClass.
+The provisioner moon-retainer will be created by another team, so it's expected that the PVC will not boot yet. Confirm this by writing the log message from the PVC into file /opt/course/13/pvc-126-reason.
+</summary>
+<p>
+  
+```bash
+#edit and "k create -f" for sc from template at https://kubernetes.io/docs/concepts/storage/storage-classes/
+#edit and "k create -f" for pvc from template at https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume (link within https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes)
+k -n moon describe pvc moon-pvc-126 # and paste "Events:" text sentence into /opt/course/13/pvc-126-reason
+```
+</p>
+</details>
+
+### Q14 | Secret, Secret-Volume, Secret-Env ###
+<details><summary>
+You need to make changes on an existing Pod in Namespace moon called secret-handler. Create a new Secret secret1 which contains user=test and pass=pwd. The Secret's content should be available in Pod secret-handler as environment variables SECRET1_USER and SECRET1_PASS. The yaml for Pod secret-handler is available at /opt/course/14/secret-handler.yaml.
+There is existing yaml for another Secret at /opt/course/14/secret2.yaml, create this Secret and mount it inside the same Pod at /tmp/secret2. Your changes should be saved under /opt/course/14/secret-handler-new.yaml. Both Secrets should only be available in Namespace moon.
+</summary>
+<p>
+  
+```bash
+?
+```
+</p>
+</details>
+
+### Q14 | Secret, Secret-Volume, Secret-Env ###
 <details><summary>
 ?
 </summary>
@@ -300,18 +328,6 @@ k -n earth describe pod project-earthflower-<deployID>-<podID> | grep -A2 Mounts
 ```
 </p>
 </details>
-
-
-
-
-### Q?? | Template ###
-<details><summary>
-?
-</summary>
-<p>
   
-```bash
-?
-```
-</p>
-</details>
+cat << EOF | k create -f -
+  
