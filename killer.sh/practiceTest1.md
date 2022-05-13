@@ -452,8 +452,8 @@ k -n jupiter get pod jupiter-crew-deploy-<dep>-<pod> -o yaml | grep nodeName #co
 
 ### Q20 | NetworkPolicy ###
 <details><summary>
-<p>In Namespace venus you'll find two Deployments named api and frontend. Both Deployments are exposed inside the cluster using Services. Create a NetworkPolicy named np1 which restricts outgoing tcp connections from Deployment frontend and only allows those going to Deployment api. Make sure the NetworkPolicy still allows outgoing traffic on UDP/TCP ports 53 for DNS resolution.</p>
-<p>Test using: wget www.google.com and wget api:2222 from a Pod of Deployment frontend.</p>
+<div><p>In Namespace venus you'll find two Deployments named api and frontend. Both Deployments are exposed inside the cluster using Services. Create a NetworkPolicy named np1 which restricts outgoing tcp connections from Deployment frontend and only allows those going to Deployment api. Make sure the NetworkPolicy still allows outgoing traffic on UDP/TCP ports 53 for DNS resolution.</p>
+<p>Test using: wget www.google.com and wget api:2222 from a Pod of Deployment frontend.</p></div>
 </summary>
 <p>
   
