@@ -23,6 +23,19 @@ set tabstop=2 #of whitespace cols a tab counts for
 </p>
 </details>
 
+<details><summary>connectivity test commands</summary>
+<p>
+  
+```bash
+k -n ??? run tmp --restart=Never --rm -i --image=nginx:alpine -i -- curl -m 5 <?>
+<?> could be: 
+  http://<svcName.namespace>:<port#>
+  ClusterIP (from "k -n ??? get pod -o wide")
+k -n ??? run tmp --restart=Never --rm -i --image=busybox -i -- wget -O- <?>
+```
+</p>
+</details>
+
 ### Q1 | Namespaces ###
 <details><summary>
 The DevOps team would like to get the list of all Namespaces in the cluster. Get the list and save it to /opt/course/1/namespaces.
