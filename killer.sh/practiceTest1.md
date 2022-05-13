@@ -411,12 +411,19 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
 
 ### Q18 | Service misconfiguration ###
 <details><summary>
-?
+There seems to be an issue in Namespace mars where the ClusterIP service manager-api-svc should make the Pods of Deployment manager-api-deployment available inside the cluster.
+You can test this with curl manager-api-svc.mars:4444 from a temporary nginx:alpine Pod. Check for the misconfiguration and apply a fix.
 </summary>
 <p>
   
 ```bash
-?
+k -n mars get all #all run; get <svcName>:<PORT> (here, manager-api-svc:4444) and <test cluster IP>
+k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 manager-api-svc:4444 #can't connect to svc
+k -n mars get ep #no eps
+k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 <test cluster IP> #CAN connect to pod
+k -n mars edit svc #spec.selector should be manager-api-pod
+k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 manager-api-svc:4444 #svc works now
+k -n mars get ep #eps show now
 ```
 </p>
 </details>
