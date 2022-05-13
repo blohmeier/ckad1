@@ -9,8 +9,8 @@ p n previous/next
 w list
 
 PANES: divides a window (does NOT create new windows!) 
-% vert
-: <"split-window"> horiz
+% vert split
+" horiz split
 (no prepending!) ctrl-d = shuts pane; closing last pane closes window
 arrow prev/next
 
