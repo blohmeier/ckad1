@@ -524,4 +524,43 @@ k -n sun annotate pod -l protected=true protected="do not delete this pod"
 </p>
 </details>
 
+### Preview Question 1 ###
+<details><summary>
+In Namespace pluto there is a Deployment named project-23-api. It has been working okay for a while but Team Pluto needs it to be more reliable. Implement a liveness-probe which checks the container to be reachable on port 80. Initially the probe should wait 10, periodically 15 seconds.
+The original Deployment yaml is available at /opt/course/p1/project-23-api.yaml. Save your changes at /opt/course/p1/project-23-api-new.yaml and apply the changes.
+</summary>
+<p>
+  
+```bash
+k -n sun label pod -l "type in (worker,runner)" protected=true
+k -n sun annotate pod -l protected=true protected="do not delete this pod"
+```
+</p>
+</details>
+
+### Preview Question 2 ###
+<details><summary>
+Team Sunny needs to identify some of their Pods in namespace sun. They ask you to add a new label protected: true to all Pods with an existing label type: worker or type: runner. Also add an annotation protected: do not delete this pod to all Pods having the new label protected: true.
+</summary>
+<p>
+  
+```bash
+k -n sun label pod -l "type in (worker,runner)" protected=true
+k -n sun annotate pod -l protected=true protected="do not delete this pod"
+```
+</p>
+</details>
+
+### Preview Question 3 ###
+<details><summary>
+Team Sunny needs to identify some of their Pods in namespace sun. They ask you to add a new label protected: true to all Pods with an existing label type: worker or type: runner. Also add an annotation protected: do not delete this pod to all Pods having the new label protected: true.
+</summary>
+<p>
+  
+```bash
+k -n sun label pod -l "type in (worker,runner)" protected=true
+k -n sun annotate pod -l protected=true protected="do not delete this pod"
+```
+</p>
+</details>
 cat << EOF | k create -f -
