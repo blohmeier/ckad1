@@ -384,7 +384,68 @@ k -n mercury logs cleaner-<dep>-<pod> -c logger-con
 </p>
 </details>
 
-### Q16 | Logging sidecar ###
+### Q17 | InitContainer ###
+<details><summary>
+Last lunch you told your coworker from department Mars Inc how amazing InitContainers are. Now he would like to see one in action. There is a Deployment yaml at /opt/course/17/test-init-container.yaml. This Deployment spins up a single Pod of image nginx:1.17.3-alpine and serves files from a mounted volume, which is empty right now.
+Create an InitContainer named init-con which also mounts that volume and creates a file index.html with content check this out! in the root of the mounted volume. For this test we ignore that it doesn't contain valid html.
+The InitContainer should be using image busybox:1.31.0. Test your implementation for example using curl from a temporary nginx:alpine Pod.
+</summary>
+<p>
+  
+```bash
+cp /opt/course/17/test-init-container.yaml ~/17_test-init-container.yaml
+vim 17_test-init-container.yaml #add below under spec.template.spec:
+initContainers:
+- name: init-con
+  image: busybox:1.31.0
+  command: ['sh', '-c', 'echo "check this out!" > /tmp/web-content/index.html']
+  volumeMounts:
+  - name: web-content
+    mountPath: /tmp/web-content
+k create -f 17_test-init-container.yaml
+k -n mars get pod -o wide # get <test cluster IP>
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
+```
+</p>
+</details>
+
+### Q18 | Logging sidecar ###
+<details><summary>
+?
+</summary>
+<p>
+  
+```bash
+?
+```
+</p>
+</details>
+
+### Q19 | Logging sidecar ###
+<details><summary>
+?
+</summary>
+<p>
+  
+```bash
+?
+```
+</p>
+</details>
+
+### Q20 | Logging sidecar ###
+<details><summary>
+?
+</summary>
+<p>
+  
+```bash
+?
+```
+</p>
+</details>
+
+### Q21 | Logging sidecar ###
 <details><summary>
 ?
 </summary>
