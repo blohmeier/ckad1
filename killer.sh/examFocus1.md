@@ -41,3 +41,17 @@ helm repo list; helm repo update; help search repo <chart e.g. nginx>
 #list current chart repos; update them, and search all for a <chart>
 helm -n mercury upgrade internal-issue-report-apiv2 bitnami/nginx
 #upgrade any deployment release to any newer available version of a repo/chart (e.g. bitnami/nginx is repo bitnami, chart nginx)
+
+## Containers (e.g. Docker, Podman) ##
+<details><summary>Build image using Docker, named registry.killer.sh:5000/sun-cipher, tagged as latest and v1-docker, push these to the registry. Build the image using Podman, named registry.killer.sh:5000/sun-cipher, tagged as v1-podman, push it to the registry.</summary>
+<p>
+  
+```bash  
+sudo docker build -t registry.killer.sh:5000/sun-cipher:latest -t registry.killer.sh:5000/sun-cipher:v1-docker .
+sudo docker push registry.killer.sh:5000/sun-cipher:latest
+sudo docker push registry.killer.sh:5000/sun-cipher:v1-docker
+podman build -t registry.killer.sh:5000/sun-cipher:v1-podman .
+podman push registry.killer.sh:5000/sun-cipher:v1-podman
+```
+</p>
+</details>
