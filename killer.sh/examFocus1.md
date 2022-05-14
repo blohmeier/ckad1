@@ -1,6 +1,6 @@
 #### Testing ####
-k -n ??? run tmp --restart=Never --rm -i --image=nginx:alpine -i -- curl -m 5 <?>
-k -n ??? run tmp --restart=Never --rm -i --image=busybox -i -- wget -O- <?>
+<p>k -n ??? run tmp --restart=Never --rm -i --image=nginx:alpine -i -- curl -m 5 <?> </p>
+<p>k -n ??? run tmp --restart=Never --rm -i --image=busybox -i -- wget -O- <?> </p>
 <?> could be: 
   http://<svcName.namespace>:<port#>
   ClusterIP (from "k -n ??? get pod -o wide")
