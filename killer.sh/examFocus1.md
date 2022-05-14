@@ -6,7 +6,8 @@
 # ClusterIP, e.g. from "k -n ??? get pod -o wide"
 
 ## Find the pod with the error ##
-k -n neptune describe pod api-new-c32-<dep>-<pod> | grep -i error; k -n neptune describe pod api-new-c32-7d64747c87-zh648 | grep -i image
+<p>k -n neptune describe pod api-new-c32-?dep?-?pod? | grep -i error </p>
+<p>k -n neptune describe pod api-new-c32-?dep?-?pod? | grep -i image </p>
 
 
 ## Pull info from cluster ##
