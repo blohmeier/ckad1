@@ -1,6 +1,6 @@
 Manipulate output:
 
-Get sense of manifest file indentation:
+Get sense of manifest file indentation for rare objects (e.g., readinessProbe, serviceAccountName, etc.):
 k explain pod --recursive |  awk '/^[ ]{3,6}[[:alpha:]]/'
 
 grab column in tab separated list:
