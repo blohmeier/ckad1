@@ -55,3 +55,13 @@ podman push registry.killer.sh:5000/sun-cipher:v1-podman
 ```
 </p>
 </details>
+
+<details><summary>Write the logs your container sun-cipher produced into /opt/course/11/logs. Then write a list of all running Podman containers into /opt/course/11/containers.</summary>
+<p>
+  
+```bash  
+podman ps > /opt/course/11/containers
+podman logs sun-cipher > /opt/course/11/logs
+```
+</p>
+</details>
