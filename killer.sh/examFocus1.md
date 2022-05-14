@@ -56,12 +56,33 @@ podman push registry.killer.sh:5000/sun-cipher:v1-podman
 </p>
 </details>
 
+  
+
+<details><summary>Run a container using Podman, which keeps running in the background, named sun-cipher using image registry.killer.sh:5000/sun-cipher:v1-podman. Run the container from k8s@terminal and not root@terminal</summary>
+<p>
+  
+```bash
+su - k8s #only if not already k8s@terminal. Or can just 'exit' from root. To go back to root, sudo su w/no pw.
+podman run -d --name sun-cipher registry.killer.sh:5000/sun-cipher:v1-podman
+```
+</p>
+</details>
+ 
 <details><summary>Write the logs your container sun-cipher produced into /opt/course/11/logs. Then write a list of all running Podman containers into /opt/course/11/containers.</summary>
 <p>
   
 ```bash  
 podman ps > /opt/course/11/containers
 podman logs sun-cipher > /opt/course/11/logs
+```
+</p>
+</details>
+
+<details><summary>?sample visible text here?</summary>
+<p>
+  
+```bash  
+?sample hidden text here?
 ```
 </p>
 </details>
