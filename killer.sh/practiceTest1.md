@@ -456,10 +456,21 @@ You can test this with curl manager-api-svc.mars:4444 from a temporary nginx:alp
 <p>
   
 ```bash
-k -n mars get all #all run; get <svcName>:<PORT> (here, manager-api-svc:4444) and <test cluster IP>
+1of2:Diagnose
+k -n mars get all #All pods STATUS: "Running"; gets you svc NAME:PORT and CLUSTER-IP for later
 k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 manager-api-svc:4444 #can't connect to svc
 k -n mars get ep #no eps
-k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 <test cluster IP> #CAN connect to pod
+k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 <test cluster IP> #pod connects
+```
+</p>
+</details>
+
+<details><summary> ... apply a fix.
+</summary>
+<p>
+  
+```bash
+2of2
 k -n mars edit svc #spec.selector should be manager-api-pod
 k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 manager-api-svc:4444 #svc works now
 k -n mars get ep #eps show now
