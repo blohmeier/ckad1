@@ -578,14 +578,15 @@ k -n venus exec frontend-<dep>-<pod> -- wget -O- api:2222 #works
 
 ### Q21 | Requests and Limits, ServiceAccount ###
 <details><summary>
-?
+Team Neptune needs 3 Pods of image httpd:2.4-alpine, create a Deployment named neptune-10ab for this. The containers should be named neptune-pod-10ab. Each container should have a memory request of 20Mi and a memory limit of 50Mi. Team Neptune has its own ServiceAccount neptune-sa-v2 under which the Pods should run. The Deployment should be in Namespace neptune.
 </summary>
 <p>
   
 ```bash
 k -n neptune create deploy neptune-10ab --image=httpd:2.4-alpine --replicas=3 $dy > 21.yaml
 vim 21.yml
-serviceAccountName: neptune-sa-v2 #spec.template.spec
+#spec.template.spec:
+serviceAccountName: neptune-sa-v2 
 #spec.template.spec.containers:
 name: neptune-pod-10ab  # change
 resources:              # add
