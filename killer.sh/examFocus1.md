@@ -1,9 +1,9 @@
 ### Connectivity Testing ###
-<p>k -n ??? run tmp --restart=Never --rm -i --image=nginx:alpine -i -- curl -m 5 <?> </p>
-<p>k -n ??? run tmp --restart=Never --rm -i --image=busybox -i -- wget -O- <?> </p>
-# <?> could be: 
+<p>k -n ??? run tmp --restart=Never --rm -i --image=nginx:alpine -i -- curl -m 5 ???2 </p>
+<p>k -n ??? run tmp --restart=Never --rm -i --image=busybox -i -- wget -O- ???2 </p>
+# ???2 could be: 
 # http://<svcName.namespace>:<port#>
-# ClusterIP (from "k -n ??? get pod -o wide")
+# ClusterIP, e.g. from "k -n ??? get pod -o wide"
 
 ## Pull info from cluster ##
 k get pod pod1 -o jsonpath="{.status.phase}"
