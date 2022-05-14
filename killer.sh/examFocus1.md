@@ -86,3 +86,7 @@ podman logs sun-cipher > /opt/course/11/logs
 ```
 </p>
 </details>
+
+## Logs ##
+#Check if the logs of the new container reveal something about the missing data incidents.
+k -n mercury logs cleaner-576967576c-cqtgx -c logger-con #logs reveal something is removing random files.
