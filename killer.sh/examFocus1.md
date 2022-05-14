@@ -13,6 +13,7 @@ k get pod holy-api-7bbc86b7b5-2x9xx -o yaml > sample3.yaml; yq e '.status.podIP'
 
 ## Create Resources ##
 k -n neptune create job neb-new-job --image=busybox:1.31.0 $dy > /opt/course/3/job.yaml -- sh -c "sleep 2 && echo done"
+k run pod6 --image=busybox:1.31.0 $dy --command -- sh -c "touch /tmp/ready && sleep 1d" > 6.yml
 
 ## Helm ##
 helm repo list; helm repo update; help search repo <chart e.g. nginx>
