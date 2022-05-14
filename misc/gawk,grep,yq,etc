@@ -1,0 +1,10 @@
+Manipulate output:
+
+Get sense of manifest file indentation:
+k explain pod --recursive |  awk '/^[ ]{3,6}[[:alpha:]]/'
+
+grab column in tab separated list:
+awk '{print $1}'
+
+grab from json
+k get pod pod1 -o jsonpath="{.status.phase}" > /opt/course/2/pod1-status-command.sh
