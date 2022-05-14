@@ -8,3 +8,8 @@ awk '{print $1}'
 
 grab from json
 k get pod pod1 -o jsonpath="{.status.phase}" > /opt/course/2/pod1-status-command.sh
+
+grap from yaml
+k get pod holy-api-7bbc86b7b5-2x9xx -o yaml > sample3.yaml
+yq e '.status.podIP' sample3.yaml
+10.44.0.74
