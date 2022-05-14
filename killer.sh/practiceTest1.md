@@ -44,7 +44,6 @@ The DevOps team would like to get the list of all Namespaces in the cluster. Get
   
 ```bash
 k get ns > /opt/course/1/namespaces
-  
 ```
 </p>
 </details>
