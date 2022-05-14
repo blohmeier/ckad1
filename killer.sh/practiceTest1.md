@@ -480,20 +480,45 @@ k -n mars get ep #eps show now
 
 ### Q19 | Service ClusterIP->NodePort ###
 <details><summary>
-In Namespace jupiter you'll find an apache Deployment (with one replica) named jupiter-crew-deploy and a ClusterIP Service called jupiter-crew-svc which exposes it. Change this service to a NodePort one to make it available on all nodes on port 30100.
-Test the NodePort Service using the internal IP of all available nodes and the port 30100 using curl, you can reach the internal node IPs directly from your main terminal. On which nodes is the Service reachable? On which node is the Pod running?
-</summary>
-<p>
-  
+1of4 In Namespace jupiter you'll find an apache Deployment (with one replica) named jupiter-crew-deploy and a ClusterIP Service called jupiter-crew-svc which exposes it. Change this service to a NodePort one to make it available on all nodes on port 30100.
+
 ```bash
 k -n jupiter run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 jupiter-crew-svc:8080 #ClusterIP svc jupiter-crew-svc does work
 k -n jupiter edit svc jupiter-crew-svc
 nodePort: 30100 #spec.ports
 type: NodePort #spec
+```
+</p>
+</details>
+
+<details><summary>
+2of4 Test the NodePort Service using the internal IP of all available nodes and the port 30100 using curl, you can reach the internal node IPs directly from your main terminal. 
+</summary>
+<p>
+  
+```bash
 #must know for ports!: https://nigelpoulton.com/explained-kubernetes-service-ports/?force_isolation=true
-k -n jupiter run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 jupiter-crew-svc:8080 #ClusterIP svc jupiter-crew-svc is still internally reachable
-k get nodes -o wide #get <masterNodeIP> and <workerNodeIP> for testing whether the service is reachable
-curl <masterNodeIP>:30100 && curl <workerNodeIP>:30100 # html><body><h1>It works!</h1></body></html>
+k -n jupiter run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 jupiter-crew-svc:8080 #ClusterIP svc is still internally reachable
+```
+</p>
+</details>
+
+3of4 On which nodes is the Service reachable? 
+</summary>
+<p>
+  
+```bash
+k get nodes -o wide #get <masterIP> and <workerIP> for testing whether svc is reachable
+curl <masterIP>:30100 && curl <workerIP>:30100 # html><body><h1>It works!</h1></body></html>
+```
+</p>
+</details>
+
+4of4 On which node is the Pod running?
+</summary>
+<p>
+  
+```bash
 k -n jupiter get pod jupiter-crew-deploy-<dep>-<pod> -o yaml | grep nodeName #confirm which node pod runs on
 ```
 </p>
