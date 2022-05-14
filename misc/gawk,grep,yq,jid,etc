@@ -55,3 +55,7 @@ grap from yaml
 k get pod holy-api-7bbc86b7b5-2x9xx -o yaml > sample3.yaml
 yq e '.status.podIP' sample3.yaml
 10.44.0.74
+
+jid (!!!)
+sudo apt-get install jid
+k get po -o json | jid -q
