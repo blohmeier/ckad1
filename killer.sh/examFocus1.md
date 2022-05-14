@@ -1,13 +1,15 @@
-#### Testing ####
+### Connectivity Testing ###
 <p>k -n ??? run tmp --restart=Never --rm -i --image=nginx:alpine -i -- curl -m 5 <?> </p>
 <p>k -n ??? run tmp --restart=Never --rm -i --image=busybox -i -- wget -O- <?> </p>
 <?> could be: 
   http://<svcName.namespace>:<port#>
   ClusterIP (from "k -n ??? get pod -o wide")
 
-### Pull info from cluster ###
+## Pull info from cluster ##
 k get pod pod1 -o jsonpath="{.status.phase}"
-
+awk '{print $1}'
+k explain pod --recursive |  awk '/^[ ]{3,6}[[:alpha:]]/'
+k get pod holy-api-7bbc86b7b5-2x9xx -o yaml > sample3.yaml; yq e '.status.podIP' sample3.yaml
 
 ## Create Resources ##
 k -n neptune create job neb-new-job --image=busybox:1.31.0 $dy > /opt/course/3/job.yaml -- sh -c "sleep 2 && echo done"
