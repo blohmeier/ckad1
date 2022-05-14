@@ -481,6 +481,8 @@ k -n mars get ep #eps show now
 ### Q19 | Service ClusterIP->NodePort ###
 <details><summary>
 1of4 In Namespace jupiter you'll find an apache Deployment (with one replica) named jupiter-crew-deploy and a ClusterIP Service called jupiter-crew-svc which exposes it. Change this service to a NodePort one to make it available on all nodes on port 30100.
+</summary>
+<p>
 
 ```bash
 k -n jupiter run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 jupiter-crew-svc:8080 #ClusterIP svc jupiter-crew-svc does work
@@ -503,6 +505,7 @@ k -n jupiter run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 j
 </p>
 </details>
 
+<details><summary>
 3of4 On which nodes is the Service reachable? 
 </summary>
 <p>
@@ -514,6 +517,7 @@ curl <masterIP>:30100 && curl <workerIP>:30100 # html><body><h1>It works!</h1></
 </p>
 </details>
 
+<details><summary>
 4of4 On which node is the Pod running?
 </summary>
 <p>
