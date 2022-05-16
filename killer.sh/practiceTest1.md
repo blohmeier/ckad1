@@ -126,7 +126,7 @@ Team Mercury asked you to perform some operations using Helm, all in Namespace m
 helm -n mercury uninstall internal-issue-report-apiv1
 helm repo list; helm repo update; helm search repo nginx; helm -n mercury upgrade internal-issue-report-apiv2 bitnami/nginx
 helm show values bitnami/apache | yq e; helm -n mercury install internal-issue-report-apache bitnami/apache --set replicaCount=2; k -n mercury get deploy internal-issue-report-apache
-helm -n mercury uninstall internal-issue-report-daniel
+helm -n mercury list -a | helm -n mercury uninstall internal-issue-report-daniel
 ```
 </p>
 </details>
