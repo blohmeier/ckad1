@@ -11,5 +11,5 @@
 <p>k -n jupiter run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 ?svcName:port?</p>
 
 18May (take 2: "Re-dos" from take 1 only):
-<p>Done: 5</p>
-<p>Re-do: 4</p>
+<p>Done: 5, 10</p>
+<p>Re-do: 4, 6</p>
