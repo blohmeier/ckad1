@@ -115,10 +115,10 @@ k create -f /opt/course/3/job.yaml
 ### Q4 | Helm Management ###
 <details><summary>
 Team Mercury asked you to perform some operations using Helm, all in Namespace mercury:
-1. Delete release internal-issue-report-apiv1
-2. Upgrade release internal-issue-report-apiv2 to any newer version of chart bitnami/nginx available
-3. Install a new release internal-issue-report-apache of chart bitnami/apache. The Deployment should have two replicas, set these via Helm-values during install
-4. There seems to be a broken release, stuck in pending-install state. Find it and delete it
+<p>1. Delete release internal-issue-report-apiv1</p>
+<p>2. Upgrade release internal-issue-report-apiv2 to any newer version of chart bitnami/nginx available</p>
+<p>3. Install a new release internal-issue-report-apache of chart bitnami/apache. The Deployment should have two replicas, set these via Helm-values during install</p>
+<p>4. There seems to be a broken release, stuck in pending-install state. Find it and delete it</p>
 </summary>
 <p>
   
@@ -157,13 +157,13 @@ The Pod should run the command touch /tmp/ready && sleep 1d, which will create t
 ```bash
 k run pod6 --image=busybox:1.31.0 $dy --command -- sh -c "touch /tmp/ready && sleep 1d" > 6.yaml
 vim 6.yml #add spec.containers.readinessProbe and add below that:
-exec:                                     # add
-  command:                                # add
-  - sh                                    # add
-  - -c                                    # add
-  - cat /tmp/ready                        # add
- initialDelaySeconds: 5                   # add
- periodSeconds: 10                        # add
+exec:                                    # add
+  command:                               # add
+  - sh                                   # add
+  - -c                                   # add
+  - cat /tmp/ready                       # add
+initialDelaySeconds: 5                   # add
+periodSeconds: 10                        # add
 k create -f 6.yml
 ```
 </p>
