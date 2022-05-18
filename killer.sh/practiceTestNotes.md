@@ -1,4 +1,4 @@
-18May:
+18May (take 1):
 <p>Done: 1-3, 7, 8, 9, 12, 13, 16, 18, 21, 22</p>
 <p>Re-do: 4-6, 10, 11, 14 (just for k exec commands), 15, 17-20</p>
 
@@ -9,3 +9,7 @@
 <p>k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 ?svcName:port OR clusterIP from 'k -n mars get all'?</p>
 <p>19</p>
 <p>k -n jupiter run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 ?svcName:port?</p>
+
+18May (take 2: "Re-dos" from take 1 only):
+<p>Done: 5</p>
+<p>Re-do: 4</p>
