@@ -12,4 +12,4 @@
 
 18May (take 2: "Re-dos" from take 1 only):
 <p>Done: 5, 10</p>
-<p>Re-do: 4, 6</p>
+<p>Re-do: 4, 6, 14</p>
