@@ -45,8 +45,8 @@ FIELDS:
       hostProcess       <boolean>
       runAsUserName     <string>
 
-grab column in tab separated list:
-awk '{print $1}'
+grab column in tab separated list | remove first row:
+awk '{print $<col#>}' | awk 'NR!=1' 
 
 grab from json
 k get pod pod1 -o jsonpath="{.status.phase}" > /opt/course/2/pod1-status-command.sh
