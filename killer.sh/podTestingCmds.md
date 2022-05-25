@@ -15,10 +15,13 @@ k get nodes -o wide; curl IP1:30100; curl IP2:30100; k get pods -o wide
 ```
 20
 ```
-#b4 netpol: confirm each service works inside cluster
-k -n venus run tmp --restart=Never --rm -i --image=busybox -i -- wget -O- frontend:80
-k -n venus run tmp --restart=Never --rm --image=busybox -i -- wget -O- api:2222
-#after netpol: using any existing Pod from the 'frontend' dep, confirm CANNOT reach external name but CAN reach the api Service
-k -n venus exec frontend-'dep'-'pod' -- wget -O- www.google.com #no longer works
-k -n venus exec frontend-'dep'-'pod' -- wget -O- api:2222 #still works
+#b4 netpol: confirm each svc works inside cluster
+k -n venus run tmp --restart=Never --rm -i --image=busybox -i -- wget -O- "1st svc:port from 'k -n venus get svc'"
+k -n venus run tmp --restart=Never --rm --image=busybox -i -- wget -O- "2nd svc:port from 'k -n venus get svc'"
+#b4 netpol: confirm can reach external names and api svc
+k -n venus exec frontend-'dep'-'pod' -- wget -O- "given URL" #works
+k -n venus exec frontend-'dep'-'pod' -- wget -O- "2nd svc:port from 'k -n venus get svc'" #works
+#after netpol: using any existing Pod from the 'frontend' dep, confirm can NO LONGER reach external name but can STILL reach api svc
+k -n venus exec frontend-'dep'-'pod' -- wget -O- "given URL" #no longer works
+k -n venus exec frontend-'dep'-'pod' -- wget -O- "2nd svc:port from 'k -n venus get svc'" #still works
 ```
