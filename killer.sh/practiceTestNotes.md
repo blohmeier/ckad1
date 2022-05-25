@@ -13,3 +13,13 @@
 18May (take 2: "Re-dos" from take 1 only):
 <p>Done: 5, 10</p>
 <p>Re-do: 4, 6, 14, 15</p>
+
+25 May:
+4
+9
+12
+13
+14
+17
+20
+21
