@@ -125,7 +125,7 @@ Team Mercury asked you to perform some operations using Helm, all in Namespace m
 ```bash
 helm -n mercury uninstall internal-issue-report-apiv1
 helm repo list; helm repo update; helm search repo nginx; helm -n mercury upgrade internal-issue-report-apiv2 bitnami/nginx
-<span style="color: red"> helm show values bitnami/apache | yq e </span>; helm -n mercury install internal-issue-report-apache bitnami/apache --set replicaCount=2; k -n mercury get deploy internal-issue-report-apache
+![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `helm show values bitnami/apache | yq e `; helm -n mercury install internal-issue-report-apache bitnami/apache --set replicaCount=2; k -n mercury get deploy internal-issue-report-apache
 helm -n mercury list -a | helm -n mercury uninstall internal-issue-report-daniel
 ```
 </p>
