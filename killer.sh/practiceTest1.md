@@ -209,9 +209,8 @@ k -n neptune rollout undo deploy api-new-c32
 </summary>
 <p>
 
-add below from _`Deployment`_ example yaml.
-
 ```bash
+add below from _`Deployment`_ example yaml.
 cp /opt/course/9/holy-api-pod.yaml /opt/course/9/holy-api-deployment.yaml
 vim /opt/course/9/holy-api-deployment.yaml #
 apiVersion: apps/v1
