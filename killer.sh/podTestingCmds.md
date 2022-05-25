@@ -1,3 +1,20 @@
+14
+```
+#verify 1of3:
+k -n moon exec secret-handler -- env | grep SECRET1 #should yield:
+SECRET1_USER=test
+SECRET1_PASS=pwd
+#verify 2of3:
+k -n moon exec secret-handler -- find /tmp/secret2 #should yield:
+/tmp/secret2
+/tmp/secret2/..data
+/tmp/secret2/key
+/tmp/secret2/..2019_09_11_09_03_08.147048594
+/tmp/secret2/..2019_09_11_09_03_08.147048594/key
+#verify 3of3:
+k -n moon exec secret-handler -- cat /tmp/secret2/key #should yield:
+12345678
+```
 15
 ```
 k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl "ClusterIP from 'k -n moon get pod -o wide'"
