@@ -9,9 +9,11 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 manager-api-
 19
 ```
 #Confirm svc works:
-k -n jupiter run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 jupiter-crew-svc:8080
-#Determine 1) which nodes service is reachable on 2) which nodes the pod runs on
-k get nodes -o wide; curl IP1:30100; curl IP2:30100; k get pods -o wide
+k -n jupiter run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "svc:port from 'k -n jupiter get svc'"
+#Determine 1) which nodes service is reachable on
+curl "IP1:30100 from 'k get nodes -o wide'"; curl "IP2:30100 from 'k get nodes -o wide'"
+#Determine 2) which nodes the pod runs on
+k -n jupiter get pod -o wide
 ```
 20
 ```
