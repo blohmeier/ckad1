@@ -349,10 +349,20 @@ vim /opt/course/14/secret-handler-new.yaml #add the following at the indicated i
        key: pass
 k delete pod -n moon secret-handler
 k create -f /opt/course/14/secret-handler-new.yaml
-#verify with:
-k -n moon exec secret-handler -- env
-k -n moon exec secret-handler -- find /tmp/secret2
-k -n moon exec secret-handler -- cat /tmp/secret2/key
+#verify 1of3:
+k -n moon exec secret-handler -- env | grep SECRET1 #should yield:
+SECRET1_USER=test
+SECRET1_PASS=pwd
+#verify 2of3:
+k -n moon exec secret-handler -- find /tmp/secret2 #should yield:
+/tmp/secret2
+/tmp/secret2/..data
+/tmp/secret2/key
+/tmp/secret2/..2019_09_11_09_03_08.147048594
+/tmp/secret2/..2019_09_11_09_03_08.147048594/key
+#verify 3of3:
+k -n moon exec secret-handler -- cat /tmp/secret2/key #should yield:
+12345678
 ```
 </p>
 </details>
