@@ -1,10 +1,17 @@
+15
+```
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl "ClusterIP from 'k -n moon get pod -o wide'"
+```
+17
+```
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl "ClusterIP from 'k -n mars get pod -o wide'"
+```
 18
 ```
-k -n mars get svc; k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 manager-api-svc:4444
-k -n mars get pod -o wide; 
-k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 10.0.1.14
-ABOVE: tmp created in correct ns. BELOW: tmp curls to correct ns.
-k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 manager-api-svc.mars:4444
+k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "ClusterIP from 'k -n mars get pod -o wide'"
+k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "svc:port from 'k -n mars get svc'"
+ABOVE: tmp created in correct ns. BELOW: tmp curls in to correct ns.
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "svc:port from 'k -n mars get svc'"
 ```
 19
 ```
