@@ -1,3 +1,7 @@
+10
+```
+k -n pluto run tmp --restart=Never --rm --image=nginx:alpine -i -- curl "svc:port from 'k -n pluto get pod,svc | grep 6cc'"
+```
 14
 ```
 #verify 1of3:
