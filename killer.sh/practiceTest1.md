@@ -290,14 +290,15 @@ podman logs sun-cipher > /opt/course/11/logs
 <p>
   
 ```bash
-#modify 12_pv.yml, 12_pvc.yml and 12_dep.yml from:
-  https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume (link within https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes)
-  application/wordpress/mysql-deployment.yaml (at https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)
-k create 12_pv.yml
-k create 12_pvc.yml
+#vim to edit/modify: 
+  12_pv.yml, 12_pvc.yml: https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/#create-a-persistentvolume (link within https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistent-volumes)
+  12_dep.yml: application/wordpress/mysql-deployment.yaml (at https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)
+  
+k create -f 12_pv.yml
+k create -f 12_pvc.yml
 k -n earth get pv,pvc #STATUS: Bound
-k create 12_dep.yml
-k -n earth describe pod project-earthflower-<deployID>-<podID> | grep -A2 Mounts:
+k create -f 12_dep.yml
+k -n earth describe pod project-earthflower-<deployID>-<podID> | grep -A2 Mounts: #verify
 ```
 </p>
 </details>
