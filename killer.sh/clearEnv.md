@@ -35,31 +35,8 @@ Start the Job and check its history. Each pod created by the Job should have the
 <p>
   
 ```bash
-k -n neptune create job neb-new-job --image=busybox:1.31.0 $dy > /opt/course/3/job.yaml -- sh -c "sleep 2 && echo done"
-vim /opt/course/3/job.yaml
-apiVersion: batch/v1
-kind: Job
-metadata:
-  creationTimestamp: null
-  name: neb-new-job
-  namespace: neptune      # add
-spec:
-  completions: 3          # add
-  parallelism: 2          # add
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:             # add
-        id: awesome-job   # add
-    spec:
-      containers:
-      - command:
-        - sh
-        - -c
-        - sleep 2 && echo done
-        image: busybox:1.31.0
-        name: neb-new-job-container # update
-k create -f /opt/course/3/job.yaml
+k -n neptune delete job neb-new-job
+k -n neptune get job,pod | grep -i job #no output
 ```
 </p>
 </details>
@@ -75,10 +52,7 @@ Team Mercury asked you to perform some operations using Helm, all in Namespace m
 <p>
   
 ```bash
-helm -n mercury uninstall internal-issue-report-apiv1
-helm repo list; helm repo update; helm search repo nginx; helm -n mercury upgrade internal-issue-report-apiv2 bitnami/nginx
-![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `helm show values bitnami/apache | yq e `; helm -n mercury install internal-issue-report-apache bitnami/apache --set replicaCount=2; k -n mercury get deploy internal-issue-report-apache
-helm -n mercury list -a | helm -n mercury uninstall internal-issue-report-daniel
+???
 ```
 </p>
 </details>
@@ -90,11 +64,8 @@ Team Neptune has its own ServiceAccount named neptune-sa-v2 in Namespace neptune
 <p>
   
 ```bash
-k -n neptune get sa neptune-sa-v2 -o yaml | grep secret -A 2
-k -n neptune get secret neptune-sa-v2-token-lwhhl -o yaml | base64 -d
-OR
-k -n neptune describe secret neptune-sa-v2-token-lwhhl
-vim /opt/course/5/token #copy part under "token:" here from step above 
+rm /opt/course/5/token;
+cat /opt/course/5/token #no output
 ```
 </p>
 </details>
@@ -107,16 +78,8 @@ The Pod should run the command touch /tmp/ready && sleep 1d, which will create t
 <p>
   
 ```bash
-k run pod6 --image=busybox:1.31.0 $dy --command -- sh -c "touch /tmp/ready && sleep 1d" > 6.yaml
-vim 6.yml #add spec.containers.readinessProbe and add below that:
-exec:                                    # add
-  command:                               # add
-  - sh                                   # add
-  - -c                                   # add
-  - cat /tmp/ready                       # add
-initialDelaySeconds: 5                   # add
-periodSeconds: 10                        # add
-k create -f 6.yml
+k delete pod pod6 $fg
+k get pod pod6 #Error from server (NotFound): pods "pod6" not found
 ```
 </p>
 </details>
@@ -129,11 +92,7 @@ k create -f 6.yml
 <p>
   
 ```bash
-k -n saturn get pod -o yaml | grep my-happy-shop -A10
-k -n saturn get pod webserver-sat-003 -o yaml > 7_webserver-sat-003.yaml
-vim 7_webserver-sat-003.yaml #change ns, remove "status:" section, token vol & volMount, & nodeName
-k create -f 7_webserver-sat-003.yaml
-k -n saturn delete pod webserver-sat-003 $fg
+LEFT OFF HERE
 ```
 </p>
 </details>
