@@ -92,7 +92,10 @@ k get pod pod6 #Error from server (NotFound): pods "pod6" not found
 <p>
   
 ```bash
-LEFT OFF HERE
+vim 7.yml
+namespace: saturn #changed from neptune
+k -n neptune delete pod webserver-sat-003 $fg
+k create -f 7.yml
 ```
 </p>
 </details>
@@ -105,9 +108,7 @@ There is an existing Deployment named api-new-c32 in Namespace neptune. A develo
   
 ```bash
 k -n neptune rollout history deploy api-new-c32
-k -n neptune get deploy,pod | grep api-new-c32
-k -n neptune describe pod api-new-c32-7d64747c87-zh648 | grep -i error; k -n neptune describe pod api-new-c32-7d64747c87-zh648 | grep -i image
-k -n neptune rollout undo deploy api-new-c32
+k -n neptune rollout undo deploy api-new-c32 --to-revision=5clear
 ```
 </p>
 </details>
