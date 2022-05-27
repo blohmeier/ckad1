@@ -43,19 +43,40 @@ MINE:
 </details>
 
 4
-```
+<details><summary>
+
+</summary>
+<p>
+
+```bash
 CORRECT:
 k create ingress ingress --rule="ckad-mock-exam-solution.com/video*=my-video-service:8080" $dy > 4.yml
 k create -f 4.yml
 MINE:
 ```
+</p>
+</details>
+
 5
-```
+<details><summary>
+
+</summary>
+<p>
+
+```bash
 CORRECT:
 MINE:
 ```
+</p>
+</details>
+
 6
-```
+<details><summary>
+
+</summary>
+<p>
+
+```bash
 CORRECT:
 apiVersion: v1
 kind: Pod
@@ -73,8 +94,16 @@ spec:
         periodSeconds: 60
 MINE:
 ```
+</p>
+</details>
+
 8
-```
+<details><summary>
+
+</summary>
+<p>
+
+```bash
 CORRECT:
 apiVersion: v1
 kind: Pod
@@ -98,8 +127,16 @@ spec:
        value: moon
 MINE:
 ```
+</p>
+</details>
+
 9
-```
+<details><summary>
+
+</summary>
+<p>
+
+```bash
 CORRECT:
 kind: PersistentVolume
 apiVersion: v1
@@ -128,3 +165,5 @@ spec:
   hostPath:
     path: "/opt/data"
 ```
+</p>
+</details>
