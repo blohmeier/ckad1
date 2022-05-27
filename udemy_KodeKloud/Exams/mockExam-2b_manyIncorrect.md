@@ -1,4 +1,4 @@
-<p>WRONG ONLY</p>
+WRONG ONLY
 1
 ```
 CORRECT:
