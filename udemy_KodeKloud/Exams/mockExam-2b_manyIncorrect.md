@@ -1,5 +1,10 @@
 1
-```
+<details><summary>
+
+</summary>
+<p>
+
+```bash
 CORRECT:
 vim 1_deploy.yml:
 apiVersion: apps/v1
@@ -34,6 +39,9 @@ k create -f 1_svc.yml
 
 MINE:
 ```
+</p>
+</details>
+
 4
 ```
 CORRECT:
@@ -49,11 +57,45 @@ MINE:
 6
 ```
 CORRECT:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx1401
+  namespace: default
+spec:
+  containers:
+    - name: nginx1401
+      image: nginx
+      livenessProbe:
+        exec:
+          command: ["ls /var/www/html/probe"]
+        initialDelaySeconds: 10
+        periodSeconds: 60
 MINE:
 ```
 8
 ```
 CORRECT:
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: multi-pod
+  name: multi-pod
+spec:
+  containers:
+  - image: nginx
+    name: jupiter
+    env:
+    - name: type
+      value: planet
+  - image: busybox
+    name: europa
+    command: ["/bin/sh","-c","sleep 4800"]
+    env:
+     - name: type
+       value: moon
 MINE:
 ```
 9
