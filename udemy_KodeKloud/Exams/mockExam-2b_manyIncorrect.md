@@ -1,5 +1,4 @@
-<p> WRONG ONLY </p>
-<p> 1 </p>
+1
 ```
 CORRECT:
 vim 1_deploy.yml:
