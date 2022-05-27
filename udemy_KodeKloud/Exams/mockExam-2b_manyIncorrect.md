@@ -1,6 +1,6 @@
 1
 <details><summary>
-
+Create a deployment called my-webapp with image: nginx, label tier:frontend and 2 replicas. Expose the deployment as a NodePort service with name front-end-service , port: 80 and NodePort: 30083
 </summary>
 <p>
 
@@ -44,7 +44,11 @@ MINE:
 
 4
 <details><summary>
-
+Create a new Ingress Resource for the service: my-video-service to be made available at the URL: http://ckad-mock-exam-solution.com:30093/video.
+Create an ingress resource with host: ckad-mock-exam-solution.com
+path: /video
+Once set up, curl test of the URL from the nodes should be successful / HTTP 200
+  <ul><li> http://ckad-mock-exam-solution.com:30093/video accessible? </li></ul>
 </summary>
 <p>
 
@@ -53,6 +57,20 @@ CORRECT:
 k create ingress ingress --rule="ckad-mock-exam-solution.com/video*=my-video-service:8080" $dy > 4.yml
 k create -f 4.yml
 MINE:
+root@controlplane ~ ➜  curl http://ckad-mock-exam-solution.com:30093/video
+<!doctype html>
+<title>Hello from Flask</title>
+<body style="background: #30336b;">
+
+<div style="color: #e4e4e4;
+    text-align:  center;
+    height: 90px;
+    vertical-align:  middle;">
+    <img src="https://res.cloudinary.com/cloudusthad/image/upload/v1547053817/error_404.png">
+
+</div>
+
+</body>
 ```
 </p>
 </details>
@@ -72,7 +90,9 @@ MINE:
 
 6
 <details><summary>
-
+Create a new pod called nginx1401 in the default namespace with the image nginx. Add a livenessProbe to the container to restart it if the command ls /var/www/html/probe fails. This check should start after a delay of 10 seconds and run every 60 seconds.
+You may delete and recreate the object. Ignore the warnings from the probe.
+Pod created correctly with the livenessProbe?
 </summary>
 <p>
 
@@ -99,7 +119,23 @@ MINE:
 
 8
 <details><summary>
-
+Create a pod called multi-pod with two containers. 
+Container 1: 
+name: jupiter, image: nginx
+Container 2: 
+name: europa, image: busybox
+command: sleep 4800
+Environment Variables: 
+Container 1: 
+type: planet
+Container 2: 
+type: moon
+Pod Name: multi-pod
+Container 1: jupiter
+Container 2: europa
+Container europa commands set correctly?
+Container 1 Environment Value Set
+Container 2 Environment Value Set
 </summary>
 <p>
 
@@ -132,7 +168,11 @@ MINE:
 
 9
 <details><summary>
-
+Create a PersistentVolume called custom-volume with size: 50MiB reclaim policy:retain, Access Modes: ReadWriteMany and hostPath: /opt/data
+PV custom-volume created?
+custom-volume uses the correct access mode?
+PV custom-volume has the correct storage capacity?
+PV custom-volume has the correct host path?
 </summary>
 <p>
 
