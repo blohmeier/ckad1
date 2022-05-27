@@ -1,4 +1,4 @@
-WRONG ONLY
+<p>WRONG ONLY</p>
 1
 ```
 CORRECT:
@@ -38,6 +38,8 @@ MINE:
 4
 ```
 CORRECT:
+k create ingress ingress --rule="ckad-mock-exam-solution.com/video*=my-video-service:8080" $dy > 4.yml
+k create -f 4.yml
 MINE:
 ```
 5
