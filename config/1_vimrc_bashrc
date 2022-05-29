@@ -1,9 +1,9 @@
 vim ~/.vimrc
-set number
-set tabstop=2 #of whitespace cols a tab counts for
-set expandtab #never see \t again in your file - expands tab keypresses to spaces
-set shiftwidth=2 #of whitespace cols a "lvl of indent" is worth
-set softtabstop #of whitespace cols a tab/backspace keypress is worth
+set number        -- (nu): numbering added to lines. FORMATTING.
+set tabstop=2     -- (ts): # of whitespace cols a \t char is worth. FORMATTING.
+set expandtab     -- (et): never see \t char again in your file - expands tab KEYPRESSES to spaces.
+set shiftwidth=2  -- (sw): # of whitespace cols a "lvl of indentation" is worth. FORMATTING.
+set softtabstop=2 -- (sts): # of whitespace cols a tab/backspace KEYPRESS is worth.
 
 export dy='--dry-run=client -o yaml' && export fg='--force --grace-period 0' && alias k=kubectl && source <(kubectl completion bash | sed 's/kubectl/k/g') && \
 echo -e 'set number\nset expandtab\nset shiftwidth=2\nset tabstop=2' >> ~/.vimrc
