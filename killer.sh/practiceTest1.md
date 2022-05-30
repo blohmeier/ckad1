@@ -545,8 +545,8 @@ k -n jupiter get pod jupiter-crew-deploy-<dep>-<pod> -o yaml | grep nodeName #co
 <p>
   
 ```bash
-k -n venus exec frontend-<dep>-<pod> -- wget -O- www.google.com #works
-k -n venus exec frontend-<dep>-<pod> -- wget -O- api:2222 #works
+k -n venus exec frontend-<dep>-<pod> -- wget -T 10 -O- www.google.com #works
+k -n venus exec frontend-<dep>-<pod> -- wget -T 10 -O- api:2222 #works
 vim 20_netpol.yml #copy from documentation and edit as shown
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -580,8 +580,8 @@ k create -f 20_netpol.yml
 <p>
   
 ```bash
-k -n venus exec frontend-<dep>-<pod> -- wget -O- www.google.com #no longer working
-k -n venus exec frontend-<dep>-<pod> -- wget -O- api:2222 #works
+k -n venus exec frontend-<dep>-<pod> -- wget -T 10 -O- www.google.com #no longer working
+k -n venus exec frontend-<dep>-<pod> -- wget -T 10 -O- api:2222 #works
 ```
 </p>
 </details>
