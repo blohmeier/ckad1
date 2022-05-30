@@ -25,7 +25,7 @@ tmux attach -t <session name>
 EXITING:
 pkill -f tmux
 tmux kill-server -- cleanly and gracefully kill all tmux open sessions (and server)
-tmux kill-session PLUS 
+??tmux kill-session PLUS 
   -a -- kills all other sessions except the session you're currently in
   -t targetSession -- after tmux list-sessions to find targetSession
 
