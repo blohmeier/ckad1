@@ -453,7 +453,7 @@ k create -f 17_test-init-container.yaml
 
 ```bash
 k -n mars get pod -o wide # get <test cluster IP>
-k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 10 <test cluster IP>
 ```
 </p>
 </details>
