@@ -22,6 +22,16 @@ tmux list-sessions
 (then reattach with ...)
 tmux attach -t <session name>
 
+EXITING:
+: 
+tmux kill-server -- cleanly and gracefully kill all tmux open sessions (and server)
+tmux kill-session PLUS 
+  -a -- kills all other sessions except the session you're currently in
+  -t targetSession -- after tmux list-sessions to find targetSession
+pkill -f tmux
+
 SOURCES
 https://blog.codonomics.com/2019/09/essential-tmux-for-ckad-or-cka-exam.html
 https://www.youtube.com/watch?v=BHhA_ZKjyxo
+https://stackoverflow.com/questions/39368285/can-tmux-save-commands-to-a-file-like-bash-history
+https://askubuntu.com/questions/868186/how-to-kill-all-tmux-sessions-or-at-least-multiple-sessions-from-the-cli
