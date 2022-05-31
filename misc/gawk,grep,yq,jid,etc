@@ -1,3 +1,15 @@
+SUMMARY:
+
+k explain po.spec
+k explain pod --recursive |  awk '/^[ ]{3,6}[[:alpha:]]/'
+awk '{print $<col#>}' | awk 'NR!=1' 
+k get clusterrolebindings -A | awk '{printf $2FS$3; print NL}'
+k get pod pod1 -o jsonpath="{.status.phase}"
+
+OR combine for fuller picture:
+k explain po.spec | awk '/^[ ]{3,4}[[:alpha:]]/'
+k explain deploy.spec.template.spec | awk '/^[ ]{3,4}[[:alpha:]]/'
+
 Manipulate output:
 
 Get sense of manifest file indentation for rare objects (e.g. for PODS: readinessProbe, serviceAccountName. for DEPLOY: allowPrivilegeEscalation, privileged):
