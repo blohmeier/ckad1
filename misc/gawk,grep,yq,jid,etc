@@ -48,6 +48,9 @@ FIELDS:
 grab column in tab separated list | remove first row:
 awk '{print $<col#>}' | awk 'NR!=1' 
 
+Print selected columns; with line break
+k get clusterrolebindings -A | awk '{printf $2FS$3; print NL}'
+
 grab from json
 k get pod pod1 -o jsonpath="{.status.phase}" > /opt/course/2/pod1-status-command.sh
 
