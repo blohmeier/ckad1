@@ -19,8 +19,10 @@ OR (instead o exports above):
 echo "export dy='--dry-run=client -o yaml' fg='--force --grace-period 0'" > ~/.bashrc
 Questions:
 1) can put "alias" and "source" commands into .bashrc as well?
-2) compare .bashrc to /etc/skel/bash.bashrc - same? different? ANSWER: skel can revert bashrc if settings get messed up. EXAMPLE:
-k8s@terminal NOT GREEN (b/c overwrote with: echo -e "export dy='--dry-run=client -o yaml' fg='--force --grace-period 0'" > ~/.bashrc). FIX:
+2) compare .bashrc to /etc/skel/bash.bashrc - same? different? ANSWER: skel can revert bashrc if settings get messed up. 
+EXAMPLE:
+k8s@terminal NOT GREEN (b/c overwrote with: echo -e "export dy='--dry-run=client -o yaml' fg='--force --grace-period 0'" > ~/.bashrc). 
+FIX:
 cp /etc/skel/bash.bashrc $HOME/.bashrc
 source $HOME/.bashrc
 echo -e "export dy='--dry-run=client -o yaml' fg='--force --grace-period 0'" >> ~/.bashrc
