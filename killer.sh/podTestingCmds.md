@@ -1,4 +1,4 @@
-10
+10. Use for example curl from a temporary nginx:alpine Pod to get the response from a newly created Service that uses tcp port redirect of 3333:80.
 ```
 k -n pluto run tmp --restart=Never --rm --image=nginx:alpine -i -- curl -m 5 "svc:port from 'k -n pluto get pod,svc | grep 6cc'"
 ```
