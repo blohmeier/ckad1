@@ -19,13 +19,13 @@ k -n moon exec secret-handler -- find /tmp/secret2 #should yield:
 k -n moon exec secret-handler -- cat /tmp/secret2/key #should yield:
 12345678
 ```
-15
+15. Test the nginx configuration for example using curl from a temporary nginx:alpine Pod.
 ```
-k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "ClusterIP from 'k -n `ns` get pod -o wide'"
+k -n `ns` run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "ClusterIP from 'k -n `ns` get pod -o wide'"
 ```
-17
+17. Test (for example using curl from a temporary nginx:alpine Pod) init-con which mounts (previously mounted) volume and creates a file index.html with content check this out! in the root of the mounted volume.
 ```
-k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "ClusterIP from 'k -n `ns` get pod -o wide'"
+k -n `ns` run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "ClusterIP from 'k -n `ns` get pod -o wide'"
 ```
 18. Problem: ClusterIP svc manager-api-svc not making the Pods of deploy manager-api-deployment available inside the cluster
 ```
