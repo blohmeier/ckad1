@@ -556,18 +556,18 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      id: frontend    # label of the pods this policy should be applied on
+      id: frontend    # label of the pods to which this policy applies
   policyTypes:
-  - Egress            # only control
+  - Egress            # only control egress
   egress:
   - to:               # rule 1 - egress only to pods with api label
     - podSelector:   
         matchLabels:
           id: api
-  - ports:            # rule 2 - allow UDP/TCP DNS ("-" is REQUIRED for logical OR (else would be AND; would only be 1 rule not 2).
-    - port: 53        # allow DNS UDP
+  - ports:            # rule 2 - UDP/TCP DNS on port 53 ("-" = OR (without, these would be 1 rule)).
+    - port: 53        
       protocol: UDP
-    - port: 53        # allow DNS TCP
+    - port: 53        
       protocol: TCP
 k create -f 20_netpol.yml
 ```
