@@ -1,6 +1,6 @@
 10
 ```
-k -n pluto run tmp --restart=Never --rm --image=nginx:alpine -i -- curl "svc:port from 'k -n pluto get pod,svc | grep 6cc'"
+k -n pluto run tmp --restart=Never --rm --image=nginx:alpine -i -- curl -m 5 "svc:port from 'k -n pluto get pod,svc | grep 6cc'"
 ```
 14
 ```
@@ -27,7 +27,7 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl "ClusterIP from '
 ```
 k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl "ClusterIP from 'k -n mars get pod -o wide'"
 ```
-18
+18 Problem: ClusterIP svc manager-api-svc not making the Pods of deploy manager-api-deployment available inside the cluster
 ```
 k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "ClusterIP from 'k -n mars get pod -o wide'"
 k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "svc:port from 'k -n mars get svc'"
