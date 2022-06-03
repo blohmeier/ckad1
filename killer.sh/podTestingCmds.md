@@ -27,12 +27,12 @@ k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl "ClusterIP from '
 ```
 k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl "ClusterIP from 'k -n mars get pod -o wide'"
 ```
-18 Problem: ClusterIP svc manager-api-svc not making the Pods of deploy manager-api-deployment available inside the cluster
+18. Problem: ClusterIP svc manager-api-svc not making the Pods of deploy manager-api-deployment available inside the cluster
 ```
 k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "ClusterIP from 'k -n mars get pod -o wide'"
+BELOW - 2 ways to do same thing: 1st: tmp created in correct ns. 2nd: tmp curls in to correct ns.
 k -n mars run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "svc:port from 'k -n mars get svc'"
-ABOVE: tmp created in correct ns. BELOW: tmp curls in to correct ns.
-k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "svc:port from 'k -n mars get svc'"
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "svc.ns:port from 'k -n mars get svc'"
 ```
 19
 ```
