@@ -21,11 +21,11 @@ k -n moon exec secret-handler -- cat /tmp/secret2/key #should yield:
 ```
 15
 ```
-k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl "ClusterIP from 'k -n moon get pod -o wide'"
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "ClusterIP from 'k -n `ns` get pod -o wide'"
 ```
 17
 ```
-k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl "ClusterIP from 'k -n mars get pod -o wide'"
+k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "ClusterIP from 'k -n `ns` get pod -o wide'"
 ```
 18. Problem: ClusterIP svc manager-api-svc not making the Pods of deploy manager-api-deployment available inside the cluster
 ```
