@@ -49,9 +49,9 @@ k -n jupiter get pod -o wide
 k -n venus run tmp --restart=Never --rm -i --image=busybox -i -- wget -O- "1st svc:port from 'k -n venus get svc'"
 k -n venus run tmp --restart=Never --rm --image=busybox -i -- wget -O- "2nd svc:port from 'k -n venus get svc'"
 #b4 netpol: confirm can reach external names and api svc
-k -n venus exec frontend-'dep'-'pod' -- wget -O- "given URL" #works
-k -n venus exec frontend-'dep'-'pod' -- wget -O- "2nd svc:port from 'k -n venus get svc'" #works
+k -n venus exec frontend-'dep'-'pod' -- wget -T 10 -O- "given URL" #works
+k -n venus exec frontend-'dep'-'pod' -- wget -T 10 -O- "2nd svc:port from 'k -n venus get svc'" #works
 #after netpol: using any existing Pod from the 'frontend' dep, confirm can NO LONGER reach external name but can STILL reach api svc
-k -n venus exec frontend-'dep'-'pod' -- wget -O- "given URL" #no longer works
-k -n venus exec frontend-'dep'-'pod' -- wget -O- "2nd svc:port from 'k -n venus get svc'" #still works
+k -n venus exec frontend-'dep'-'pod' -- wget -T 10 -O- "given URL" #no longer works
+k -n venus exec frontend-'dep'-'pod' -- wget -T 10 -O- "2nd svc:port from 'k -n venus get svc'" #still works
 ```
