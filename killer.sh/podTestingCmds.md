@@ -4,18 +4,18 @@ k -n pluto run tmp --restart=Never --rm --image=nginx:alpine -i -- curl -m 5 "sv
 ```
 14
 ```
-#verify 1of3:
+#verify 1of2: 'secret1' content available in Pod secret-handler as env vars SECRET1_USER and SECRET1_PASS
 k -n moon exec secret-handler -- env | grep SECRET1 #should yield:
 SECRET1_USER=test
 SECRET1_PASS=pwd
-#verify 2of3:
+#verify 2of2:
 k -n moon exec secret-handler -- find /tmp/secret2 #should yield:
 /tmp/secret2
 /tmp/secret2/..data
 /tmp/secret2/key
 /tmp/secret2/..2019_09_11_09_03_08.147048594
 /tmp/secret2/..2019_09_11_09_03_08.147048594/key
-#verify 3of3:
+#now that found where 'key' is located, get content of key:
 k -n moon exec secret-handler -- cat /tmp/secret2/key #should yield:
 12345678
 ```
