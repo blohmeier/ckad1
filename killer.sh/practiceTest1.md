@@ -377,8 +377,7 @@ The Deployment web-moon is already configured to work with this ConfigMap and se
 ```bash
 k -n moon create configmap configmap-web-moon-html --from-file=index.html=/opt/course/15/web-moon.html
 k -n moon rollout restart deploy web-moon # MAY need to delete/recreate for pods to deploy
-k -n moon get pod -o wide # get <test cluster IP>
-k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl <test cluster IP>
+k -n `ns` run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 5 "ClusterIP from 'k -n `ns` get pod -o wide'"
 ```
 </p>
 </details>
