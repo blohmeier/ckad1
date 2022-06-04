@@ -454,6 +454,18 @@ k create -f 17_test-init-container.yaml
 k -n mars get pod -o wide # get <test cluster IP>
 k run tmp --restart=Never --rm -i --image=nginx:alpine -- curl -m 10 <test cluster IP>
 ```
+NOTE: Path (to index.html in "command") and initContainers.volumeMounts.mountPath must agree but NEED NOT BE identical to answer above. Just don't put mountPath at root! Example:
+
+```
+initContainers:
+- image: busybox:1.31.0
+  name: init-con
+  command: ['sh', '-c', 'echo "check this out!" > /test1/index.html']
+  volumeMounts:
+  - name: web-content
+    mountPath: /test1
+```
+
 </p>
 </details>
 
