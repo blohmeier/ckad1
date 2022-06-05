@@ -1,4 +1,4 @@
-# K8s Certification Challenge (final exam 1 of 3) #
+# K8s Certification Challenge (final exam 1 of 2) #
 <details><summary>Exam link</summary>
 https://cloudacademy.com/lab-challenge/kubernetes-certification-challenge/?context_resource=lp&context_id=3086
 </p></details>
